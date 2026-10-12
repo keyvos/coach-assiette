@@ -243,6 +243,7 @@ window.CA_CONFIG = window.CA_CONFIG || {
 const T = {
 fr:{
 need_style:'Choisis un style de coaching.', need_answer:'Choisis une réponse.', age_min:'L’app est réservée aux personnes de 18 ans et plus.',
+demo_btn:'Essayer en mode démo', demo_note:'Mode démo : tes réponses restent sur cet appareil et l’analyse par IA est désactivée (saisie à la main). Idéal pour découvrir l’application.', demo_on:'Mode démo : rien n’est envoyé en ligne.', demo_quit:'Quitter la démo',
 au_signup:'Créer mon compte', au_login:'Me connecter', au_email:'Adresse e-mail', au_pass:'Mot de passe', au_pass_hint:'8 caractères minimum. Garde-le bien : il te permet de retrouver tes données sur n’importe quel téléphone.', au_forgot:'Mot de passe oublié ? Demande à ton coach de le réinitialiser.', au_signup_btn:'Créer mon compte', au_login_btn:'Me connecter', au_privacy:'Tes données sont enregistrées dans ton espace privé, sur des serveurs en Europe. Ton coach ne voit tes résultats que si tu l’acceptes.', au_bad_email:'Adresse e-mail invalide.', au_bad_pass:'Le mot de passe doit faire au moins 8 caractères.', au_exists:'Un compte existe déjà avec cette adresse : choisis « Me connecter ».', au_wrong:'Adresse ou mot de passe incorrect.', au_confirm:'Compte créé : confirme ton adresse avec l’e-mail reçu, puis connecte-toi.', au_account:'Connecté avec {e}', au_logout:'Me déconnecter', au_delete_account:'Ton compte sera aussi supprimé.', err_quota:'Tu as atteint la limite d’analyses par IA pour aujourd’hui. Tu peux encore ajouter tes repas à la main.', cfg_missing:'L’application n’est pas encore configurée : il manque l’adresse de la base de données.',
 pick_fail:'La galerie ou l’appareil photo ne s’est pas ouvert ? L’application Claude sur certains téléphones (notamment Android) bloque l’envoi de photos. Ouvre ce même lien dans ton navigateur (Chrome ou Safari, connecté à claude.ai) : la photo y fonctionne. En attendant, utilise « Écrire ou dicter ».',
 guest_notice:'Attention : avec ton accès invité, l’application n’arrive pas à enregistrer tes données en ligne ni à les envoyer à ton coach. Elles restent dans ce téléphone et peuvent disparaître quand tu fermes l’application. Envoie à ton coach une capture de la ligne « Diagnostic » (Réglages → Mes données).',
@@ -375,6 +376,7 @@ d_vegetarien:'Végétarien', d_vegetalien:'Végétalien', d_pescetarien:'Pescét
 },
 en:{
 need_style:'Choose a coaching style.', need_answer:'Choose an answer.', age_min:'The app is for people aged 18 and over.',
+demo_btn:'Try the demo', demo_note:'Demo mode: your answers stay on this device and AI analysis is off (manual entry). Ideal to discover the app.', demo_on:'Demo mode: nothing is sent online.', demo_quit:'Leave the demo',
 au_signup:'Create my account', au_login:'Sign in', au_email:'Email address', au_pass:'Password', au_pass_hint:'At least 8 characters. Keep it safe: it lets you find your data on any phone.', au_forgot:'Forgot your password? Ask your coach to reset it.', au_signup_btn:'Create my account', au_login_btn:'Sign in', au_privacy:'Your data is saved in your private space, on servers in Europe. Your coach only sees your results if you agree.', au_bad_email:'Invalid email address.', au_bad_pass:'The password must be at least 8 characters.', au_exists:'An account already exists with this address: choose “Sign in”.', au_wrong:'Wrong email or password.', au_confirm:'Account created: confirm your address with the email you received, then sign in.', au_account:'Signed in as {e}', au_logout:'Sign out', au_delete_account:'Your account will also be deleted.', err_quota:'You have reached today’s limit of AI analyses. You can still add your meals by hand.', cfg_missing:'The app is not configured yet: the database address is missing.',
 pick_fail:'Didn’t your gallery or camera open? On some phones (especially Android) the Claude app blocks photo uploads. Open this same link in your browser (Chrome or Safari, signed in to claude.ai): photos work there. Meanwhile, use “Type or dictate”.',
 guest_notice:'Warning: with your guest access, the app cannot save your data online or send it to your coach. It stays on this phone and may disappear when you close the app. Send your coach a screenshot of the “Diagnostic” line (Settings → My data).',
@@ -507,6 +509,7 @@ d_vegetarien:'Vegetarian', d_vegetalien:'Vegan', d_pescetarien:'Pescatarian', d_
 },
 pt:{
 need_style:'Escolhe um estilo de coaching.', need_answer:'Escolhe uma resposta.', age_min:'A aplicação destina-se a pessoas com 18 anos ou mais.',
+demo_btn:'Experimentar a demonstração', demo_note:'Modo demonstração: as tuas respostas ficam neste dispositivo e a análise por IA está desativada (registo manual). Ideal para descobrir a aplicação.', demo_on:'Modo demonstração: nada é enviado online.', demo_quit:'Sair da demonstração',
 au_signup:'Criar a minha conta', au_login:'Entrar', au_email:'Endereço de e-mail', au_pass:'Palavra-passe', au_pass_hint:'Pelo menos 8 caracteres. Guarda-a bem: permite-te encontrar os teus dados em qualquer telemóvel.', au_forgot:'Esqueceste a palavra-passe? Pede ao teu coach para a repor.', au_signup_btn:'Criar a minha conta', au_login_btn:'Entrar', au_privacy:'Os teus dados ficam guardados no teu espaço privado, em servidores na Europa. O teu coach só vê os teus resultados se aceitares.', au_bad_email:'Endereço de e-mail inválido.', au_bad_pass:'A palavra-passe deve ter pelo menos 8 caracteres.', au_exists:'Já existe uma conta com este endereço: escolhe «Entrar».', au_wrong:'E-mail ou palavra-passe incorretos.', au_confirm:'Conta criada: confirma o teu endereço com o e-mail recebido e depois entra.', au_account:'Sessão iniciada com {e}', au_logout:'Terminar sessão', au_delete_account:'A tua conta também será apagada.', err_quota:'Atingiste o limite de análises por IA de hoje. Ainda podes adicionar as refeições à mão.', cfg_missing:'A aplicação ainda não está configurada: falta o endereço da base de dados.',
 pick_fail:'A galeria ou a câmara não abriu? Em alguns telemóveis (sobretudo Android) a aplicação Claude bloqueia o envio de fotos. Abre este mesmo link no teu navegador (Chrome ou Safari, com sessão iniciada em claude.ai): aí a foto funciona. Entretanto, usa «Escrever ou ditar».',
 guest_notice:'Atenção: com o teu acesso de convidado, a aplicação não consegue guardar os teus dados online nem enviá-los ao teu coach. Ficam neste telemóvel e podem desaparecer quando fechares a aplicação. Envia ao teu coach uma captura da linha «Diagnostic» (Definições → Os meus dados).',
@@ -639,6 +642,7 @@ d_vegetarien:'Vegetariano', d_vegetalien:'Vegano', d_pescetarien:'Pescetariano',
 },
 es:{
 need_style:'Elige un estilo de coaching.', need_answer:'Elige una respuesta.', age_min:'La aplicación es para personas de 18 años o más.',
+demo_btn:'Probar la demo', demo_note:'Modo demo: tus respuestas se quedan en este dispositivo y el análisis por IA está desactivado (registro manual). Ideal para descubrir la aplicación.', demo_on:'Modo demo: no se envía nada en línea.', demo_quit:'Salir de la demo',
 au_signup:'Crear mi cuenta', au_login:'Iniciar sesión', au_email:'Correo electrónico', au_pass:'Contraseña', au_pass_hint:'Al menos 8 caracteres. Guárdala bien: te permite recuperar tus datos en cualquier teléfono.', au_forgot:'¿Olvidaste la contraseña? Pide a tu coach que la restablezca.', au_signup_btn:'Crear mi cuenta', au_login_btn:'Iniciar sesión', au_privacy:'Tus datos se guardan en tu espacio privado, en servidores en Europa. Tu coach solo ve tus resultados si lo aceptas.', au_bad_email:'Correo electrónico no válido.', au_bad_pass:'La contraseña debe tener al menos 8 caracteres.', au_exists:'Ya existe una cuenta con este correo: elige «Iniciar sesión».', au_wrong:'Correo o contraseña incorrectos.', au_confirm:'Cuenta creada: confirma tu correo con el mensaje recibido y luego inicia sesión.', au_account:'Sesión iniciada con {e}', au_logout:'Cerrar sesión', au_delete_account:'Tu cuenta también se eliminará.', err_quota:'Has alcanzado el límite de análisis por IA de hoy. Todavía puedes añadir tus comidas a mano.', cfg_missing:'La aplicación aún no está configurada: falta la dirección de la base de datos.',
 pick_fail:'¿No se abrió la galería o la cámara? En algunos teléfonos (sobre todo Android) la aplicación Claude bloquea el envío de fotos. Abre este mismo enlace en tu navegador (Chrome o Safari, con sesión iniciada en claude.ai): allí la foto funciona. Mientras tanto, usa «Escribir o dictar».',
 guest_notice:'Atención: con tu acceso de invitado, la aplicación no puede guardar tus datos en línea ni enviarlos a tu coach. Se quedan en este teléfono y pueden desaparecer al cerrar la aplicación. Envía a tu coach una captura de la línea «Diagnostic» (Ajustes → Mis datos).',
@@ -884,10 +888,12 @@ const Store = {
     if (sess && sess.user){ this.uid = sess.user.id; this.email = String(sess.user.email || '').toLowerCase(); this.mode = 'db'; this.db = DBA; this.user = USERA; }
     else { this.uid = null; this.email = null; this.mode = 'memory'; this.db = null; this.user = null; }
   },
+  startDemo(){ this.demo = true; this.mode = 'local'; this.uid = 'demo'; this.email = ''; this.db = null; this.mem = {}; this.q = {}; this.user = {async id(){ return 'demo'; }, async can(){ return true; }, async isOwner(){ return false; }, async profiles(){ return {}; }}; },
   async token(){ try { const { data } = await SB.auth.getSession(); if (data && data.session){ this.session = data.session; return data.session.access_token; } } catch(e){} return this.session && this.session.access_token; },
   path(k){ return 'data/users/' + this.uid + '/' + k; },
   async get(k){
     if (this.mode === 'db'){ try { const s = await this.db.doc(this.path(k)).get(); return s.exists ? clone(s.data()) : null; } catch(e){ return this.mem[k] != null ? this.mem[k] : null; } }
+    if (this.mode === 'local'){ const v = lsGet('cademo:' + k); if (v){ try { return JSON.parse(v); } catch(e){} } }
     return this.mem[k] != null ? this.mem[k] : null;
   },
   set(k, v){
@@ -899,6 +905,7 @@ const Store = {
     return p;
   },
   async _write(k, v){
+    if (this.mode === 'local'){ lsSet('cademo:' + k, JSON.stringify(v)); return; }
     if (this.mode !== 'db') return;
     try { await this.db.doc(this.path(k)).set(v); }
     catch(e){
@@ -909,11 +916,13 @@ const Store = {
   },
   async keys(){
     if (this.mode === 'db'){ try { const qs = await this.db.collection('data/users/' + this.uid).get(); return qs.docs.map(d => d.id); } catch(e){ return Object.keys(this.mem); } }
+    if (this.mode === 'local'){ const out = []; try { for (let i = 0; i < localStorage.length; i++){ const k = localStorage.key(i); if (k && k.indexOf('cademo:') === 0) out.push(k.slice(7)); } } catch(e){} return out; }
     return Object.keys(this.mem);
   },
   async del(k){
     delete this.mem[k];
     if (this.mode === 'db'){ try { await this.db.doc(this.path(k)).delete(); } catch(e){} }
+    if (this.mode === 'local'){ try { localStorage.removeItem('cademo:' + k); } catch(e){} }
   }
 };
 /* AI through the project's own secure function (the Claude API key never reaches the phone) */
@@ -1837,7 +1846,7 @@ function viewSettings(){
   h += acc('restr', t('s_restr'), restrHas ? t('acc_filled') : t('acc_none'), () => '<div class="card">' + restrEditor('set') + '</div>' + (p.restr && (p.restr.validated || Object.keys(p.restr.items || {}).length) ? '<button class="btn ghost" data-act="restr-withdraw">' + esc(t('restr_withdraw')) + '</button>' : ''));
   h += acc('habits', t('s_habits'), (p.habits || []).length ? String(p.habits.length) : '', () => (p.habits || []).length ? '<div class="card list">' + p.habits.map((x, i) => '<div class="item"><div class="between"><span>' + esc(x.name) + ' · <b class="num">' + x.grams + ' g</b></span><button class="x" data-act="habit-del" data-v="' + i + '" aria-label="' + esc(t('delete')) + '">×</button></div></div>').join('') + '</div>' : '<p class="small muted">' + esc(t('no_habits')) + '</p>');
   h += acc('fb', t('s_feedback'), '', () => '<p class="small muted">' + esc(t('s_feedback_d')) + '</p><button class="btn outline block" data-act="fb-open">' + esc(t('feedback_btn')) + '</button>');
-  h += acc('data', t('s_data'), '', () => (guestWarn() || note('info', esc(Store.mode === 'db' ? t('s_mode_db') : Store.mode === 'local' ? t('local_notice') : t('memory_notice')))) + '<p class="small">' + esc(t('au_account', {e:Store.email || ''})) + '</p><button class="btn outline block" data-act="logout">' + esc(t('au_logout')) + '</button><button class="btn outline block" data-act="export">' + esc(t('export')) + '</button>' + (S.exportText ? '<label class="field"><span>' + esc(t('export_copy')) + '</span><textarea id="export-text" readonly style="min-height:160px;font-size:12px">' + esc(S.exportText) + '</textarea></label>' : '') +
+  h += acc('data', t('s_data'), '', () => (guestWarn() || note('info', esc(Store.mode === 'db' ? t('s_mode_db') : Store.mode === 'local' ? t('local_notice') : t('memory_notice')))) + '<p class="small">' + esc(Store.demo ? t('demo_on') : t('au_account', {e:Store.email || ''})) + '</p><button class="btn outline block" data-act="logout">' + esc(Store.demo ? t('demo_quit') : t('au_logout')) + '</button><button class="btn outline block" data-act="export">' + esc(t('export')) + '</button>' + (S.exportText ? '<label class="field"><span>' + esc(t('export_copy')) + '</span><textarea id="export-text" readonly style="min-height:160px;font-size:12px">' + esc(S.exportText) + '</textarea></label>' : '') +
     (S.deleteAsk ? note('danger', esc(t('delete_confirm') + ' ' + t('au_delete_account'))) + '<div class="row"><button class="btn primary" data-act="delete-yes">' + esc(t('delete_yes')) + '</button><button class="btn ghost" data-act="delete-no">' + esc(t('cancel')) + '</button></div>' : '<button class="btn ghost" data-act="delete-ask" style="color:var(--danger)">' + esc(t('delete_all')) + '</button>'));
   h += acc('sources', t('s_sources'), 'Ciqual · INSA · BEDCA · USDA · OFF', () => '<div class="card stack-s"><p class="small">' + esc(t('sources_text')) + '</p><ul class="small" style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px">' + ['src_ciqual','src_insa','src_bedca','src_usda','src_off'].map(x => '<li>' + esc(t(x)) + '</li>').join('') + '</ul></div>');
   h += acc('about', t('s_about'), '', () => '<p class="small muted">' + esc(t('about_text')) + '</p>');
@@ -1878,6 +1887,7 @@ async function deleteAll(){
   const keys = await Store.keys(); for (const k of keys) await Store.del(k);
   try { await Store.db.doc('feedback/' + Store.uid).delete(); } catch(e){}
   try { await Store.db.doc('coaching/' + Store.uid).delete(); } catch(e){}
+  if (Store.demo){ toast(t('deleted')); setTimeout(() => location.reload(), 700); return; }
   try { await SB.rpc('delete_me'); } catch(e){}
   toast(t('deleted')); try { await SB.auth.signOut(); } catch(e){} onSignedOut();
 }
@@ -2144,6 +2154,7 @@ document.addEventListener('click', e => {
     case 'ob-next': obNext(); break;
     case 'auth-mode': if (S.auth){ S.auth.mode = v; S.auth.error = null; render(); } break;
     case 'auth-go': authGo(); break;
+    case 'demo': startDemo(); break;
     case 'logout': logout(); break;
     case 'ob-skip': { const O = S.ob, d = O.d, st = OB_STEPS[O.step];
       if (st === 'health'){ d.hd.answer = 'no'; d.health = {answer:'no', validated:false, consent:false, items:[], other:'', shareCoach:false}; }
@@ -2253,7 +2264,8 @@ function resetUserState(){
 }
 function onSignedOut(){ if (S.auth && !Store.uid) return; Store.setSession(null); resetUserState(); S.auth = newAuth(); render(); window.scrollTo(0, 0); }
 function newAuth(){ return {mode:'signup', email:'', pass:'', error:null, busy:false}; }
-function viewCfg(){ return '<div class="stack" style="padding-top:8px"><h1>' + esc(t('app')) + '</h1>' + note('warn', esc(S.cfgMissing === 'net' ? t('err_generic') : t('cfg_missing'))) + '</div>'; }
+function viewCfg(){ return '<div class="stack" style="padding-top:8px"><h1>' + esc(t('app')) + '</h1><p class="muted">' + esc(t('ob_welcome')) + '</p>' + note('warn', esc(S.cfgMissing === 'net' ? t('err_generic') : t('cfg_missing'))) + (S.cfgMissing === 'cfg' ? '<div class="card stack-s"><p class="small">' + esc(t('demo_note')) + '</p><button class="btn primary big block" data-act="demo">' + esc(t('demo_btn')) + '</button></div>' : '') + '</div>'; }
+async function startDemo(){ Store.startDemo(); S.cfgMissing = null; S.auth = null; S.loaded = false; render(); await loadUserData(); S.sample = null; S.imgOk = false; S.sampleReady = true; render(); }
 function viewAuth(){
   const A = S.auth;
   return '<div class="stack" style="padding-top:8px"><h1>' + esc(t('app')) + '</h1><p class="muted">' + esc(t('ob_welcome')) + '</p>' +
@@ -2284,7 +2296,7 @@ async function authGo(){
     render();
   }
 }
-async function logout(){ try { await SB.auth.signOut(); } catch(e){} onSignedOut(); }
+async function logout(){ if (Store.demo){ location.reload(); return; } try { await SB.auth.signOut(); } catch(e){} onSignedOut(); }
 async function loadUserData(){
   S.profile = await Store.get('profile');
   if (S.profile && S.profile.lang && T[S.profile.lang]) LANG = S.profile.lang;
@@ -2293,7 +2305,7 @@ async function loadUserData(){
   const res = await Promise.all([Store.get('favorites'), Store.get('body'), Store.get('bilans')].concat(ks.map(k => Store.get('day-' + k))));
   S.favorites = (res[0] && res[0].items) || []; S.body = res[1] || {entries:[]}; if (!S.body.entries) S.body.entries = []; S.bilans = res[2] || {weeks:{}};
   S.days = {}; ks.forEach((k, i) => { if (res[3 + i]) S.days[k] = res[3 + i]; });
-  S.sample = makeAI(); S.imgOk = true; S.sampleReady = true; S.downloads = DL;
+  if (Store.demo){ S.sample = null; S.imgOk = false; } else { S.sample = makeAI(); S.imgOk = true; } S.sampleReady = true; S.downloads = DL;
   S.loaded = true; S.auth = null;
   if (S.profile && S.profile.onboarded) S.sheet = 'intro';
   if (S.profile && S.profile.onboarded) checkSignals();
