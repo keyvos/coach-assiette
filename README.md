@@ -21,7 +21,7 @@ avec le coach (avec l'accord du client).
 - **Comptes et données** : Supabase (serveurs en Europe). Chaque client ne voit que ses propres données ;
   le coach ne voit que les résumés des clients qui ont accepté le partage.
 - **IA** : la fonction `ai` appelle l'API Claude. Limite par client et par jour réglable avec le secret
-  `AI_DAILY_LIMIT` (40 par défaut). Modèles réglables avec `AI_MODEL` (analyse des photos, `claude-haiku-5-5` par défaut, le moins cher ; `claude-sonnet-5-5` pour plus de précision) et `AI_MODEL_QUICK` (messages courts).
+  `AI_DAILY_LIMIT` (20 par défaut). Modèles réglables avec `AI_MODEL` (analyse des photos, `claude-haiku-5-5` par défaut, le moins cher ; `claude-sonnet-5-5` pour plus de précision) et `AI_MODEL_QUICK` (messages courts).
 
 ## Configuration
 

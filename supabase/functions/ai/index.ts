@@ -4,7 +4,7 @@
 // sur le téléphone des clients.
 // Secret obligatoire : ANTHROPIC_API_KEY
 // Réglages facultatifs : AI_MODEL (défaut claude-haiku-5-5, le moins cher ; mettre claude-sonnet-5-5 pour plus de précision),
-//   AI_MODEL_QUICK (défaut claude-haiku-5-5), AI_DAILY_LIMIT (défaut 40)
+//   AI_MODEL_QUICK (défaut claude-haiku-5-5), AI_DAILY_LIMIT (défaut 20)
 // =====================================================================
 import { createClient } from "jsr:@supabase/supabase-js@2";
 
@@ -43,7 +43,7 @@ Deno.serve(async (req) => {
   const uid = who.user.id;
 
   // 2. Daily limit per person (protects the bill)
-  const limit = Number(Deno.env.get("AI_DAILY_LIMIT") || "40");
+  const limit = Number(Deno.env.get("AI_DAILY_LIMIT") || "20");
   const day = new Date().toISOString().slice(0, 10);
   const { data: row } = await admin.from("ai_usage").select("n").eq("user_id", uid).eq("day", day).maybeSingle();
   const used = row?.n || 0;

@@ -214,6 +214,20 @@ details summary{cursor:pointer;font-weight:600}
 .acc.open .chev{transform:rotate(-135deg);margin:4px 4px 0 0}
 .acc-b{padding:0 16px 16px;display:flex;flex-direction:column;gap:12px;min-width:0}
 .acc-b>.card:not(.flat){border:0;padding:0;background:none;box-shadow:none;border-radius:0}
+.tiles-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.tile{position:relative;appearance:none;min-height:100px;border:1px solid var(--line);border-radius:var(--r-s);background:var(--surface);color:var(--ink);padding:10px;display:flex;flex-direction:column;gap:3px;text-align:left;cursor:pointer;font:inherit;min-width:0}
+.tile .tl{font-size:12.5px;font-weight:800;line-height:1.2;overflow-wrap:anywhere}
+.tile .tv{font-size:16px;font-weight:800;font-variant-numeric:tabular-nums;margin-top:auto}
+.tile .th{font-size:12px;color:var(--muted);line-height:1.25}
+.tile .ti{width:22px;height:22px;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;margin-top:auto}
+.tile.done{background:var(--sage-soft);border-color:transparent}
+.tile.done .th{color:var(--ink)}
+.tile.skip{background:var(--surface-2);border-color:transparent;color:var(--muted)}
+.tile.extra{border-style:dashed}
+.tile.wr .ti{stroke:var(--muted)}
+label.tile:has(input:focus-visible),.tile:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (max-width:370px){.tiles{grid-template-columns:repeat(2,1fr)}}
 .footer-note{font-size:12px;color:var(--muted);text-align:center;padding-top:8px}
 @media (max-width:360px){.macros{grid-template-columns:repeat(2,1fr)}.grid3{grid-template-columns:1fr 1fr}}
 @media (min-width:480px){.cta{grid-template-columns:1fr 1fr}}
@@ -245,6 +259,7 @@ fr:{
 need_style:'Choisis un style de coaching.', need_answer:'Choisis une réponse.', age_min:'L’app est réservée aux personnes de 18 ans et plus.',
 demo_btn:'Essayer en mode démo', demo_note:'Mode démo : tes réponses restent sur cet appareil et l’analyse par IA est désactivée (saisie à la main). Idéal pour découvrir l’application.', demo_on:'Mode démo : rien n’est envoyé en ligne.', demo_quit:'Quitter la démo',
 au_signup:'Créer mon compte', au_login:'Me connecter', au_email:'Adresse e-mail', au_pass:'Mot de passe', au_pass_hint:'8 caractères minimum. Garde-le bien : il te permet de retrouver tes données sur n’importe quel téléphone.', au_forgot:'Mot de passe oublié ? Demande à ton coach de le réinitialiser.', au_signup_btn:'Créer mon compte', au_login_btn:'Me connecter', au_privacy:'Tes données sont enregistrées dans ton espace privé, sur des serveurs en Europe. Ton coach ne voit tes résultats que si tu l’acceptes.', au_bad_email:'Adresse e-mail invalide.', au_bad_pass:'Le mot de passe doit faire au moins 8 caractères.', au_exists:'Un compte existe déjà avec cette adresse : choisis « Me connecter ».', au_wrong:'Adresse ou mot de passe incorrect.', au_confirm:'Compte créé : confirme ton adresse avec l’e-mail reçu, puis connecte-toi.', au_account:'Connecté avec {e}', au_logout:'Me déconnecter', au_delete_account:'Ton compte sera aussi supprimé.', err_quota:'Tu as atteint la limite d’analyses par IA pour aujourd’hui. Tu peux encore ajouter tes repas à la main.', cfg_missing:'L’application n’est pas encore configurée : il manque l’adresse de la base de données.',
+ms_breakfast:'Petit-déjeuner', ms_snack10:'Collation 10 h', ms_lunch:'Déjeuner', ms_snack16:'Goûter 16 h', ms_dinner:'Dîner', ms_extra:'Hors repas', ms_extra_d:'Craquage, grignotage', tiles_t:'Mes repas du jour', tiles_count:'Photos : {n} / {m}', tile_goal:'≈ {n} kcal conseillées', tile_skip:'Sauté', tile_n:'{n} repas', tiles_hint:'Une photo par case. Tu peux toujours écrire un repas en plus.', photo_limit:'Tu as utilisé tes {m} photos d’aujourd’hui. Tu peux encore écrire ce que tu as mangé : ça compte aussi dans ton suivi.', slot_to_extra:'Il y a déjà une photo pour ce repas : celle-ci est classée en « Hors repas ».', ml_snack10:'Collation de 10 h', ml_snack16:'Goûter de 16 h',
 pick_fail:'La galerie ou l’appareil photo ne s’est pas ouvert ? L’application Claude sur certains téléphones (notamment Android) bloque l’envoi de photos. Ouvre ce même lien dans ton navigateur (Chrome ou Safari, connecté à claude.ai) : la photo y fonctionne. En attendant, utilise « Écrire ou dicter ».',
 guest_notice:'Attention : avec ton accès invité, l’application n’arrive pas à enregistrer tes données en ligne ni à les envoyer à ton coach. Elles restent dans ce téléphone et peuvent disparaître quand tu fermes l’application. Envoie à ton coach une capture de la ligne « Diagnostic » (Réglages → Mes données).',
 share_level_notice:'Ton coach ne reçoit pas encore tes résultats : ton accès à l’application est en lecture seule, donc tes données restent sur ce téléphone. Demande à ton coach de te donner l’accès « Éditeur », puis rouvre l’application : ce que tu as déjà saisi sera transféré automatiquement.', migrated:'Tes données ont été transférées en ligne.', coach_todo_t:'Partager avec ton coach', coach_todo_d:'Ton coach ne voit pas encore tes résultats. Le partage se fait seulement avec ton accord, et tu peux l’arrêter quand tu veux.', coach_todo_btn:'Activer le partage', coach_none_help:'Un client n’apparaît pas ici ? Vérifie qu’il a créé son compte puis activé « Suivi par mon coach » dans ses Réglages (ou coché le partage à la fin du questionnaire).',
@@ -378,6 +393,7 @@ en:{
 need_style:'Choose a coaching style.', need_answer:'Choose an answer.', age_min:'The app is for people aged 18 and over.',
 demo_btn:'Try the demo', demo_note:'Demo mode: your answers stay on this device and AI analysis is off (manual entry). Ideal to discover the app.', demo_on:'Demo mode: nothing is sent online.', demo_quit:'Leave the demo',
 au_signup:'Create my account', au_login:'Sign in', au_email:'Email address', au_pass:'Password', au_pass_hint:'At least 8 characters. Keep it safe: it lets you find your data on any phone.', au_forgot:'Forgot your password? Ask your coach to reset it.', au_signup_btn:'Create my account', au_login_btn:'Sign in', au_privacy:'Your data is saved in your private space, on servers in Europe. Your coach only sees your results if you agree.', au_bad_email:'Invalid email address.', au_bad_pass:'The password must be at least 8 characters.', au_exists:'An account already exists with this address: choose “Sign in”.', au_wrong:'Wrong email or password.', au_confirm:'Account created: confirm your address with the email you received, then sign in.', au_account:'Signed in as {e}', au_logout:'Sign out', au_delete_account:'Your account will also be deleted.', err_quota:'You have reached today’s limit of AI analyses. You can still add your meals by hand.', cfg_missing:'The app is not configured yet: the database address is missing.',
+ms_breakfast:'Breakfast', ms_snack10:'10 am snack', ms_lunch:'Lunch', ms_snack16:'4 pm snack', ms_dinner:'Dinner', ms_extra:'Outside meals', ms_extra_d:'Craving, nibbling', tiles_t:'Today’s meals', tiles_count:'Photos: {n} / {m}', tile_goal:'≈ {n} kcal suggested', tile_skip:'Skipped', tile_n:'{n} meals', tiles_hint:'One photo per box. You can always type an extra meal.', photo_limit:'You have used your {m} photos for today. You can still type what you ate: it counts in your tracking too.', slot_to_extra:'There is already a photo for this meal: this one goes to “Outside meals”.', ml_snack10:'10 am snack', ml_snack16:'4 pm snack',
 pick_fail:'Didn’t your gallery or camera open? On some phones (especially Android) the Claude app blocks photo uploads. Open this same link in your browser (Chrome or Safari, signed in to claude.ai): photos work there. Meanwhile, use “Type or dictate”.',
 guest_notice:'Warning: with your guest access, the app cannot save your data online or send it to your coach. It stays on this phone and may disappear when you close the app. Send your coach a screenshot of the “Diagnostic” line (Settings → My data).',
 share_level_notice:'Your coach is not receiving your results yet: your access to the app is read-only, so your data stays on this phone. Ask your coach to give you “Editor” access, then reopen the app: what you have already entered will be transferred automatically.', migrated:'Your data has been transferred online.', coach_todo_t:'Share with your coach', coach_todo_d:'Your coach can’t see your results yet. Sharing only happens with your consent, and you can stop it at any time.', coach_todo_btn:'Turn on sharing', coach_none_help:'A client doesn’t appear here? Check that they created their account and turned on “Followed by my coach” in their Settings (or ticked sharing at the end of the questionnaire).',
@@ -511,6 +527,7 @@ pt:{
 need_style:'Escolhe um estilo de coaching.', need_answer:'Escolhe uma resposta.', age_min:'A aplicação destina-se a pessoas com 18 anos ou mais.',
 demo_btn:'Experimentar a demonstração', demo_note:'Modo demonstração: as tuas respostas ficam neste dispositivo e a análise por IA está desativada (registo manual). Ideal para descobrir a aplicação.', demo_on:'Modo demonstração: nada é enviado online.', demo_quit:'Sair da demonstração',
 au_signup:'Criar a minha conta', au_login:'Entrar', au_email:'Endereço de e-mail', au_pass:'Palavra-passe', au_pass_hint:'Pelo menos 8 caracteres. Guarda-a bem: permite-te encontrar os teus dados em qualquer telemóvel.', au_forgot:'Esqueceste a palavra-passe? Pede ao teu coach para a repor.', au_signup_btn:'Criar a minha conta', au_login_btn:'Entrar', au_privacy:'Os teus dados ficam guardados no teu espaço privado, em servidores na Europa. O teu coach só vê os teus resultados se aceitares.', au_bad_email:'Endereço de e-mail inválido.', au_bad_pass:'A palavra-passe deve ter pelo menos 8 caracteres.', au_exists:'Já existe uma conta com este endereço: escolhe «Entrar».', au_wrong:'E-mail ou palavra-passe incorretos.', au_confirm:'Conta criada: confirma o teu endereço com o e-mail recebido e depois entra.', au_account:'Sessão iniciada com {e}', au_logout:'Terminar sessão', au_delete_account:'A tua conta também será apagada.', err_quota:'Atingiste o limite de análises por IA de hoje. Ainda podes adicionar as refeições à mão.', cfg_missing:'A aplicação ainda não está configurada: falta o endereço da base de dados.',
+ms_breakfast:'Pequeno-almoço', ms_snack10:'Lanche 10 h', ms_lunch:'Almoço', ms_snack16:'Lanche 16 h', ms_dinner:'Jantar', ms_extra:'Fora das refeições', ms_extra_d:'Desejo, petisco', tiles_t:'As minhas refeições de hoje', tiles_count:'Fotos: {n} / {m}', tile_goal:'≈ {n} kcal sugeridas', tile_skip:'Saltada', tile_n:'{n} refeições', tiles_hint:'Uma foto por quadrado. Podes sempre escrever uma refeição a mais.', photo_limit:'Já usaste as tuas {m} fotos de hoje. Ainda podes escrever o que comeste: também conta no teu acompanhamento.', slot_to_extra:'Já existe uma foto para esta refeição: esta fica em «Fora das refeições».', ml_snack10:'Lanche das 10 h', ml_snack16:'Lanche das 16 h',
 pick_fail:'A galeria ou a câmara não abriu? Em alguns telemóveis (sobretudo Android) a aplicação Claude bloqueia o envio de fotos. Abre este mesmo link no teu navegador (Chrome ou Safari, com sessão iniciada em claude.ai): aí a foto funciona. Entretanto, usa «Escrever ou ditar».',
 guest_notice:'Atenção: com o teu acesso de convidado, a aplicação não consegue guardar os teus dados online nem enviá-los ao teu coach. Ficam neste telemóvel e podem desaparecer quando fechares a aplicação. Envia ao teu coach uma captura da linha «Diagnostic» (Definições → Os meus dados).',
 share_level_notice:'O teu coach ainda não recebe os teus resultados: o teu acesso à aplicação é só de leitura, por isso os teus dados ficam neste telemóvel. Pede ao teu coach que te dê o acesso «Editor» e volta a abrir a aplicação: o que já registaste será transferido automaticamente.', migrated:'Os teus dados foram transferidos para a nuvem.', coach_todo_t:'Partilhar com o teu coach', coach_todo_d:'O teu coach ainda não vê os teus resultados. A partilha só acontece com o teu acordo e podes pará-la quando quiseres.', coach_todo_btn:'Ativar a partilha', coach_none_help:'Um cliente não aparece aqui? Confirma que criou a conta e ativou «Acompanhamento pelo meu coach» nas Definições (ou marcou a partilha no fim do questionário).',
@@ -644,6 +661,7 @@ es:{
 need_style:'Elige un estilo de coaching.', need_answer:'Elige una respuesta.', age_min:'La aplicación es para personas de 18 años o más.',
 demo_btn:'Probar la demo', demo_note:'Modo demo: tus respuestas se quedan en este dispositivo y el análisis por IA está desactivado (registro manual). Ideal para descubrir la aplicación.', demo_on:'Modo demo: no se envía nada en línea.', demo_quit:'Salir de la demo',
 au_signup:'Crear mi cuenta', au_login:'Iniciar sesión', au_email:'Correo electrónico', au_pass:'Contraseña', au_pass_hint:'Al menos 8 caracteres. Guárdala bien: te permite recuperar tus datos en cualquier teléfono.', au_forgot:'¿Olvidaste la contraseña? Pide a tu coach que la restablezca.', au_signup_btn:'Crear mi cuenta', au_login_btn:'Iniciar sesión', au_privacy:'Tus datos se guardan en tu espacio privado, en servidores en Europa. Tu coach solo ve tus resultados si lo aceptas.', au_bad_email:'Correo electrónico no válido.', au_bad_pass:'La contraseña debe tener al menos 8 caracteres.', au_exists:'Ya existe una cuenta con este correo: elige «Iniciar sesión».', au_wrong:'Correo o contraseña incorrectos.', au_confirm:'Cuenta creada: confirma tu correo con el mensaje recibido y luego inicia sesión.', au_account:'Sesión iniciada con {e}', au_logout:'Cerrar sesión', au_delete_account:'Tu cuenta también se eliminará.', err_quota:'Has alcanzado el límite de análisis por IA de hoy. Todavía puedes añadir tus comidas a mano.', cfg_missing:'La aplicación aún no está configurada: falta la dirección de la base de datos.',
+ms_breakfast:'Desayuno', ms_snack10:'Tentempié 10 h', ms_lunch:'Comida', ms_snack16:'Merienda 16 h', ms_dinner:'Cena', ms_extra:'Fuera de comidas', ms_extra_d:'Antojo, picoteo', tiles_t:'Mis comidas de hoy', tiles_count:'Fotos: {n} / {m}', tile_goal:'≈ {n} kcal sugeridas', tile_skip:'Saltada', tile_n:'{n} comidas', tiles_hint:'Una foto por casilla. Siempre puedes escribir una comida más.', photo_limit:'Ya has usado tus {m} fotos de hoy. Todavía puedes escribir lo que comiste: también cuenta en tu seguimiento.', slot_to_extra:'Ya hay una foto para esta comida: esta va a «Fuera de comidas».', ml_snack10:'Tentempié de las 10 h', ml_snack16:'Merienda de las 16 h',
 pick_fail:'¿No se abrió la galería o la cámara? En algunos teléfonos (sobre todo Android) la aplicación Claude bloquea el envío de fotos. Abre este mismo enlace en tu navegador (Chrome o Safari, con sesión iniciada en claude.ai): allí la foto funciona. Mientras tanto, usa «Escribir o dictar».',
 guest_notice:'Atención: con tu acceso de invitado, la aplicación no puede guardar tus datos en línea ni enviarlos a tu coach. Se quedan en este teléfono y pueden desaparecer al cerrar la aplicación. Envía a tu coach una captura de la línea «Diagnostic» (Ajustes → Mis datos).',
 share_level_notice:'Tu coach todavía no recibe tus resultados: tu acceso a la aplicación es de solo lectura, así que tus datos se quedan en este teléfono. Pide a tu coach que te dé el acceso «Editor» y vuelve a abrir la aplicación: lo que ya has registrado se transferirá automáticamente.', migrated:'Tus datos se han transferido a la nube.', coach_todo_t:'Compartir con tu coach', coach_todo_d:'Tu coach todavía no ve tus resultados. Solo se comparte con tu consentimiento y puedes pararlo cuando quieras.', coach_todo_btn:'Activar el uso compartido', coach_none_help:'¿Un cliente no aparece aquí? Comprueba que creó su cuenta y activó «Seguimiento de mi coach» en sus Ajustes (o marcó compartir al final del cuestionario).',
@@ -973,7 +991,7 @@ const S = {
   showSupport:false, exportText:null, deleteAsk:false, bilanBusy:false, bilanErr:null, bilanCtl:null,
   setDraft:null, secOpen:{}
 };
-function newAdd(){ return {when:'now', mode:'photo', blob:null, preview:null, text:'', hunger:{level:0, type:null, emotion:null, other:''}, phase:'input', items:[], conf:'moyen', origin:'SAISIE', source:'photo', error:null, msgError:null, saved:null, ctl:null, favAdded:false, manual:{name:'', grams:'', kcal:''}, manualOpen:false, title:null}; }
+function newAdd(){ return {slot:null, when:'now', mode:'photo', blob:null, preview:null, text:'', hunger:{level:0, type:null, emotion:null, other:''}, phase:'input', items:[], conf:'moyen', origin:'SAISIE', source:'photo', error:null, msgError:null, saved:null, ctl:null, favAdded:false, manual:{name:'', grams:'', kcal:''}, manualOpen:false, title:null}; }
 function newIdea(){ return {ctx:null, blob:null, preview:null, text:'', time:10, tool:'micro', box:false, phase:'input', ingr:[], ingrAdd:'', options:[], hidden:0, verified:{}, error:null, ctl:null}; }
 function newOb(){ const lang = LANG; return {step:0, d:{lang, sex:null, age:'', height:'', weight:'', waist:'', life:newLife(), journee:newDay(), hd:newHd(null), health:null, country:'FR', activity:'sed', goal:'keep', bmrManual:'', style:null, restr:null, rd:newRd(null), adult:false, consent:false, aiok:false}, error:null}; }
 function newRd(r){ return {items: r && r.items ? clone(r.items) : {}, other: r ? (r.other || '') : '', dislikes: r ? (r.dislikes || '') : '', consent:false, answer: r ? (r.answer || null) : null}; }
@@ -1050,7 +1068,7 @@ function dayValid(D){ return !!D && !!D.phys && !!D.ment && SLOTS.every(x => isN
 function dayCoef(D){ const avg = SLOTS.reduce((a, x) => a + D.phys[x], 0) / 4; return Math.round((1.2 + avg * 0.08) * 1000) / 1000; }
 function daySplit(D){
   const w = {}; let sum = 0;
-  const nm = (S.profile && S.profile.noMeal) || {}; SLOTS.forEach(x => { let v = BASE_SPLIT[x] * (1 + 0.06 * (D.phys[x] - 2)); if (x === 'afternoon' && (D.ment[x] >= 4 || D.phys[x] >= 4)) v += 4; w[x] = nm[x] ? 0 : Math.max(5, v); sum += w[x]; }); if (!sum) sum = 1;
+  const nm = (S.profile && S.profile.noMeal) || {}; SLOTS.forEach(x => { let v = BASE_SPLIT[x] * (1 + 0.06 * (D.phys[x] - 2)); if (x === 'afternoon' && (D.ment[x] >= 4 || D.phys[x] >= 4)) v += 4; w[x] = (nm[x] || (x === 'afternoon' && nm.snack16)) ? 0 : Math.max(5, v); sum += w[x]; }); if (!sum) sum = 1;
   const out = {}; SLOTS.forEach(x => { out[x] = Math.round(w[x] / sum * 100); }); return out;
 }
 function slotOf(iso){ const d = new Date(iso); const h = d.getHours() + d.getMinutes() / 60; if (h >= 4 && h < 11) return 'morning'; if (h >= 11 && h < 15.5) return 'noon'; if (h >= 15.5 && h < 19) return 'afternoon'; return 'evening'; }
@@ -1084,9 +1102,26 @@ function splitCard(){
     return '<div class="split-c"><span class="tiny muted">' + esc(t('ml_' + x)) + '</span><b class="num">' + (target ? nf(target) : '—') + '</b><span class="tiny num ' + (over ? 'over' : 'muted') + '">' + (e ? nf(e) + ' ' + esc(t('eaten')) : '—') + '</span></div>'; }).join('') + '</div><p class="tiny muted">' + esc(t('split_d')) + '</p></section>';
 }
 const SLOT_END = {morning:11, noon:15.5, evening:21.5};
-const SLOT_TIME = {morning:[8,0], noon:[12,30], afternoon:[16,30], evening:[20,0]};
+const SLOT_TIME = {morning:[8,0], noon:[12,30], afternoon:[16,30], evening:[20,0], breakfast:[8,0], snack10:[10,0], lunch:[12,30], snack16:[16,0], dinner:[20,0]};
+/* Meal boxes shown on Today: five meals + one 'hors repas' box. One photo per box and per day; writing a meal is always possible. */
+const MEAL_SLOTS = ['breakfast','snack10','lunch','snack16','dinner'];
+const MEAL_MOMENT = {breakfast:'morning', snack10:'morning', lunch:'noon', snack16:'afternoon', dinner:'evening'};
+const MEAL_NOKEY = {breakfast:'morning', snack10:'snack10', lunch:'noon', snack16:'snack16', dinner:'evening'};
+function mealSlotOfTime(iso){ const d = new Date(iso); const h = d.getHours() + d.getMinutes() / 60; if (h >= 4 && h < 9.5) return 'breakfast'; if (h >= 9.5 && h < 11.5) return 'snack10'; if (h >= 11.5 && h < 15) return 'lunch'; if (h >= 15 && h < 18.5) return 'snack16'; if (h >= 18.5 && h < 22.5) return 'dinner'; return 'extra'; }
+function mealSlot(m){ return m.slot || mealSlotOfTime(m.at); }
+function activeSlots(){ const nm = (S.profile && S.profile.noMeal) || {}; return MEAL_SLOTS.filter(x => !nm[MEAL_NOKEY[x]]); }
+function photoLimit(){ return activeSlots().length + 1; }
+function photosUsed(k){ const d = dayRO(k || dayKey()); const n = (d.meals || []).filter(m => m.source === 'photo').length; return Math.max(n, d.photos || 0); }
+function slotHasPhoto(k, x){ return (dayRO(k).meals || []).some(m => m.source === 'photo' && mealSlot(m) === x); }
+function slotTarget(x){
+  const D = S.profile && S.profile.journee; if (!dayValid(D) || hasMed('tca') || x === 'extra') return 0;
+  const sp = daySplit(D), nm = S.profile.noMeal || {}; const m = sp.morning;
+  const pct = x === 'breakfast' ? (nm.snack10 ? m : m * 0.7) : x === 'snack10' ? m * 0.3 : sp[MEAL_MOMENT[x]];
+  return Math.round(dayNeeds(dayKey()) * pct / 100 / 10) * 10;
+}
+function slotWhen(x){ if (x === 'extra' || mealSlotOfTime(new Date().toISOString()) === x) return 'now'; return x; }
 function mealAt(w){ if (!w || w === 'now' || !SLOT_TIME[w]) return new Date().toISOString(); const d = new Date(); d.setHours(SLOT_TIME[w][0], SLOT_TIME[w][1], 0, 0); return d.toISOString(); }
-function whenField(){ const w = (S.add && S.add.when) || 'now'; return '<div class="field"><span>' + esc(t('when_t')) + '</span><div class="chips">' + [['now', t('when_now')]].concat(SLOTS.map(x => [x, t('ml_' + x)])).map(o => '<button type="button" class="chip ' + (w === o[0] ? 'on' : '') + '" data-act="set" data-k="add.when" data-v="' + o[0] + '" aria-pressed="' + (w === o[0]) + '">' + esc(o[1]) + '</button>').join('') + '</div></div>'; }
+function whenField(){ const w = (S.add && S.add.when) || 'now'; return '<div class="field"><span>' + esc(t('when_t')) + '</span><div class="chips">' + [['now', t('when_now')]].concat(MEAL_SLOTS.concat(['extra']).map(x => [x, t('ms_' + x)])).map(o => '<button type="button" class="chip ' + (w === o[0] ? 'on' : '') + '" data-act="set" data-k="add.when" data-v="' + o[0] + '" aria-pressed="' + (w === o[0]) + '">' + esc(o[1]) + '</button>').join('') + '</div></div>'; }
 function skippedText(k){ const sk = dayRO(k).skipped || []; return sk.length ? sk.map(x => SLOT_FR[x]).join(', ') : 'aucun'; }
 function missedSlot(){
   const k = dayKey(), d = dayRO(k), now = new Date(), h = now.getHours() + now.getMinutes() / 60; const nm = S.profile.noMeal || {}; const sk = d.skipped || [];
@@ -1443,8 +1478,7 @@ function viewToday(){
     '<div class="bar ' + (over ? 'over' : '') + '" role="progressbar" aria-valuemin="0" aria-valuemax="' + needs + '" aria-valuenow="' + Math.round(tot.kcal) + '"><i style="width:' + pct.toFixed(1) + '%"></i></div>' +
     '<div class="kv"><div><span class="tiny muted">' + esc(t('needs')) + '</span><b>' + nf(needs) + '</b></div><div><span class="tiny muted">' + esc(t('consumed')) + '</span><b>' + nf(Math.round(tot.kcal)) + '</b></div><div><span class="tiny muted">' + esc(t('sport')) + '</span><b>+' + nf(sport) + '</b></div></div>' +
     '<div class="macros"><div class="macro"><b>' + nf(Math.round(tot.p)) + ' g</b><span>' + esc(t('protein')) + '</span></div><div class="macro"><b>' + nf(Math.round(tot.g)) + ' g</b><span>' + esc(t('carbs')) + '</span></div><div class="macro"><b>' + nf(Math.round(tot.l)) + ' g</b><span>' + esc(t('fat')) + '</span></div><div class="macro sugar"><b>' + nf(Math.round(tot.s)) + ' g</b><span>' + esc(t('sugars')) + '</span></div></div></section>';
-  h += '<div class="stack-s"><label class="btn primary big block" for="today-file">' + ICON.cam + '<span>' + esc(t('photo_now')) + '</span><input type="file" id="today-file" accept="image/*" data-file="today-file" class="pick" title="' + esc(t('photo_now')) + '"></label>' +
-    (S.pickFail ? note('warn', esc(t('pick_fail'))) : '') + '<div class="grid2"><button class="btn outline" data-act="quick-add" data-v="text">' + esc(t('type_meal')) + '</button><button class="btn outline" data-act="quick-add" data-v="fav">' + esc(t('fav_quick')) + '</button></div>' +
+  h += mealTiles(k, day) + '<div class="stack-s">' + (S.pickFail ? note('warn', esc(t('pick_fail'))) : '') + '<div class="grid2"><button class="btn outline" data-act="quick-add" data-v="text">' + esc(t('type_meal')) + '</button><button class="btn outline" data-act="quick-add" data-v="fav">' + esc(t('fav_quick')) + '</button></div>' +
     '<button class="card opt-pick" data-act="go" data-v="idea"><strong>' + esc(t('no_idea')) + '</strong><span class="small muted">' + esc(t('idea_sub')) + '</span></button></div>';
   const eve = eveningCard(), eveDone = !!day.checkin;
   const cs = S.profile.coachShare || {};
@@ -1456,13 +1490,30 @@ function viewToday(){
   h += cravingTip();
   h += '<section class="section"><h2>' + esc(t('meals_t')) + '</h2>' + (day.meals && day.meals.length ? '<div class="card list">' + day.meals.slice().sort((a, b) => a.at < b.at ? -1 : 1).map(m => mealRow(m, k)).join('') + '</div>' : '<div class="card flat"><p class="muted">' + esc(t('no_meals')) + '</p></div>') + '</section>';
   if (eveDone) h += eve;
-  h += splitCard();
   h += healthNotes();
   h += activitiesSection(k, day);
   h += '<button class="card opt-pick" data-act="go-week" style="border-radius:var(--r)"><strong>' + esc(t('week_card_t')) + '</strong><span class="small muted">' + esc(t('week_card_d')) + '</span></button>';
   h += '<div class="row" style="justify-content:center"><button class="btn ghost" data-act="fb-open">' + esc(t('feedback_btn')) + '</button></div>';
   h += '<p class="footer-note">' + esc(t('disclaimer')) + '</p></div>';
   return h;
+}
+function mealTiles(k, day){
+  const lim = photoLimit(), used = photosUsed(k), full = used >= lim; const sk = day.skipped || [];
+  const SKIPKEY = {breakfast:'morning', lunch:'noon', dinner:'evening'};
+  const cam = '<svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>';
+  const pen = '<svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg>';
+  const tile = x => {
+    const ms = (day.meals || []).filter(m => mealSlot(m) === x); const lab = '<span class="tl">' + esc(t('ms_' + x)) + '</span>';
+    if (ms.length){ const lo = ms.reduce((a, m) => a + num(m.kcalMin), 0), hi = ms.reduce((a, m) => a + num(m.kcalMax), 0);
+      return '<button type="button" class="tile done' + (x === 'extra' ? ' extra' : '') + '" data-act="tile-open" data-v="' + ms[ms.length - 1].id + '">' + lab + '<span class="th">' + (ms.length > 1 ? esc(t('tile_n', {n:ms.length})) : '&#10003;') + '</span><span class="tv">' + nf(lo) + '–' + nf(hi) + '</span></button>'; }
+    if (SKIPKEY[x] && sk.indexOf(SKIPKEY[x]) >= 0) return '<div class="tile skip">' + lab + '<span class="th">' + esc(t('tile_skip')) + '</span></div>';
+    const goal = slotTarget(x); const hint = x === 'extra' ? t('ms_extra_d') : goal ? t('tile_goal', {n:nf(goal)}) : '';
+    if (full || !S.imgOk) return '<button type="button" class="tile wr' + (x === 'extra' ? ' extra' : '') + '" data-act="tile-text" data-v="' + x + '">' + lab + (hint ? '<span class="th">' + esc(hint) + '</span>' : '') + pen + '</button>';
+    return '<label class="tile' + (x === 'extra' ? ' extra' : '') + '" for="tile-file-' + x + '">' + lab + (hint ? '<span class="th">' + esc(hint) + '</span>' : '') + cam + '<input type="file" id="tile-file-' + x + '" accept="image/*" data-file="tile-file" data-slot="' + x + '" class="pick" title="' + esc(t('ms_' + x)) + '"></label>';
+  };
+  return '<section class="section"><div class="tiles-head"><h2>' + esc(t('tiles_t')) + '</h2><span class="small muted num">' + esc(t('tiles_count', {n:Math.min(used, lim), m:lim})) + '</span></div>' +
+    '<div class="tiles">' + activeSlots().concat(['extra']).map(tile).join('') + '</div>' +
+    (full ? note('info', esc(t('photo_limit', {m:lim}))) : '<p class="tiny muted">' + esc(t('tiles_hint')) + '</p>') + '</section>';
 }
 function hungerBadge(m){ if (!m.hunger || !m.hunger.type) return ''; return m.hunger.type === 'EMOTIONNELLE' ? '<span class="badge emo">' + esc(t('emo_badge')) + '</span>' : '<span class="badge">' + esc(t('phys_badge')) + '</span>'; }
 function originBadge(m){ if (!m.origin || m.origin === 'SAISIE') return ''; const lv = m.origin.replace('IDEE_REPAS_', '').toLowerCase(); return '<span class="badge ' + (LVL_BADGE[lv] || '') + '">' + esc(t('idea_badge')) + ' · ' + esc(t('lvl_' + lv)) + '</span>'; }
@@ -1522,6 +1573,7 @@ function viewAdd(){
   h += seg('add-mode', 'add.mode', A.mode, [['photo', t('mode_photo')], ['text', t('mode_text')], ['fav', t('mode_fav')]]);
   if (A.mode === 'photo'){
     if (S.sampleReady && S.sample && !S.imgOk) h += note('info', esc(t('photo_off')));
+    if (!A.preview && photosUsed() >= photoLimit()){ h += note('info', esc(t('photo_limit', {m:photoLimit()}))) + '<button class="btn primary big block" data-act="add-mode" data-v="text">' + esc(t('type_meal')) + '</button>'; return h + '</div>'; }
     if (S.pickFail) h += note('warn', esc(t('pick_fail')));
     h += A.preview ? '<div class="stack-s"><img class="preview" src="' + A.preview + '" alt=""><label class="btn outline" for="add-file">' + esc(t('change_photo')) + '<input type="file" id="add-file" accept="image/*" data-file="add-file" class="pick" title="' + esc(t('change_photo')) + '"></label></div>' : photoInput('add-file', t('take_photo'), t('photo_hint'));
   } else if (A.mode === 'text'){
@@ -1587,6 +1639,12 @@ async function analyzeMeal(){
   const usePhoto = A.mode === 'photo';
   if (usePhoto && !A.blob){ A.error = t('need_input'); render(); return; }
   if (usePhoto && !S.imgOk){ A.error = t('photo_off'); render(); return; }
+  if (usePhoto){
+    const kk = dayKey(); if (photosUsed(kk) >= photoLimit()){ A.error = t('photo_limit', {m:photoLimit()}); render(); return; }
+    let sl = A.slot || (MEAL_SLOTS.indexOf(A.when) >= 0 ? A.when : mealSlotOfTime(mealAt(A.when)));
+    if (sl !== 'extra' && slotHasPhoto(kk, sl) && !slotHasPhoto(kk, 'extra')){ sl = 'extra'; toast(t('slot_to_extra')); }
+    A.slot = sl;
+  }
   if (!usePhoto && !A.text.trim()){ A.error = t('need_input'); render(); return; }
   if (!A.hunger.level || !A.hunger.type){ A.error = t('need_hunger'); render(); return; }
   A.phase = 'loading'; A.source = usePhoto ? 'photo' : 'text'; render();
@@ -1595,6 +1653,7 @@ async function analyzeMeal(){
     const opts = {signal:A.ctl.signal}; if (usePhoto) opts.images = [A.blob];
     const res = await S.sample.json(promptA('REPAS', usePhoto ? null : A.text.trim(), usePhoto), opts);
     if (!res || res.est_exploitable === false || !Array.isArray(res.aliments) || !res.aliments.length){ A.phase = 'input'; A.error = (res && res.message_erreur) || t('not_food'); render(); return; }
+    if (usePhoto){ const kk = dayKey(); const dd = dayRW(kk); dd.photos = (dd.photos || 0) + 1; saveDay(kk); }
     A.items = res.aliments.slice(0, 20).map(normItem);
     A.conf = ['faible','moyen','eleve'].indexOf(res.niveau_confiance) >= 0 ? res.niveau_confiance : 'moyen';
     A.phase = 'result'; render(); window.scrollTo(0, 0);
@@ -1622,7 +1681,7 @@ async function validateMeal(){
   if (!A.items.length){ A.error = t('no_items'); render(); return; }
   recordCorrections(A.items);
   const k = dayKey(); const before = dayTotals(dayRO(k)); const tot = totals(A.items); const r = rangeFor(tot.kcal, A.conf);
-  const meal = {id:uidGen(), at:mealAt(A.when), source:A.source, origin:A.origin, title:A.title || null, items:A.items.map(stripItem), conf:A.conf, kcalMin:r[0], kcalMax:r[1], kcal:Math.round((r[0]+r[1])/2), p:Math.round(tot.p), g:Math.round(tot.g), s:Math.round(tot.s), l:Math.round(tot.l), hunger:clone(A.hunger), message:null};
+  const at = mealAt(A.when); const meal = {id:uidGen(), at, slot:A.slot || (MEAL_SLOTS.indexOf(A.when) >= 0 ? A.when : mealSlotOfTime(at)), source:A.source, origin:A.origin, title:A.title || null, items:A.items.map(stripItem), conf:A.conf, kcalMin:r[0], kcalMax:r[1], kcal:Math.round((r[0]+r[1])/2), p:Math.round(tot.p), g:Math.round(tot.g), s:Math.round(tot.s), l:Math.round(tot.l), hunger:clone(A.hunger), message:null};
   const day = dayRW(k); day.meals.push(meal); saveDay(k);
   A.saved = meal;
   if (S.sample){
@@ -1834,7 +1893,7 @@ function viewSettings(){
   h += acc('profile', t('s_profile'), profileValid(p) ? t('prof_sum', {a:p.age, h:p.height, w:nf(w, w % 1 ? 1 : 0)}) : t('acc_todo'), () => '<div class="card stack">' + profileFields('setDraft', D) +
     '<label class="field"><span>' + esc(t('bmr_label')) + '</span><input type="number" inputmode="numeric" id="s-bmr" data-f="setDraft.bmrManual" placeholder="' + (b || '') + '" value="' + esc(D.bmrManual) + '"></label><p class="small muted">' + esc(t('bmr_hint')) + '</p>' + (hasMed('thyroide_hypo') || hasMed('thyroide_hyper') ? note('info', esc(t('hn_thyro'))) : '') +
     '<button class="btn primary block" data-act="profile-save">' + esc(t('save')) + '</button></div>');
-  h += acc('day', t('s_day'), okSub(dayValid(p.journee)), () => '<p class="small muted">' + esc(t('ob_day_d')) + '</p>' + dayBlock('dayDraft', S.dayDraft) + dayPreview(p, S.dayDraft) + '<div class="field"><span>' + esc(t('never_meals')) + '</span><div class="chips">' + ['morning','noon','evening'].map(x => { const on = !!(p.noMeal && p.noMeal[x]); return '<button type="button" class="chip ' + (on ? 'on' : '') + '" data-act="never-toggle" data-v="' + x + '" aria-pressed="' + on + '">' + esc(t('ml_' + x)) + '</button>'; }).join('') + '</div><p class="tiny muted">' + esc(t('never_hint')) + '</p></div>' + '<button class="btn primary block" data-act="day-save">' + esc(t('save')) + '</button>', 'day-sec');
+  h += acc('day', t('s_day'), okSub(dayValid(p.journee)), () => '<p class="small muted">' + esc(t('ob_day_d')) + '</p>' + dayBlock('dayDraft', S.dayDraft) + dayPreview(p, S.dayDraft) + '<div class="field"><span>' + esc(t('never_meals')) + '</span><div class="chips">' + ['morning','snack10','noon','snack16','evening'].map(x => { const on = !!(p.noMeal && p.noMeal[x]); return '<button type="button" class="chip ' + (on ? 'on' : '') + '" data-act="never-toggle" data-v="' + x + '" aria-pressed="' + on + '">' + esc(t('ml_' + x)) + '</button>'; }).join('') + '</div><p class="tiny muted">' + esc(t('never_hint')) + '</p></div>' + '<button class="btn primary block" data-act="day-save">' + esc(t('save')) + '</button>', 'day-sec');
   h += acc('life', t('s_life'), okSub(lifeValid(p.life)), () => '<p class="small muted">' + esc(t('ob_life_d')) + '</p><div class="card stack">' + lifeBlock('lifeDraft', S.lifeDraft) + '<button class="btn primary block" data-act="life-save">' + esc(t('save')) + '</button></div>', 'life-sec');
   h += acc('health', t('s_health'), activeHealth().length ? t('acc_filled') : t('acc_none'), () => '<p class="small muted">' + esc(t('ob_health_d')) + '</p><div class="card">' + healthEditor('set') + '</div>' + (activeHealth().length || (p.health && p.health.validated && p.health.other) ? '<button class="btn ghost" data-act="h-withdraw">' + esc(t('hc_withdraw')) + '</button>' : ''));
   if (Store.mode === 'db'){
@@ -2089,6 +2148,12 @@ document.addEventListener('change', async e => {
   if (fileId && el.files && el.files[0]){
     S.pickFail = false; if (pickWatch) clearTimeout(pickWatch.timer);
     const file = el.files[0]; const blob = await prepImage(file); const url = URL.createObjectURL(blob);
+    if (fileId === 'tile-file'){
+      const sl = el.getAttribute('data-slot');
+      if (S.add && (S.add.phase === 'loading' || S.add.phase === 'coaching')){ URL.revokeObjectURL(url); go('add'); return; }
+      if (S.add && S.add.preview) URL.revokeObjectURL(S.add.preview);
+      S.add = newAdd(); S.add.mode = 'photo'; S.add.slot = sl; S.add.when = slotWhen(sl); S.add.blob = blob; S.add.preview = url; el.value = ''; go('add'); return;
+    }
     if (fileId === 'today-file'){
       if (S.add && (S.add.phase === 'loading' || S.add.phase === 'coaching')){ URL.revokeObjectURL(url); go('add'); return; }
       if (S.add && S.add.preview) URL.revokeObjectURL(S.add.preview);
@@ -2133,7 +2198,9 @@ document.addEventListener('click', e => {
     case 'coach-export': coachExport(); break;
     case 'coach-enable': { const D = S.coachDraft || {}; if (!D.consent){ toast(t('coach_need_consent')); break; } S.profile.coachShare = {on:true, at:new Date().toISOString(), name:String(D.name || '').trim().slice(0, 60)}; S.coachDraft = null; Store.set('profile', S.profile); toast(t('coach_enabled')); render(); break; }
     case 'coach-disable': coachDisable(); break;
-    case 'miss-add': S.add = newAdd(); S.add.when = v; S.view = 'add'; S.expanded = null; render(); window.scrollTo(0, 0); break;
+    case 'tile-open': S.expanded = v; render(); setTimeout(() => { const b = document.querySelector('[data-act="meal-toggle"][data-v="' + v + '"]'); if (b){ b.scrollIntoView({block:'center'}); b.focus({preventScroll:true}); } }, 30); break;
+    case 'tile-text': S.add = newAdd(); S.add.mode = 'text'; S.add.slot = v; S.add.when = slotWhen(v); S.view = 'add'; S.expanded = null; render(); window.scrollTo(0, 0); break;
+    case 'miss-add': S.add = newAdd(); S.add.when = {morning:'breakfast', noon:'lunch', evening:'dinner'}[v] || v; S.add.slot = MEAL_SLOTS.indexOf(S.add.when) >= 0 ? S.add.when : null; S.view = 'add'; S.expanded = null; render(); window.scrollTo(0, 0); break;
     case 'miss-skip': { const kk = dayKey(); const d = dayRW(kk); d.skipped = (d.skipped || []).filter(x => x !== v).concat([v]); saveDay(kk); toast(t('miss_skipped')); checkSignals(); render(); break; }
     case 'miss-never': case 'never-toggle': { const nm = Object.assign({}, S.profile.noMeal || {}); if (act === 'never-toggle' && nm[v]) delete nm[v]; else nm[v] = true; S.profile.noMeal = nm; Store.set('profile', S.profile); render(); break; }
     case 'eve-save': eveSave(); break;
