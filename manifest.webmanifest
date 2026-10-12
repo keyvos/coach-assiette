@@ -1,0 +1,16 @@
+{
+  "name": "Coach Assiette",
+  "short_name": "Coach Assiette",
+  "description": "Coach nutrition : analyse de tes repas, coaching et idées de repas.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F3F8F6",
+  "theme_color": "#2C7868",
+  "lang": "fr",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icon-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
