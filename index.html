@@ -83,7 +83,7 @@ label.btn:has(input:focus-visible){outline:2px solid var(--accent);outline-offse
 .seg button.on{background:var(--surface);box-shadow:0 1px 2px rgba(0,0,0,.12);color:var(--accent)}
 .field{display:flex;flex-direction:column;gap:6px;min-width:0}
 .field>span{font-size:14px;font-weight:700;color:var(--muted)}
-input[type=text],input[type=number],input[type=date],input[type=email],input[type=password],select,textarea{width:100%;min-width:0;padding:12px;border-radius:var(--r-s);border:1px solid var(--line);background:var(--surface);color:var(--ink);font:16px/1.3 var(--font-body)}
+input[type=text],input[type=number],input[type=date],input[type=time],input[type=email],input[type=password],select,textarea{width:100%;min-width:0;padding:12px;border-radius:var(--r-s);border:1px solid var(--line);background:var(--surface);color:var(--ink);font:16px/1.3 var(--font-body)}
 textarea{min-height:88px;resize:vertical}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
@@ -228,6 +228,20 @@ details summary{cursor:pointer;font-weight:600}
 .tile.wr .ti{stroke:var(--muted)}
 label.tile:has(input:focus-visible),.tile:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 @media (max-width:370px){.tiles{grid-template-columns:repeat(2,1fr)}}
+.hydro{display:grid;grid-template-columns:64px 1fr;gap:14px;align-items:center}
+.bottle{width:64px;height:128px;display:block}
+.bottle .water{transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+.hydro-n{font-size:26px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.1}
+.drinks{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.drink{appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:12px;min-height:58px;padding:6px 2px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font:600 11.5px/1.1 var(--font-body);cursor:pointer}
+.drink .em{font-size:22px;line-height:1}
+.drink:active{transform:scale(.94)}
+.drink:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.drink.pop{animation:pop .35s ease}
+@keyframes pop{50%{transform:scale(1.12)}}
+@media (prefers-reduced-motion: reduce){.bottle .water{transition:none}.drink.pop{animation:none}}
+.tile.flash{animation:flash 1.2s ease 2}
+@keyframes flash{50%{box-shadow:0 0 0 4px var(--accent)}}
 .footer-note{font-size:12px;color:var(--muted);text-align:center;padding-top:8px}
 @media (max-width:360px){.macros{grid-template-columns:repeat(2,1fr)}.grid3{grid-template-columns:1fr 1fr}}
 @media (min-width:480px){.cta{grid-template-columns:1fr 1fr}}
@@ -257,8 +271,10 @@ window.CA_CONFIG = window.CA_CONFIG || {
 const T = {
 fr:{
 need_style:'Choisis un style de coaching.', need_answer:'Choisis une réponse.', age_min:'L’app est réservée aux personnes de 18 ans et plus.',
+s_rem:'Rappels de repas', rem_d:'Une notification si une case repas est encore vide à l’heure choisie. Un seul rappel par repas, jamais si le repas est déjà noté ou sauté.', rem_times_hint:'Efface une heure pour ne pas être rappelé pour ce repas.', rem_water:'Rappel « Pense à boire » à 11 h et 16 h, seulement si ta gourde est peu remplie', rem_enable:'Activer les rappels', rem_disable:'Désactiver les rappels', rem_test:'Envoyer un test', rem_test_sent:'Notification de test envoyée.', rem_saved:'Rappels enregistrés.', rem_on_toast:'Rappels activés.', rem_off_toast:'Rappels désactivés.', rem_need_account:'Les rappels fonctionnent avec un compte, dans l’application en ligne.', rem_err_ios:'Sur iPhone, ajoute d’abord l’application à ton écran d’accueil (bouton Partager, puis « Sur l’écran d’accueil »), ouvre-la depuis cette icône, puis active les rappels.', rem_err_denied:'Les notifications sont bloquées pour ce site. Autorise-les dans les réglages de ton navigateur, puis réessaie.', rem_err_unsupported:'Ce navigateur ne gère pas les notifications. Essaie avec Chrome (Android) ou Safari (iPhone).', rem_err_other:'Les rappels n’ont pas pu être activés. Réessaie dans un moment.', rem_todo_t:'Un rappel si tu oublies une photo ?', rem_todo_d:'Une petite notification à l’heure des repas, seulement si rien n’est noté. Tu choisis les heures.', rem_todo_btn:'Choisir mes rappels',
 demo_btn:'Essayer en mode démo', demo_note:'Mode démo : tes réponses restent sur cet appareil et l’analyse par IA est désactivée (saisie à la main). Idéal pour découvrir l’application.', demo_on:'Mode démo : rien n’est envoyé en ligne.', demo_quit:'Quitter la démo',
 au_signup:'Créer mon compte', au_login:'Me connecter', au_email:'Adresse e-mail', au_pass:'Mot de passe', au_pass_hint:'8 caractères minimum. Garde-le bien : il te permet de retrouver tes données sur n’importe quel téléphone.', au_forgot:'Mot de passe oublié ? Demande à ton coach de le réinitialiser.', au_signup_btn:'Créer mon compte', au_login_btn:'Me connecter', au_privacy:'Tes données sont enregistrées dans ton espace privé, sur des serveurs en Europe. Ton coach ne voit tes résultats que si tu l’acceptes.', au_bad_email:'Adresse e-mail invalide.', au_bad_pass:'Le mot de passe doit faire au moins 8 caractères.', au_exists:'Un compte existe déjà avec cette adresse : choisis « Me connecter ».', au_wrong:'Adresse ou mot de passe incorrect.', au_confirm:'Compte créé : confirme ton adresse avec l’e-mail reçu, puis connecte-toi.', au_account:'Connecté avec {e}', au_logout:'Me déconnecter', au_delete_account:'Ton compte sera aussi supprimé.', err_quota:'Tu as atteint la limite d’analyses par IA pour aujourd’hui. Tu peux encore ajouter tes repas à la main.', cfg_missing:'L’application n’est pas encore configurée : il manque l’adresse de la base de données.',
+hyd_t:'Ma gourde', hyd_goal:'Objectif indicatif : {g}', hyd_done:'Objectif du jour atteint, bravo', hyd_streak:'{n} jours d’affilée', hyd_sugar:'+{n} g de sucres en boissons', hyd_alc_1:'1 verre d’alcool', hyd_alc_n:'{n} verres d’alcool', hyd_sugar_q:'Avec du sucre ? (morceaux)', hyd_caf_tip:'Beaucoup de cafés ou de thés aujourd’hui : la caféine peut accentuer le stress et les fringales. Un verre d’eau ou une tisane pour la suite ?', hyd_hint:'Un geste = un verre. Les boissons de tes photos sont ajoutées toutes seules.', hyd_undo:'Annuler la dernière', hyd_from_photo:'Ajouté à ta gourde : {x}', dr_water:'Eau', dr_hot:'Café/thé', dr_juice:'Jus', dr_soda:'Soda', dr_alcohol:'Alcool', coach_hydra:'Hydratation moyenne sur 7 jours : {l} · alcool : {a} verre(s)', col_hyd:'Boissons (L)', col_hot:'Cafés/thés', col_alc:'Alcool (verres)',
 ms_breakfast:'Petit-déjeuner', ms_snack10:'Collation 10 h', ms_lunch:'Déjeuner', ms_snack16:'Goûter 16 h', ms_dinner:'Dîner', ms_extra:'Hors repas', ms_extra_d:'Craquage, grignotage', tiles_t:'Mes repas du jour', tiles_count:'Photos : {n} / {m}', tile_goal:'≈ {n} kcal conseillées', tile_skip:'Sauté', tile_n:'{n} repas', tiles_hint:'Une photo par case. Tu peux toujours écrire un repas en plus.', photo_limit:'Tu as utilisé tes {m} photos d’aujourd’hui. Tu peux encore écrire ce que tu as mangé : ça compte aussi dans ton suivi.', slot_to_extra:'Il y a déjà une photo pour ce repas : celle-ci est classée en « Hors repas ».', ml_snack10:'Collation de 10 h', ml_snack16:'Goûter de 16 h',
 pick_fail:'La galerie ou l’appareil photo ne s’est pas ouvert ? L’application Claude sur certains téléphones (notamment Android) bloque l’envoi de photos. Ouvre ce même lien dans ton navigateur (Chrome ou Safari, connecté à claude.ai) : la photo y fonctionne. En attendant, utilise « Écrire ou dicter ».',
 guest_notice:'Attention : avec ton accès invité, l’application n’arrive pas à enregistrer tes données en ligne ni à les envoyer à ton coach. Elles restent dans ce téléphone et peuvent disparaître quand tu fermes l’application. Envoie à ton coach une capture de la ligne « Diagnostic » (Réglages → Mes données).',
@@ -391,8 +407,10 @@ d_vegetarien:'Végétarien', d_vegetalien:'Végétalien', d_pescetarien:'Pescét
 },
 en:{
 need_style:'Choose a coaching style.', need_answer:'Choose an answer.', age_min:'The app is for people aged 18 and over.',
+s_rem:'Meal reminders', rem_d:'A notification if a meal box is still empty at the time you choose. One reminder per meal, never if the meal is already logged or skipped.', rem_times_hint:'Clear a time to get no reminder for that meal.', rem_water:'“Remember to drink” reminder at 11 am and 4 pm, only if your bottle is low', rem_enable:'Turn on reminders', rem_disable:'Turn off reminders', rem_test:'Send a test', rem_test_sent:'Test notification sent.', rem_saved:'Reminders saved.', rem_on_toast:'Reminders on.', rem_off_toast:'Reminders off.', rem_need_account:'Reminders work with an account, in the online app.', rem_err_ios:'On iPhone, first add the app to your home screen (Share button, then “Add to Home Screen”), open it from that icon, then turn on reminders.', rem_err_denied:'Notifications are blocked for this site. Allow them in your browser settings, then try again.', rem_err_unsupported:'This browser does not support notifications. Try Chrome (Android) or Safari (iPhone).', rem_err_other:'Reminders could not be turned on. Try again in a moment.', rem_todo_t:'A reminder if you forget a photo?', rem_todo_d:'A small notification at mealtimes, only if nothing is logged. You choose the times.', rem_todo_btn:'Choose my reminders',
 demo_btn:'Try the demo', demo_note:'Demo mode: your answers stay on this device and AI analysis is off (manual entry). Ideal to discover the app.', demo_on:'Demo mode: nothing is sent online.', demo_quit:'Leave the demo',
 au_signup:'Create my account', au_login:'Sign in', au_email:'Email address', au_pass:'Password', au_pass_hint:'At least 8 characters. Keep it safe: it lets you find your data on any phone.', au_forgot:'Forgot your password? Ask your coach to reset it.', au_signup_btn:'Create my account', au_login_btn:'Sign in', au_privacy:'Your data is saved in your private space, on servers in Europe. Your coach only sees your results if you agree.', au_bad_email:'Invalid email address.', au_bad_pass:'The password must be at least 8 characters.', au_exists:'An account already exists with this address: choose “Sign in”.', au_wrong:'Wrong email or password.', au_confirm:'Account created: confirm your address with the email you received, then sign in.', au_account:'Signed in as {e}', au_logout:'Sign out', au_delete_account:'Your account will also be deleted.', err_quota:'You have reached today’s limit of AI analyses. You can still add your meals by hand.', cfg_missing:'The app is not configured yet: the database address is missing.',
+hyd_t:'My water bottle', hyd_goal:'Suggested goal: {g}', hyd_done:'Today’s goal reached, well done', hyd_streak:'{n} days in a row', hyd_sugar:'+{n} g of sugar from drinks', hyd_alc_1:'1 alcoholic drink', hyd_alc_n:'{n} alcoholic drinks', hyd_sugar_q:'With sugar? (cubes)', hyd_caf_tip:'Lots of coffee or tea today: caffeine can increase stress and cravings. A glass of water or a herbal tea next?', hyd_hint:'One tap = one glass. Drinks on your photos are added automatically.', hyd_undo:'Undo the last one', hyd_from_photo:'Added to your bottle: {x}', dr_water:'Water', dr_hot:'Coffee/tea', dr_juice:'Juice', dr_soda:'Soda', dr_alcohol:'Alcohol', coach_hydra:'Average hydration over 7 days: {l} · alcohol: {a} drink(s)', col_hyd:'Drinks (L)', col_hot:'Coffees/teas', col_alc:'Alcohol (drinks)',
 ms_breakfast:'Breakfast', ms_snack10:'10 am snack', ms_lunch:'Lunch', ms_snack16:'4 pm snack', ms_dinner:'Dinner', ms_extra:'Outside meals', ms_extra_d:'Craving, nibbling', tiles_t:'Today’s meals', tiles_count:'Photos: {n} / {m}', tile_goal:'≈ {n} kcal suggested', tile_skip:'Skipped', tile_n:'{n} meals', tiles_hint:'One photo per box. You can always type an extra meal.', photo_limit:'You have used your {m} photos for today. You can still type what you ate: it counts in your tracking too.', slot_to_extra:'There is already a photo for this meal: this one goes to “Outside meals”.', ml_snack10:'10 am snack', ml_snack16:'4 pm snack',
 pick_fail:'Didn’t your gallery or camera open? On some phones (especially Android) the Claude app blocks photo uploads. Open this same link in your browser (Chrome or Safari, signed in to claude.ai): photos work there. Meanwhile, use “Type or dictate”.',
 guest_notice:'Warning: with your guest access, the app cannot save your data online or send it to your coach. It stays on this phone and may disappear when you close the app. Send your coach a screenshot of the “Diagnostic” line (Settings → My data).',
@@ -525,8 +543,10 @@ d_vegetarien:'Vegetarian', d_vegetalien:'Vegan', d_pescetarien:'Pescatarian', d_
 },
 pt:{
 need_style:'Escolhe um estilo de coaching.', need_answer:'Escolhe uma resposta.', age_min:'A aplicação destina-se a pessoas com 18 anos ou mais.',
+s_rem:'Lembretes de refeições', rem_d:'Uma notificação se um quadrado de refeição ainda estiver vazio à hora escolhida. Um só lembrete por refeição, nunca se a refeição já estiver registada ou saltada.', rem_times_hint:'Apaga uma hora para não receber lembrete dessa refeição.', rem_water:'Lembrete «Lembra-te de beber» às 11 h e às 16 h, só se a tua garrafa estiver pouco cheia', rem_enable:'Ativar os lembretes', rem_disable:'Desativar os lembretes', rem_test:'Enviar um teste', rem_test_sent:'Notificação de teste enviada.', rem_saved:'Lembretes guardados.', rem_on_toast:'Lembretes ativados.', rem_off_toast:'Lembretes desativados.', rem_need_account:'Os lembretes funcionam com uma conta, na aplicação online.', rem_err_ios:'No iPhone, adiciona primeiro a aplicação ao ecrã principal (botão Partilhar e depois «Adicionar ao ecrã principal»), abre-a a partir desse ícone e ativa os lembretes.', rem_err_denied:'As notificações estão bloqueadas para este site. Autoriza-as nas definições do navegador e tenta de novo.', rem_err_unsupported:'Este navegador não suporta notificações. Experimenta o Chrome (Android) ou o Safari (iPhone).', rem_err_other:'Não foi possível ativar os lembretes. Tenta de novo daqui a pouco.', rem_todo_t:'Um lembrete se te esqueceres de uma foto?', rem_todo_d:'Uma pequena notificação à hora das refeições, só se nada estiver registado. Tu escolhes as horas.', rem_todo_btn:'Escolher os meus lembretes',
 demo_btn:'Experimentar a demonstração', demo_note:'Modo demonstração: as tuas respostas ficam neste dispositivo e a análise por IA está desativada (registo manual). Ideal para descobrir a aplicação.', demo_on:'Modo demonstração: nada é enviado online.', demo_quit:'Sair da demonstração',
 au_signup:'Criar a minha conta', au_login:'Entrar', au_email:'Endereço de e-mail', au_pass:'Palavra-passe', au_pass_hint:'Pelo menos 8 caracteres. Guarda-a bem: permite-te encontrar os teus dados em qualquer telemóvel.', au_forgot:'Esqueceste a palavra-passe? Pede ao teu coach para a repor.', au_signup_btn:'Criar a minha conta', au_login_btn:'Entrar', au_privacy:'Os teus dados ficam guardados no teu espaço privado, em servidores na Europa. O teu coach só vê os teus resultados se aceitares.', au_bad_email:'Endereço de e-mail inválido.', au_bad_pass:'A palavra-passe deve ter pelo menos 8 caracteres.', au_exists:'Já existe uma conta com este endereço: escolhe «Entrar».', au_wrong:'E-mail ou palavra-passe incorretos.', au_confirm:'Conta criada: confirma o teu endereço com o e-mail recebido e depois entra.', au_account:'Sessão iniciada com {e}', au_logout:'Terminar sessão', au_delete_account:'A tua conta também será apagada.', err_quota:'Atingiste o limite de análises por IA de hoje. Ainda podes adicionar as refeições à mão.', cfg_missing:'A aplicação ainda não está configurada: falta o endereço da base de dados.',
+hyd_t:'A minha garrafa', hyd_goal:'Objetivo indicativo: {g}', hyd_done:'Objetivo do dia atingido, parabéns', hyd_streak:'{n} dias seguidos', hyd_sugar:'+{n} g de açúcar em bebidas', hyd_alc_1:'1 copo de álcool', hyd_alc_n:'{n} copos de álcool', hyd_sugar_q:'Com açúcar? (pacotes)', hyd_caf_tip:'Muitos cafés ou chás hoje: a cafeína pode aumentar o stress e os desejos. Um copo de água ou uma infusão a seguir?', hyd_hint:'Um toque = um copo. As bebidas das tuas fotos são adicionadas sozinhas.', hyd_undo:'Anular a última', hyd_from_photo:'Adicionado à tua garrafa: {x}', dr_water:'Água', dr_hot:'Café/chá', dr_juice:'Sumo', dr_soda:'Refrigerante', dr_alcohol:'Álcool', coach_hydra:'Hidratação média em 7 dias: {l} · álcool: {a} copo(s)', col_hyd:'Bebidas (L)', col_hot:'Cafés/chás', col_alc:'Álcool (copos)',
 ms_breakfast:'Pequeno-almoço', ms_snack10:'Lanche 10 h', ms_lunch:'Almoço', ms_snack16:'Lanche 16 h', ms_dinner:'Jantar', ms_extra:'Fora das refeições', ms_extra_d:'Desejo, petisco', tiles_t:'As minhas refeições de hoje', tiles_count:'Fotos: {n} / {m}', tile_goal:'≈ {n} kcal sugeridas', tile_skip:'Saltada', tile_n:'{n} refeições', tiles_hint:'Uma foto por quadrado. Podes sempre escrever uma refeição a mais.', photo_limit:'Já usaste as tuas {m} fotos de hoje. Ainda podes escrever o que comeste: também conta no teu acompanhamento.', slot_to_extra:'Já existe uma foto para esta refeição: esta fica em «Fora das refeições».', ml_snack10:'Lanche das 10 h', ml_snack16:'Lanche das 16 h',
 pick_fail:'A galeria ou a câmara não abriu? Em alguns telemóveis (sobretudo Android) a aplicação Claude bloqueia o envio de fotos. Abre este mesmo link no teu navegador (Chrome ou Safari, com sessão iniciada em claude.ai): aí a foto funciona. Entretanto, usa «Escrever ou ditar».',
 guest_notice:'Atenção: com o teu acesso de convidado, a aplicação não consegue guardar os teus dados online nem enviá-los ao teu coach. Ficam neste telemóvel e podem desaparecer quando fechares a aplicação. Envia ao teu coach uma captura da linha «Diagnostic» (Definições → Os meus dados).',
@@ -659,8 +679,10 @@ d_vegetarien:'Vegetariano', d_vegetalien:'Vegano', d_pescetarien:'Pescetariano',
 },
 es:{
 need_style:'Elige un estilo de coaching.', need_answer:'Elige una respuesta.', age_min:'La aplicación es para personas de 18 años o más.',
+s_rem:'Recordatorios de comidas', rem_d:'Una notificación si una casilla de comida sigue vacía a la hora elegida. Un solo recordatorio por comida, nunca si la comida ya está anotada o saltada.', rem_times_hint:'Borra una hora para no recibir recordatorio de esa comida.', rem_water:'Recordatorio «Acuérdate de beber» a las 11 y a las 16, solo si tu botella está poco llena', rem_enable:'Activar los recordatorios', rem_disable:'Desactivar los recordatorios', rem_test:'Enviar una prueba', rem_test_sent:'Notificación de prueba enviada.', rem_saved:'Recordatorios guardados.', rem_on_toast:'Recordatorios activados.', rem_off_toast:'Recordatorios desactivados.', rem_need_account:'Los recordatorios funcionan con una cuenta, en la aplicación en línea.', rem_err_ios:'En iPhone, añade primero la aplicación a tu pantalla de inicio (botón Compartir y luego «Añadir a pantalla de inicio»), ábrela desde ese icono y activa los recordatorios.', rem_err_denied:'Las notificaciones están bloqueadas para este sitio. Permítelas en los ajustes del navegador y vuelve a intentarlo.', rem_err_unsupported:'Este navegador no admite notificaciones. Prueba con Chrome (Android) o Safari (iPhone).', rem_err_other:'No se pudieron activar los recordatorios. Inténtalo de nuevo en un momento.', rem_todo_t:'¿Un recordatorio si olvidas una foto?', rem_todo_d:'Una pequeña notificación a la hora de comer, solo si no hay nada anotado. Tú eliges las horas.', rem_todo_btn:'Elegir mis recordatorios',
 demo_btn:'Probar la demo', demo_note:'Modo demo: tus respuestas se quedan en este dispositivo y el análisis por IA está desactivado (registro manual). Ideal para descubrir la aplicación.', demo_on:'Modo demo: no se envía nada en línea.', demo_quit:'Salir de la demo',
 au_signup:'Crear mi cuenta', au_login:'Iniciar sesión', au_email:'Correo electrónico', au_pass:'Contraseña', au_pass_hint:'Al menos 8 caracteres. Guárdala bien: te permite recuperar tus datos en cualquier teléfono.', au_forgot:'¿Olvidaste la contraseña? Pide a tu coach que la restablezca.', au_signup_btn:'Crear mi cuenta', au_login_btn:'Iniciar sesión', au_privacy:'Tus datos se guardan en tu espacio privado, en servidores en Europa. Tu coach solo ve tus resultados si lo aceptas.', au_bad_email:'Correo electrónico no válido.', au_bad_pass:'La contraseña debe tener al menos 8 caracteres.', au_exists:'Ya existe una cuenta con este correo: elige «Iniciar sesión».', au_wrong:'Correo o contraseña incorrectos.', au_confirm:'Cuenta creada: confirma tu correo con el mensaje recibido y luego inicia sesión.', au_account:'Sesión iniciada con {e}', au_logout:'Cerrar sesión', au_delete_account:'Tu cuenta también se eliminará.', err_quota:'Has alcanzado el límite de análisis por IA de hoy. Todavía puedes añadir tus comidas a mano.', cfg_missing:'La aplicación aún no está configurada: falta la dirección de la base de datos.',
+hyd_t:'Mi botella', hyd_goal:'Objetivo orientativo: {g}', hyd_done:'Objetivo del día conseguido, enhorabuena', hyd_streak:'{n} días seguidos', hyd_sugar:'+{n} g de azúcar en bebidas', hyd_alc_1:'1 copa de alcohol', hyd_alc_n:'{n} copas de alcohol', hyd_sugar_q:'¿Con azúcar? (terrones)', hyd_caf_tip:'Muchos cafés o tés hoy: la cafeína puede aumentar el estrés y los antojos. ¿Un vaso de agua o una infusión para seguir?', hyd_hint:'Un toque = un vaso. Las bebidas de tus fotos se añaden solas.', hyd_undo:'Deshacer la última', hyd_from_photo:'Añadido a tu botella: {x}', dr_water:'Agua', dr_hot:'Café/té', dr_juice:'Zumo', dr_soda:'Refresco', dr_alcohol:'Alcohol', coach_hydra:'Hidratación media en 7 días: {l} · alcohol: {a} copa(s)', col_hyd:'Bebidas (L)', col_hot:'Cafés/tés', col_alc:'Alcohol (copas)',
 ms_breakfast:'Desayuno', ms_snack10:'Tentempié 10 h', ms_lunch:'Comida', ms_snack16:'Merienda 16 h', ms_dinner:'Cena', ms_extra:'Fuera de comidas', ms_extra_d:'Antojo, picoteo', tiles_t:'Mis comidas de hoy', tiles_count:'Fotos: {n} / {m}', tile_goal:'≈ {n} kcal sugeridas', tile_skip:'Saltada', tile_n:'{n} comidas', tiles_hint:'Una foto por casilla. Siempre puedes escribir una comida más.', photo_limit:'Ya has usado tus {m} fotos de hoy. Todavía puedes escribir lo que comiste: también cuenta en tu seguimiento.', slot_to_extra:'Ya hay una foto para esta comida: esta va a «Fuera de comidas».', ml_snack10:'Tentempié de las 10 h', ml_snack16:'Merienda de las 16 h',
 pick_fail:'¿No se abrió la galería o la cámara? En algunos teléfonos (sobre todo Android) la aplicación Claude bloquea el envío de fotos. Abre este mismo enlace en tu navegador (Chrome o Safari, con sesión iniciada en claude.ai): allí la foto funciona. Mientras tanto, usa «Escribir o dictar».',
 guest_notice:'Atención: con tu acceso de invitado, la aplicación no puede guardar tus datos en línea ni enviarlos a tu coach. Se quedan en este teléfono y pueden desaparecer al cerrar la aplicación. Envía a tu coach una captura de la línea «Diagnostic» (Ajustes → Mis datos).',
@@ -1190,7 +1212,15 @@ function dayRW(k){ if (!S.days[k]) S.days[k] = {meals:[], activities:[]}; if (!S
 function saveDay(k){ return Store.set('day-' + k, S.days[k]); }
 function sportOf(day){ return (day.activities || []).reduce((s, a) => s + num(a.kcal), 0); }
 function dayNeeds(k){ return needsBase(S.profile) + sportOf(dayRO(k)); }
-function dayTotals(day){ return (day.meals || []).reduce((t, m) => ({kcal:t.kcal+num(m.kcal), p:t.p+num(m.p), g:t.g+num(m.g), s:t.s+num(m.s), l:t.l+num(m.l)}), {kcal:0, p:0, g:0, s:0, l:0}); }
+/* Drinks: one tap = one standard glass. Juice, soda, sugar in hot drinks and alcohol add their calories and sugars to the day;
+   drinks seen on a meal photo only add volume (their calories are already in the meal). */
+const DRINKS = {water:{ml:250, kcal:0, s:0, g:0, e:'💧'}, hot:{ml:150, kcal:0, s:0, g:0, e:'☕'}, juice:{ml:250, kcal:110, s:22, g:26, e:'🧃'}, soda:{ml:330, kcal:140, s:35, g:35, e:'🥤'}, alcohol:{ml:125, kcal:85, s:1, g:3, e:'🍷'}};
+function drinkVals(dr){ const D = DRINKS[dr.type] || DRINKS.water; if (dr.meal) return {kcal:0, s:0, g:0}; const su = num(dr.sugar); return {kcal:D.kcal + su * 20, s:D.s + su * 5, g:D.g + su * 5}; }
+function hydroOf(day){ let ml = 0, alc = 0, hot = 0, sweet = 0, sugar = 0; (day.drinks || []).forEach(dr => { const D = DRINKS[dr.type] || DRINKS.water; if (dr.type === 'alcohol') alc++; else ml += D.ml; if (dr.type === 'hot') hot++; if (dr.type === 'juice' || dr.type === 'soda') sweet++; sugar += drinkVals(dr).s; }); return {ml, alc, hot, sweet, sugar:Math.round(sugar)}; }
+function hydroGoal(){ return S.profile && S.profile.sex === 'm' ? 2000 : 1500; }
+function hydroStreak(){ const goal = hydroGoal(); let n = 0; let k = dayKey(); if (hydroOf(dayRO(k)).ml < goal) k = addDays(k, -1); for (let i = 0; i < 14; i++){ if (hydroOf(dayRO(k)).ml >= goal){ n++; k = addDays(k, -1); } else break; } return n; }
+function litres(ml){ const v = ml / 1000; return nf(v, ml % 1000 === 0 ? 0 : (ml % 100 === 0 ? 1 : 2)) + ' L'; }
+function dayTotals(day){ const t0 = (day.meals || []).reduce((t, m) => ({kcal:t.kcal+num(m.kcal), p:t.p+num(m.p), g:t.g+num(m.g), s:t.s+num(m.s), l:t.l+num(m.l)}), {kcal:0, p:0, g:0, s:0, l:0}); (day.drinks || []).forEach(dr => { const v = drinkVals(dr); t0.kcal += v.kcal; t0.s += v.s; t0.g += v.g; }); return t0; }
 function itemVals(it){ const f = it.unit === 'portion' ? num(it.qty) : (it.base.grams ? num(it.grams) / it.base.grams : 1); return {kcal:it.base.kcal*f, p:it.base.p*f, g:it.base.g*f, s:it.base.s*f, l:it.base.l*f}; }
 function totals(items){ return items.reduce((t, it) => { const v = itemVals(it); return {kcal:t.kcal+v.kcal, p:t.p+v.p, g:t.g+v.g, s:t.s+v.s, l:t.l+v.l}; }, {kcal:0, p:0, g:0, s:0, l:0}); }
 function rangeFor(total, conf){ const w = conf === 'eleve' ? 100 : conf === 'faible' ? 200 : 150; let mn = Math.round((total - w/2) / 10) * 10; if (mn < 0) mn = 0; return [mn, mn + w]; }
@@ -1240,7 +1270,7 @@ function promptA(mode, desc, hasImg){
     '\nRègles :\n1. Liste seulement les ingrédients ou aliments visibles ou cités, sans portions ni calories.\n2. Donne un nom normalisé en français et un nom d’affichage dans la langue d’affichage.\n3. Si l’image est inexploitable ou ne montre pas de nourriture : "est_exploitable": false et une courte explication dans "message_erreur", dans la langue d’affichage.\n\nRéponds uniquement avec ce JSON :\n{"est_exploitable": true, "ingredients": [{"nom_normalise": "texte", "nom_affiche": "texte"}], "message_erreur": ""}';
   }
   return head + 'Mode : REPAS\n' + src + lang + 'Habitudes de portions de l’utilisateur : ' + habitsText() + '\n' +
-  '\nRègles :\n1. Identifie chaque aliment. Donne un nom normalisé en français (pour la recherche dans les bases) et un nom d’affichage dans la langue d’affichage.\n2. Estime la portion en grammes, en tenant compte des habitudes de l’utilisateur quand un aliment correspond.\n3. Pense aux matières grasses et sauces peu visibles (huile de cuisson, beurre, vinaigrette) : ajoute-les comme aliment séparé quand elles sont probables.\n4. Pour chaque aliment et sa portion, estime kcal, protéines, glucides, sucres et lipides en t’appuyant sur les valeurs de référence de la table Ciqual (Anses) quand tu les connais.\n5. Liste les allergènes probables de chaque aliment avec ces codes uniquement : ' + CODES_TXT + '. Indique aussi s’il contient de la viande, du porc, du poisson ou des fruits de mer, des produits animaux, de l’alcool.\n6. Si ce n’est pas un repas ou si l’image est inexploitable : "est_exploitable": false et une courte explication dans "message_erreur", dans la langue d’affichage.\n\nRéponds uniquement avec ce JSON :\n{"est_exploitable": true, "aliments": [{"nom_normalise": "texte", "nom_affiche": "texte", "portion_g": 0, "kcal_estimees": 0, "proteines_g": 0, "glucides_g": 0, "sucres_g": 0, "lipides_g": 0, "allergenes_probables": ["code"], "contient": {"viande": false, "porc": false, "poisson": false, "produits_animaux": false, "alcool": false}}], "niveau_confiance": "faible | moyen | eleve", "message_erreur": ""}';
+  '\nRègles :\n1. Identifie chaque aliment. Donne un nom normalisé en français (pour la recherche dans les bases) et un nom d’affichage dans la langue d’affichage.\n2. Estime la portion en grammes, en tenant compte des habitudes de l’utilisateur quand un aliment correspond.\n3. Pense aux matières grasses et sauces peu visibles (huile de cuisson, beurre, vinaigrette) : ajoute-les comme aliment séparé quand elles sont probables.\n4. Pour chaque aliment et sa portion, estime kcal, protéines, glucides, sucres et lipides en t’appuyant sur les valeurs de référence de la table Ciqual (Anses) quand tu les connais.\n5. Liste les allergènes probables de chaque aliment avec ces codes uniquement : ' + CODES_TXT + '. Indique aussi s’il contient de la viande, du porc, du poisson ou des fruits de mer, des produits animaux, de l’alcool.\n6. Si ce n’est pas un repas ou si l’image est inexploitable : "est_exploitable": false et une courte explication dans "message_erreur", dans la langue d’affichage.\n7. Repère aussi les boissons visibles ou citées (eau, café ou thé, jus, soda, alcool) : liste-les dans "boissons" avec le nombre de verres ou de tasses. Garde-les aussi dans "aliments" avec leurs valeurs nutritionnelles. Aucune boisson : liste vide.\n\nRéponds uniquement avec ce JSON :\n{"est_exploitable": true, "boissons": [{"type": "eau | cafe_the | jus | soda | alcool", "nombre": 1}], "aliments": [{"nom_normalise": "texte", "nom_affiche": "texte", "portion_g": 0, "kcal_estimees": 0, "proteines_g": 0, "glucides_g": 0, "sucres_g": 0, "lipides_g": 0, "allergenes_probables": ["code"], "contient": {"viande": false, "porc": false, "poisson": false, "produits_animaux": false, "alcool": false}}], "niveau_confiance": "faible | moyen | eleve", "message_erreur": ""}';
 }
 function goalText(){ if (hasMed('grossesse') || hasMed('allaitement')) return 'accompagnement de grossesse ou d’allaitement (aucune perte de poids, aucune restriction)'; return {lose:'perte de poids', keep:'maintien', gain:'prise de masse'}[S.profile.goal] || 'maintien'; }
 function emoText(h){ if (h.type !== 'EMOTIONNELLE') return 'aucune'; const map = {stress:'stress', bored:'ennui', tired:'fatigue', sad:'tristesse', other:'autre'}; return (map[h.emotion] || 'non précisée') + (h.other ? ' (' + h.other + ')' : ''); }
@@ -1355,6 +1385,7 @@ function render(){
     main.innerHTML = (V[S.view] || viewToday)();
   }
   renderSheet();
+  afterRender();
 }
 function ambPicker(){ return '<div class="grid2">' + Object.keys(AMBS).map(a => '<button type="button" class="opt-pick ' + (AMB === a ? 'on' : '') + '" data-act="amb" data-v="' + a + '" aria-pressed="' + (AMB === a) + '" style="gap:8px"><span class="sw" aria-hidden="true">' + AMBS[a].map(c => '<i style="background:' + c + '"></i>').join('') + '</span><strong>' + esc(t('amb_' + a)) + '</strong></button>').join('') + '</div>'; }
 function guestWarn(){ return ''; }
@@ -1480,10 +1511,11 @@ function viewToday(){
     '<div class="macros"><div class="macro"><b>' + nf(Math.round(tot.p)) + ' g</b><span>' + esc(t('protein')) + '</span></div><div class="macro"><b>' + nf(Math.round(tot.g)) + ' g</b><span>' + esc(t('carbs')) + '</span></div><div class="macro"><b>' + nf(Math.round(tot.l)) + ' g</b><span>' + esc(t('fat')) + '</span></div><div class="macro sugar"><b>' + nf(Math.round(tot.s)) + ' g</b><span>' + esc(t('sugars')) + '</span></div></div></section>';
   h += mealTiles(k, day) + '<div class="stack-s">' + (S.pickFail ? note('warn', esc(t('pick_fail'))) : '') + '<div class="grid2"><button class="btn outline" data-act="quick-add" data-v="text">' + esc(t('type_meal')) + '</button><button class="btn outline" data-act="quick-add" data-v="fav">' + esc(t('fav_quick')) + '</button></div>' +
     '<button class="card opt-pick" data-act="go" data-v="idea"><strong>' + esc(t('no_idea')) + '</strong><span class="small muted">' + esc(t('idea_sub')) + '</span></button></div>';
+  h += hydroCard(k, day);
   const eve = eveningCard(), eveDone = !!day.checkin;
   const cs = S.profile.coachShare || {};
   const coachTodo = Store.mode === 'db' && !cs.on && !S.coachLater ? '<div class="card stack-s"><h3>' + esc(t('coach_todo_t')) + '</h3><p class="muted small">' + esc(t('coach_todo_d')) + '</p><div class="row"><button class="btn primary" data-act="go-coach">' + esc(t('coach_todo_btn')) + '</button><button class="btn ghost" data-act="coach-later">' + esc(t('later')) + '</button></div></div>' : '';
-  const todo = coachTodo + missedCard() + (eveDone ? '' : eve) + questionnaireCard() +
+  const todo = coachTodo + remTodo() + missedCard() + (eveDone ? '' : eve) + questionnaireCard() +
     (!dayValid(S.profile.journee) ? '<div class="card stack-s"><h3>' + esc(t('day_card_t')) + '</h3><p class="muted small">' + esc(t('day_card_d')) + '</p><button class="btn primary" data-act="go-day">' + esc(t('life_card_btn')) + '</button></div>' : '') +
     (!lifeValid(S.profile.life) ? '<div class="card stack-s"><h3>' + esc(t('life_card_t')) + '</h3><p class="muted small">' + esc(t('life_card_d')) + '</p><button class="btn primary" data-act="go-life">' + esc(t('life_card_btn')) + '</button></div>' : '');
   if (todo) h += '<section class="section"><h2>' + esc(t('todo_t')) + '</h2>' + todo + '</section>';
@@ -1515,6 +1547,74 @@ function mealTiles(k, day){
     '<div class="tiles">' + activeSlots().concat(['extra']).map(tile).join('') + '</div>' +
     (full ? note('info', esc(t('photo_limit', {m:lim}))) : '<p class="tiny muted">' + esc(t('tiles_hint')) + '</p>') + '</section>';
 }
+function hydroCard(k, day){
+  const H = hydroOf(day), goal = hydroGoal(), pct = Math.min(100, Math.round(H.ml / goal * 100)), done = H.ml >= goal, streak = hydroStreak();
+  const yy = Math.round(112 * (1 - pct / 100)); S.hydroPct = pct;
+  const bottle = '<svg class="bottle" viewBox="0 0 64 128" aria-hidden="true"><defs><clipPath id="btl-clip"><path d="M24 4h16v14l9 11v89a6 6 0 0 1-6 6H21a6 6 0 0 1-6-6V29l9-11z"/></clipPath></defs><g clip-path="url(#btl-clip)"><rect x="0" y="0" width="64" height="128" fill="var(--surface-2)"/><rect id="hydro-water" class="water" x="0" y="16" width="64" height="112" fill="var(--accent)" fill-opacity="0.5" style="transform:translateY(' + yy + 'px)"/></g><path d="M24 4h16v14l9 11v89a6 6 0 0 1-6 6H21a6 6 0 0 1-6-6V29l9-11z" fill="none" stroke="var(--line)" stroke-width="2"/></svg>';
+  const btn = x => '<button type="button" class="drink" data-act="drink" data-v="' + x + '" id="drink-' + x + '"><span class="em" aria-hidden="true">' + DRINKS[x].e + '</span>' + esc(t('dr_' + x)) + '</button>';
+  const parts = []; if (H.hot) parts.push('☕ ×' + H.hot); if (H.sweet) parts.push(esc(t('hyd_sugar', {n:H.sugar}))); if (H.alc) parts.push('🍷 ' + esc(t(H.alc > 1 ? 'hyd_alc_n' : 'hyd_alc_1', {n:H.alc})));
+  const last = (day.drinks || []).filter(d => !d.meal).slice(-1)[0];
+  let h = '<section class="card stack-s" aria-label="' + esc(t('hyd_t')) + '"><div class="between"><h2>' + esc(t('hyd_t')) + '</h2>' + (streak >= 2 ? '<span class="badge eq">' + esc(t('hyd_streak', {n:streak})) + '</span>' : '') + '</div>' +
+    '<div class="hydro">' + bottle + '<div class="stack-s" style="gap:4px"><span class="hydro-n">' + litres(H.ml) + '</span><span class="small muted">' + esc(done ? t('hyd_done') : t('hyd_goal', {g:litres(goal)})) + '</span>' + (parts.length ? '<span class="small">' + parts.join(' · ') + '</span>' : '') + '</div></div>' +
+    '<div class="drinks">' + ['water','hot','juice','soda','alcohol'].map(btn).join('') + '</div>';
+  if (S.drinkAsk && last && last.id === S.drinkAsk && last.type === 'hot') h += '<div class="row" style="justify-content:space-between"><span class="small">' + esc(t('hyd_sugar_q')) + '</span><div class="seg" style="min-width:180px">' + [0,1,2,3].map(n => '<button type="button" data-act="drink-sugar" data-v="' + n + '" class="' + (num(last.sugar) === n ? 'on' : '') + '">' + n + '</button>').join('') + '</div></div>';
+  if (H.hot >= 5) h += note('info', esc(t('hyd_caf_tip')));
+  h += '<div class="between"><span class="tiny muted">' + esc(t('hyd_hint')) + '</span>' + (last ? '<button class="link small" data-act="drink-undo">' + esc(t('hyd_undo')) + '</button>' : '') + '</div></section>';
+  return h;
+}
+function animHydro(){ const w = document.getElementById('hydro-water'); if (!w) return; const yy = Math.round(112 * (1 - (S.hydroPct || 0) / 100)); if (S.hydroFrom != null && S.hydroFrom !== S.hydroPct){ w.style.transition = 'none'; w.style.transform = 'translateY(' + Math.round(112 * (1 - S.hydroFrom / 100)) + 'px)'; void w.getBoundingClientRect(); w.style.transition = ''; w.style.transform = 'translateY(' + yy + 'px)'; } S.hydroFrom = null; }
+function drinkType(x){ x = String(x || '').toLowerCase(); if (/alcool|vin|bi[eè]re|alcohol|wine|beer|cerveja|vinho|cerveza/.test(x)) return 'alcohol'; if (/soda|cola|limonade|soft/.test(x)) return 'soda'; if (/jus|juice|sumo|zumo|smoothie/.test(x)) return 'juice'; if (/caf|th[eé]|tea|ch[aá]|infusion|tisane/.test(x)) return 'hot'; return 'water'; }
+const REM_DEF = {breakfast:'09:30', snack10:'11:00', lunch:'14:00', snack16:'17:30', dinner:'21:00'};
+function remPrefs(){ const r = (S.profile && S.profile.reminders) || {}; return {on:!!r.on, meals:Object.assign({}, REM_DEF, r.meals || {}), water:!!r.water}; }
+function pushSupport(){ return 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window; }
+function isIOS(){ return /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1); }
+function isStandalone(){ return (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true; }
+function keyBytes(str){ const pad = '='.repeat((4 - str.length % 4) % 4); const bin = atob((str + pad).replace(/-/g, '+').replace(/_/g, '/')); return Uint8Array.from(bin, c => c.charCodeAt(0)); }
+async function swReg(){ if (!('serviceWorker' in navigator)) return null; try { return await navigator.serviceWorker.register('sw.js'); } catch(e){ return null; } }
+function fnUrl(name){ return window.CA_CONFIG.SUPABASE_URL.replace(/\/$/, '') + '/functions/v1/' + name; }
+async function remSave(prefs){
+  S.profile.reminders = prefs; Store.set('profile', S.profile);
+  if (!prefs.on) return;
+  const reg = await swReg(); const sub = reg && await reg.pushManager.getSubscription(); if (!sub) throw {code:'unsupported'};
+  const meals = {}; activeSlots().forEach(x => { if (prefs.meals[x]) meals[x] = prefs.meals[x]; });
+  const tz = (Intl.DateTimeFormat().resolvedOptions().timeZone) || 'Europe/Paris';
+  const { error } = await SB.from('push_subs').upsert({user_id:Store.uid, endpoint:sub.endpoint, sub:sub.toJSON(), tz, lang:LANG, prefs:{meals, water:!!prefs.water, goal:hydroGoal()}, updated_at:new Date().toISOString()});
+  if (error) throw {code:'other'};
+}
+async function remEnable(){
+  S.remBusy = true; S.remErr = null; render();
+  try {
+    if (!pushSupport()) throw {code:'unsupported'};
+    if (isIOS() && !isStandalone()) throw {code:'ios'};
+    const perm = await Notification.requestPermission(); if (perm !== 'granted') throw {code:'denied'};
+    const reg = await swReg(); if (!reg) throw {code:'unsupported'};
+    await navigator.serviceWorker.ready;
+    let sub = await reg.pushManager.getSubscription();
+    if (!sub){ const tok = await Store.token(); const r = await fetch(fnUrl('remind') + '?vapid=1', {headers:{apikey:window.CA_CONFIG.SUPABASE_KEY, Authorization:'Bearer ' + tok}}); const j = await r.json().catch(() => ({})); if (!j.publicKey) throw {code:'other'}; sub = await reg.pushManager.subscribe({userVisibleOnly:true, applicationServerKey:keyBytes(j.publicKey)}); }
+    const D = S.remDraft || remPrefs(); await remSave({on:true, meals:Object.assign({}, D.meals), water:!!D.water}); toast(t('rem_on_toast'));
+  } catch(e){ S.remErr = (e && e.code) || 'other'; }
+  S.remBusy = false; render();
+}
+async function remUnsubscribe(){ try { const reg = await navigator.serviceWorker.getRegistration(); const sub = reg && await reg.pushManager.getSubscription(); if (sub) await sub.unsubscribe(); } catch(e){} try { await SB.from('push_subs').delete().eq('user_id', Store.uid); } catch(e){} }
+async function remDisable(){ await remUnsubscribe(); const p = remPrefs(); p.on = false; S.profile.reminders = p; Store.set('profile', S.profile); toast(t('rem_off_toast')); render(); }
+async function remTest(){ try { const tok = await Store.token(); const r = await fetch(fnUrl('remind'), {method:'POST', headers:{'Content-Type':'application/json', apikey:window.CA_CONFIG.SUPABASE_KEY, Authorization:'Bearer ' + tok}, body:JSON.stringify({test:true})}); toast(r.ok ? t('rem_test_sent') : t('err_generic')); } catch(e){ toast(t('err_generic')); } }
+async function remCheck(){ if (!remPrefs().on || Store.mode !== 'db') return; try { const reg = await navigator.serviceWorker.getRegistration(); const sub = reg && await reg.pushManager.getSubscription(); if (!sub || Notification.permission !== 'granted'){ const p = remPrefs(); p.on = false; S.profile.reminders = p; Store.set('profile', S.profile); render(); } } catch(e){} }
+function remAcc(acc){
+  const p = remPrefs(); if (!S.remDraft) S.remDraft = {meals:Object.assign({}, p.meals), water:p.water};
+  return acc('rem', t('s_rem'), p.on ? t('acc_on') : t('acc_off'), () => {
+    if (Store.mode !== 'db') return note('info', esc(t('rem_need_account')));
+    let h = '<p class="small muted">' + esc(t('rem_d')) + '</p>';
+    if (S.remErr) h += note('warn', esc(t('rem_err_' + (['ios','denied','unsupported'].indexOf(S.remErr) >= 0 ? S.remErr : 'other'))));
+    else if (!p.on && isIOS() && !isStandalone()) h += note('info', esc(t('rem_err_ios')));
+    h += '<div class="stack-s">' + activeSlots().map(x => '<label class="between" style="gap:12px"><span>' + esc(t('ms_' + x)) + '</span><input type="time" style="max-width:140px" id="rem-' + x + '" data-f="remDraft.meals.' + x + '" value="' + esc(S.remDraft.meals[x] || '') + '"></label>').join('') + '</div>' +
+      '<p class="tiny muted">' + esc(t('rem_times_hint')) + '</p>' + chk('remDraft.water', S.remDraft.water, t('rem_water'));
+    h += p.on ? '<button class="btn primary block" data-act="rem-save">' + esc(t('save')) + '</button><div class="row"><button class="btn outline sm" data-act="rem-test">' + esc(t('rem_test')) + '</button><button class="btn ghost sm" data-act="rem-off">' + esc(t('rem_disable')) + '</button></div>'
+      : '<button class="btn primary block" data-act="rem-on"' + (S.remBusy ? ' disabled' : '') + '>' + esc(S.remBusy ? t('loading') : t('rem_enable')) + '</button>';
+    return h;
+  }, 'rem-sec');
+}
+function remTodo(){ if (Store.mode !== 'db' || !pushSupport() || remPrefs().on || (S.profile && S.profile.remAsked) || S.remLater) return ''; return '<div class="card stack-s"><h3>' + esc(t('rem_todo_t')) + '</h3><p class="muted small">' + esc(t('rem_todo_d')) + '</p><div class="row"><button class="btn primary" data-act="rem-go">' + esc(t('rem_todo_btn')) + '</button><button class="btn ghost" data-act="rem-later">' + esc(t('later')) + '</button></div></div>'; }
+function afterRender(){ animHydro(); if (S.flashSlot){ const x = S.flashSlot; S.flashSlot = null; const el = x === 'water' ? document.getElementById('drink-water') : document.querySelector('label[for="tile-file-' + x + '"]'); if (el){ el.classList.add('flash'); setTimeout(() => el.scrollIntoView({block:'center'}), 50); } } }
 function hungerBadge(m){ if (!m.hunger || !m.hunger.type) return ''; return m.hunger.type === 'EMOTIONNELLE' ? '<span class="badge emo">' + esc(t('emo_badge')) + '</span>' : '<span class="badge">' + esc(t('phys_badge')) + '</span>'; }
 function originBadge(m){ if (!m.origin || m.origin === 'SAISIE') return ''; const lv = m.origin.replace('IDEE_REPAS_', '').toLowerCase(); return '<span class="badge ' + (LVL_BADGE[lv] || '') + '">' + esc(t('idea_badge')) + ' · ' + esc(t('lvl_' + lv)) + '</span>'; }
 function mealRow(m, k){
@@ -1654,6 +1754,7 @@ async function analyzeMeal(){
     const res = await S.sample.json(promptA('REPAS', usePhoto ? null : A.text.trim(), usePhoto), opts);
     if (!res || res.est_exploitable === false || !Array.isArray(res.aliments) || !res.aliments.length){ A.phase = 'input'; A.error = (res && res.message_erreur) || t('not_food'); render(); return; }
     if (usePhoto){ const kk = dayKey(); const dd = dayRW(kk); dd.photos = (dd.photos || 0) + 1; saveDay(kk); }
+    A.drinks = Array.isArray(res.boissons) ? res.boissons.slice(0, 6).map(b => ({type:drinkType(b && b.type), n:Math.max(1, Math.min(4, Math.round(num(b && b.nombre) || 1)))})) : [];
     A.items = res.aliments.slice(0, 20).map(normItem);
     A.conf = ['faible','moyen','eleve'].indexOf(res.niveau_confiance) >= 0 ? res.niveau_confiance : 'moyen';
     A.phase = 'result'; render(); window.scrollTo(0, 0);
@@ -1682,7 +1783,9 @@ async function validateMeal(){
   recordCorrections(A.items);
   const k = dayKey(); const before = dayTotals(dayRO(k)); const tot = totals(A.items); const r = rangeFor(tot.kcal, A.conf);
   const at = mealAt(A.when); const meal = {id:uidGen(), at, slot:A.slot || (MEAL_SLOTS.indexOf(A.when) >= 0 ? A.when : mealSlotOfTime(at)), source:A.source, origin:A.origin, title:A.title || null, items:A.items.map(stripItem), conf:A.conf, kcalMin:r[0], kcalMax:r[1], kcal:Math.round((r[0]+r[1])/2), p:Math.round(tot.p), g:Math.round(tot.g), s:Math.round(tot.s), l:Math.round(tot.l), hunger:clone(A.hunger), message:null};
-  const day = dayRW(k); day.meals.push(meal); saveDay(k);
+  const day = dayRW(k); day.meals.push(meal);
+  if ((A.drinks || []).length){ day.drinks = day.drinks || []; A.drinks.forEach(b => { for (let i = 0; i < b.n; i++) day.drinks.push({id:uidGen(), type:b.type, at:meal.at, meal:true, mealId:meal.id}); }); toast(t('hyd_from_photo', {x:A.drinks.map(b => DRINKS[b.type].e + (b.n > 1 ? '×' + b.n : '')).join(' ')})); }
+  saveDay(k);
   A.saved = meal;
   if (S.sample){
     A.phase = 'coaching'; render();
@@ -1904,6 +2007,7 @@ function viewSettings(){
   }
   h += acc('restr', t('s_restr'), restrHas ? t('acc_filled') : t('acc_none'), () => '<div class="card">' + restrEditor('set') + '</div>' + (p.restr && (p.restr.validated || Object.keys(p.restr.items || {}).length) ? '<button class="btn ghost" data-act="restr-withdraw">' + esc(t('restr_withdraw')) + '</button>' : ''));
   h += acc('habits', t('s_habits'), (p.habits || []).length ? String(p.habits.length) : '', () => (p.habits || []).length ? '<div class="card list">' + p.habits.map((x, i) => '<div class="item"><div class="between"><span>' + esc(x.name) + ' · <b class="num">' + x.grams + ' g</b></span><button class="x" data-act="habit-del" data-v="' + i + '" aria-label="' + esc(t('delete')) + '">×</button></div></div>').join('') + '</div>' : '<p class="small muted">' + esc(t('no_habits')) + '</p>');
+  h += remAcc(acc);
   h += acc('fb', t('s_feedback'), '', () => '<p class="small muted">' + esc(t('s_feedback_d')) + '</p><button class="btn outline block" data-act="fb-open">' + esc(t('feedback_btn')) + '</button>');
   h += acc('data', t('s_data'), '', () => (guestWarn() || note('info', esc(Store.mode === 'db' ? t('s_mode_db') : Store.mode === 'local' ? t('local_notice') : t('memory_notice')))) + '<p class="small">' + esc(Store.demo ? t('demo_on') : t('au_account', {e:Store.email || ''})) + '</p><button class="btn outline block" data-act="logout">' + esc(Store.demo ? t('demo_quit') : t('au_logout')) + '</button><button class="btn outline block" data-act="export">' + esc(t('export')) + '</button>' + (S.exportText ? '<label class="field"><span>' + esc(t('export_copy')) + '</span><textarea id="export-text" readonly style="min-height:160px;font-size:12px">' + esc(S.exportText) + '</textarea></label>' : '') +
     (S.deleteAsk ? note('danger', esc(t('delete_confirm') + ' ' + t('au_delete_account'))) + '<div class="row"><button class="btn primary" data-act="delete-yes">' + esc(t('delete_yes')) + '</button><button class="btn ghost" data-act="delete-no">' + esc(t('cancel')) + '</button></div>' : '<button class="btn ghost" data-act="delete-ask" style="color:var(--danger)">' + esc(t('delete_all')) + '</button>'));
@@ -1957,11 +2061,11 @@ function coachOn(){ const c = S.profile && S.profile.coachShare; return !!(c && 
 function scheduleSync(){ if (!coachOn()) return; clearTimeout(syncTimer); syncTimer = setTimeout(() => { syncChain = syncChain.then(syncCoach).catch(() => {}); }, 1500); }
 function daySummary(k){
   const d = dayRO(k); const ms = d.meals || [], ac = d.activities || [];
-  if (!ms.length && !ac.length && !(d.skipped || []).length && !d.checkin) return null;
-  const tt = dayTotals(d);
+  if (!ms.length && !ac.length && !(d.skipped || []).length && !d.checkin && !(d.drinks || []).length) return null;
+  const tt = dayTotals(d); const hy = hydroOf(d);
   return {kcal:Math.round(tt.kcal), besoins:dayNeeds(k), p:Math.round(tt.p), g:Math.round(tt.g), s:Math.round(tt.s), l:Math.round(tt.l), sport:sportOf(d),
     repas:ms.slice().sort((a, b) => a.at < b.at ? -1 : 1).map(m => ({at:m.at, nom:mealName(m).slice(0, 120), kmin:m.kcalMin, kmax:m.kcalMax, s:Math.round(num(m.s)), niveau:m.hunger ? m.hunger.level || null : null, type:m.hunger ? m.hunger.type || null : null, emotion:m.hunger ? m.hunger.emotion || null : null, emotionTxt:m.hunger && m.hunger.other ? String(m.hunger.other).slice(0, 120) : '', origine:m.origin || 'SAISIE', message:m.message ? String(m.message).slice(0, 600) : ''})),
-    act:ac.map(a => ({type:a.type, minutes:num(a.minutes), kcal:num(a.kcal)})), sautes:(d.skipped || []).slice(),
+    act:ac.map(a => ({type:a.type, minutes:num(a.minutes), kcal:num(a.kcal)})), sautes:(d.skipped || []).slice(), hydra:(d.drinks || []).length ? {ml:hy.ml, alcool:hy.alc, chaud:hy.hot, sucres:hy.sugar} : null,
     soir:d.checkin ? {phys:d.checkin.phys, ment:d.checkin.ment, emo:d.checkin.emo, faim:d.checkin.hunger, note:d.checkin.note || '', deficit:!!d.checkin.deficit} : null};
 }
 async function syncCoach(){
@@ -1998,10 +2102,10 @@ function coachSubscribe(){
 }
 function clientName(c){ return c.data.nom || (S.coachNames && S.coachNames[c.id] && S.coachNames[c.id].name) || t('col_client'); }
 function clientStats(c){
-  const days = c.data.days || {}; const today = dayKey(); let kc = 0, su = 0, n = 0, emo = 0, needs = 0, sk7 = 0, defs = 0;
-  for (let i = 0; i < 7; i++){ const d = days[addDays(today, -i)]; if (!d) continue; sk7 += (d.sautes || []).length; if (d.soir && d.soir.deficit) defs++; const rp = d.repas || []; if (rp.length){ n++; kc += num(d.kcal); su += num(d.s); needs += num(d.besoins); } rp.forEach(r => { if (r.type === 'EMOTIONNELLE') emo++; }); }
+  const days = c.data.days || {}; const today = dayKey(); let kc = 0, su = 0, n = 0, emo = 0, needs = 0, sk7 = 0, defs = 0, hyMl = 0, hyN = 0, alc7 = 0;
+  for (let i = 0; i < 7; i++){ const d = days[addDays(today, -i)]; if (!d) continue; if (d.hydra){ hyMl += num(d.hydra.ml); hyN++; alc7 += num(d.hydra.alcool); } sk7 += (d.sautes || []).length; if (d.soir && d.soir.deficit) defs++; const rp = d.repas || []; if (rp.length){ n++; kc += num(d.kcal); su += num(d.s); needs += num(d.besoins); } rp.forEach(r => { if (r.type === 'EMOTIONNELLE') emo++; }); }
   const M = (c.data.mesures || []).slice().sort((a, b) => a.date < b.date ? -1 : 1); const last = M[M.length - 1]; const first = M.find(e => e.date >= addDays(today, -30));
-  return {sk7, defs, avgK:n ? Math.round(kc / n) : null, avgS:n ? Math.round(su / n) : null, avgN:n ? Math.round(needs / n) : null, days7:n, emo7:emo, lastW:last ? num(last.weight) : null, dW:(last && first && first !== last) ? Math.round((num(last.weight) - num(first.weight)) * 10) / 10 : null, idx:c.data.stress && c.data.stress.indice != null ? c.data.stress.indice : null};
+  return {sk7, defs, avgK:n ? Math.round(kc / n) : null, avgS:n ? Math.round(su / n) : null, avgN:n ? Math.round(needs / n) : null, days7:n, emo7:emo, lastW:last ? num(last.weight) : null, dW:(last && first && first !== last) ? Math.round((num(last.weight) - num(first.weight)) * 10) / 10 : null, idx:c.data.stress && c.data.stress.indice != null ? c.data.stress.indice : null, hy7:hyN ? Math.round(hyMl / hyN / 50) * 50 : null, alc7};
 }
 function lifeShort(L){
   const parts = [t('ls_stress') + ' ' + L.stress + '/5'];
@@ -2037,6 +2141,7 @@ function coachDetail(c){
   let h = '<button class="btn ghost" style="align-self:flex-start" data-act="coach-close">← ' + esc(t('coach_back')) + '</button><h1>' + esc(clientName(c)) + '</h1>';
   h += '<p class="small muted">' + [pr.age ? t('age') + ' ' + pr.age : '', pr.objectif ? t('goal_' + pr.objectif) : '', pr.style ? t(pr.style === 'STRICT' ? 'style_strict' : 'style_kind') : '', pr.besoinsBase ? t('needs') + ' ' + nf(pr.besoinsBase) + ' kcal' : ''].filter(Boolean).map(esc).join(' · ') + '</p>';
   h += '<div class="kv card"><div><span class="tiny muted">' + esc(t('coach_avg7')) + '</span><b>' + (st.avgK != null ? nf(st.avgK) + ' kcal' : '—') + '</b></div><div><span class="tiny muted">' + esc(t('sugars')) + '</span><b>' + (st.avgS != null ? st.avgS + ' g' : '—') + '</b></div><div><span class="tiny muted">' + esc(t('coach_emo7')) + '</span><b>' + st.emo7 + '</b></div></div>';
+  if (st.hy7 != null || st.alc7) h += '<p class="small muted">' + esc(t('coach_hydra', {l:st.hy7 != null ? litres(st.hy7) : '—', a:st.alc7})) + '</p>';
   if (d.sante && ((d.sante.items || []).length || d.sante.autre)) h += note('info', '<b>' + esc(t('coach_health')) + '</b> : ' + esc((d.sante.items || []).map(c => t('m_' + c)).concat(d.sante.autre ? [d.sante.autre] : []).join(', ')));
   if (d.stress && d.stress.indice != null) h += lifeIndexCard(d.stress.indice) + '<p class="small muted">' + esc(lifeShort(d.stress)) + '</p>';
   if (d.journee && d.journee.phys){ const J = d.journee; const cell = v => '<td>' + (v == null ? '–' : esc(String(v))) + '</td>';
@@ -2068,7 +2173,7 @@ async function coachExport(){
     const X = await loadXLSX(); const C = S.coachData || []; const today = dayKey();
     const hType = v => v === 'EMOTIONNELLE' ? t('emo') : v === 'PHYSIQUE' ? t('phys') : '';
     const sum = [[t('col_client'), t('col_updated'), t('col_goal'), t('col_style'), t('coach_idx_short'), t('col_avgk'), t('needs'), t('col_avgs'), t('col_emo7'), t('col_days7'), t('col_lastw'), t('col_dw'), t('coach_health')]];
-    const log = [[t('col_client'), t('date'), 'kcal', t('needs'), t('protein') + ' (g)', t('carbs') + ' (g)', t('sugars') + ' (g)', t('fat') + ' (g)', t('sport') + ' (kcal)', t('col_meals'), t('col_emo'), t('col_skipped'), t('col_eve_p'), t('col_eve_m'), t('col_eve_e'), t('col_eve_h'), t('col_eve_note')]];
+    const log = [[t('col_client'), t('date'), 'kcal', t('needs'), t('protein') + ' (g)', t('carbs') + ' (g)', t('sugars') + ' (g)', t('fat') + ' (g)', t('sport') + ' (kcal)', t('col_meals'), t('col_emo'), t('col_skipped'), t('col_eve_p'), t('col_eve_m'), t('col_eve_e'), t('col_eve_h'), t('col_eve_note'), t('col_hyd'), t('col_hot'), t('col_alc')]];
     const meals = [[t('col_client'), t('date'), t('col_time'), t('col_meal'), t('col_kmin'), t('col_kmax'), t('sugars') + ' (g)', t('col_hlevel'), t('col_htype'), t('col_emotion'), t('col_origin')]];
     const body = [[t('col_client'), t('date'), t('weight')].concat(MEAS.map(mLabel))];
     const stress = [[t('col_client'), t('coach_idx_short'), t('ls_stress') + ' (0-5)', t('ls_work') + ' (0-5)', t('ls_sleep') + ' (0-5)', t('l_sleeph'), t('ls_family') + ' (0-5)', t('l_sched'), t('ls_crave'), t('ls_caf'), t('col_updated')]];
@@ -2078,7 +2183,7 @@ async function coachExport(){
       if (d.journee && d.journee.phys) SLOTS.forEach(x => dayRows.push([n, t('sl_' + x), d.journee.phys[x], d.journee.ment[x], d.journee.repartition ? d.journee.repartition[x] : null]));
       sum.push([n, d.updatedAt ? d.updatedAt.slice(0, 10) : '', pr.objectif ? t('goal_' + pr.objectif) : '', pr.style ? t(pr.style === 'STRICT' ? 'style_strict' : 'style_kind') : '', st.idx, st.avgK, st.avgN, st.avgS, st.emo7, st.days7, st.lastW, st.dW, d.sante ? (d.sante.items || []).map(x => t('m_' + x)).concat(d.sante.autre ? [d.sante.autre] : []).join(', ') : '']);
       Object.keys(d.days || {}).sort().forEach(k => { const x = d.days[k]; const rp = x.repas || [];
-        const so = x.soir || {}; log.push([n, k, x.kcal, x.besoins, x.p, x.g, x.s, x.l, x.sport, rp.length, rp.filter(r => r.type === 'EMOTIONNELLE').length, (x.sautes || []).map(z => t('ml_' + z)).join(', '), so.phys, so.ment, so.emo, so.faim, so.note || '']);
+        const so = x.soir || {}; log.push([n, k, x.kcal, x.besoins, x.p, x.g, x.s, x.l, x.sport, rp.length, rp.filter(r => r.type === 'EMOTIONNELLE').length, (x.sautes || []).map(z => t('ml_' + z)).join(', '), so.phys, so.ment, so.emo, so.faim, so.note || '', x.hydra ? Math.round(num(x.hydra.ml) / 100) / 10 : null, x.hydra ? x.hydra.chaud : null, x.hydra ? x.hydra.alcool : null]);
         rp.forEach(r => meals.push([n, k, r.at ? fmtTime(r.at) : '', r.nom, r.kmin, r.kmax, r.s, r.niveau, hType(r.type), r.emotion ? t('em_' + r.emotion) + (r.emotionTxt ? ' (' + r.emotionTxt + ')' : '') : '', r.origine && r.origine !== 'SAISIE' ? t('lvl_' + r.origine.replace('IDEE_REPAS_', '').toLowerCase()) : '']));
       });
       (d.mesures || []).slice().sort((a, b) => a.date < b.date ? -1 : 1).forEach(e => body.push([n, e.date, e.weight].concat(MEAS.map(x => e[x] != null ? e[x] : null))));
@@ -2198,6 +2303,9 @@ document.addEventListener('click', e => {
     case 'coach-export': coachExport(); break;
     case 'coach-enable': { const D = S.coachDraft || {}; if (!D.consent){ toast(t('coach_need_consent')); break; } S.profile.coachShare = {on:true, at:new Date().toISOString(), name:String(D.name || '').trim().slice(0, 60)}; S.coachDraft = null; Store.set('profile', S.profile); toast(t('coach_enabled')); render(); break; }
     case 'coach-disable': coachDisable(); break;
+    case 'drink': { const kk = dayKey(); const d = dayRW(kk); d.drinks = d.drinks || []; const id = uidGen(); d.drinks.push({id, type:v, at:new Date().toISOString()}); S.hydroFrom = S.hydroPct; S.drinkAsk = v === 'hot' ? id : null; saveDay(kk); render(); const b = document.getElementById('drink-' + v); if (b){ b.classList.add('pop'); b.focus({preventScroll:true}); } break; }
+    case 'drink-sugar': { const kk = dayKey(); const d = dayRW(kk); const last = (d.drinks || []).filter(x => !x.meal).slice(-1)[0]; if (last && last.type === 'hot'){ last.sugar = Number(v); saveDay(kk); } S.drinkAsk = null; render(); break; }
+    case 'drink-undo': { const kk = dayKey(); const d = dayRW(kk); const ds = d.drinks || []; for (let i = ds.length - 1; i >= 0; i--){ if (!ds[i].meal){ ds.splice(i, 1); break; } } S.hydroFrom = S.hydroPct; S.drinkAsk = null; saveDay(kk); render(); break; }
     case 'tile-open': S.expanded = v; render(); setTimeout(() => { const b = document.querySelector('[data-act="meal-toggle"][data-v="' + v + '"]'); if (b){ b.scrollIntoView({block:'center'}); b.focus({preventScroll:true}); } }, 30); break;
     case 'tile-text': S.add = newAdd(); S.add.mode = 'text'; S.add.slot = v; S.add.when = slotWhen(v); S.view = 'add'; S.expanded = null; render(); window.scrollTo(0, 0); break;
     case 'miss-add': S.add = newAdd(); S.add.when = {morning:'breakfast', noon:'lunch', evening:'dinner'}[v] || v; S.add.slot = MEAL_SLOTS.indexOf(S.add.when) >= 0 ? S.add.when : null; S.view = 'add'; S.expanded = null; render(); window.scrollTo(0, 0); break;
@@ -2222,6 +2330,12 @@ document.addEventListener('click', e => {
     case 'auth-mode': if (S.auth){ S.auth.mode = v; S.auth.error = null; render(); } break;
     case 'auth-go': authGo(); break;
     case 'demo': startDemo(); break;
+    case 'rem-on': remEnable(); break;
+    case 'rem-off': remDisable(); break;
+    case 'rem-test': remTest(); break;
+    case 'rem-save': { const D = S.remDraft || remPrefs(); remSave({on:true, meals:Object.assign({}, D.meals), water:!!D.water}).then(() => toast(t('rem_saved'))).catch(() => toast(t('err_save'))); render(); break; }
+    case 'rem-go': S.secOpen.rem = true; go('settings'); setTimeout(() => { const sec = $('rem-sec'); if (sec) sec.scrollIntoView({block:'start'}); }, 30); break;
+    case 'rem-later': S.remLater = true; if (S.profile){ S.profile.remAsked = true; Store.set('profile', S.profile); } render(); break;
     case 'logout': logout(); break;
     case 'ob-skip': { const O = S.ob, d = O.d, st = OB_STEPS[O.step];
       if (st === 'health'){ d.hd.answer = 'no'; d.health = {answer:'no', validated:false, consent:false, items:[], other:'', shareCoach:false}; }
@@ -2251,7 +2365,7 @@ document.addEventListener('click', e => {
     case 'fav-del': S.favorites.splice(Number(v), 1); Store.set('favorites', {items:S.favorites}); render(); break;
     case 'pick-meal': { const p = v.split('|'); const m = (dayRO(p[0]).meals || []).find(x => x.id === p[1]); if (m) prefillFrom(m, 'fav'); break; }
     case 'meal-toggle': S.expanded = S.expanded === v ? null : v; render(); break;
-    case 'meal-del': { const dk = el.getAttribute('data-day'); const d = dayRW(dk); d.meals = d.meals.filter(m => m.id !== v); saveDay(dk); S.expanded = null; render(); break; }
+    case 'meal-del': { const dk = el.getAttribute('data-day'); const d = dayRW(dk); d.meals = d.meals.filter(m => m.id !== v); if (d.drinks) d.drinks = d.drinks.filter(x => x.mealId !== v); saveDay(dk); S.expanded = null; render(); break; }
     case 'meal-fav': { const dk = el.getAttribute('data-day'); const m = (dayRO(dk).meals || []).find(x => x.id === v); if (m) addFav(m); break; }
     case 'act-open': S.act = {type:'walk', minutes:'30', kcal:''}; render(); break;
     case 'act-cancel': S.act = null; render(); break;
@@ -2363,7 +2477,7 @@ async function authGo(){
     render();
   }
 }
-async function logout(){ if (Store.demo){ location.reload(); return; } try { await SB.auth.signOut(); } catch(e){} onSignedOut(); }
+async function logout(){ if (Store.demo){ location.reload(); return; } await remUnsubscribe(); if (S.profile && S.profile.reminders){ S.profile.reminders.on = false; await Store.set('profile', S.profile); } try { await SB.auth.signOut(); } catch(e){} onSignedOut(); }
 async function loadUserData(){
   S.profile = await Store.get('profile');
   if (S.profile && S.profile.lang && T[S.profile.lang]) LANG = S.profile.lang;
@@ -2379,6 +2493,9 @@ async function loadUserData(){
   render();
   Store.user.isOwner().then(v => { S.isOwner = !!v; render(); }).catch(() => {});
   scheduleSync();
+  const q = new URLSearchParams(location.search); const sl = q.get('slot');
+  if (sl && S.profile && S.profile.onboarded){ S.sheet = null; S.view = 'today'; S.flashSlot = sl; try { history.replaceState(null, '', location.pathname); } catch(e){} render(); }
+  if (!Store.demo){ if (remPrefs().on) swReg(); remCheck(); }
 }
 async function boot(){
   const nl = (navigator.language || 'fr').slice(0, 2).toLowerCase(); LANG = T[nl] ? nl : 'fr';

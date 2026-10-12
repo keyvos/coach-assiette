@@ -110,3 +110,39 @@ grant execute on function public.delete_me() to authenticated;
 -- ---------------------------------------------------------------------
 insert into public.coach_emails (email) values (lower('TON-ADRESSE@exemple.com'))
 on conflict do nothing;
+
+-- =====================================================================
+-- Rappels de repas (notifications)
+-- =====================================================================
+create table if not exists public.push_subs (
+  user_id    uuid primary key default auth.uid() references auth.users(id) on delete cascade,
+  endpoint   text not null,
+  sub        jsonb not null,
+  tz         text not null default 'Europe/Paris',
+  lang       text not null default 'fr',
+  prefs      jsonb not null default '{}'::jsonb,
+  updated_at timestamptz not null default now()
+);
+create table if not exists public.push_log (
+  user_id uuid not null references auth.users(id) on delete cascade,
+  day     date not null,
+  kind    text not null,
+  sent_at timestamptz not null default now(),
+  primary key (user_id, day, kind)
+);
+create table if not exists public.app_secrets (
+  name  text primary key,
+  value jsonb not null
+);
+alter table public.push_subs   enable row level security;
+alter table public.push_log    enable row level security;
+alter table public.app_secrets enable row level security;
+
+drop policy if exists push_own on public.push_subs;
+create policy push_own on public.push_subs for all to authenticated
+  using (user_id = auth.uid()) with check (user_id = auth.uid());
+
+revoke all on public.push_subs, public.push_log, public.app_secrets from anon;
+grant select, insert, update, delete on public.push_subs to authenticated;
+revoke all on public.push_log, public.app_secrets from authenticated;
+-- push_log et app_secrets : aucune règle = accessibles seulement par la fonction "remind", côté serveur

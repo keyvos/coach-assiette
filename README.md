@@ -1,6 +1,6 @@
 # Coach Assiette
 
-Application web de coaching nutritionnel (FR · EN · PT · ES) : analyse des repas par photo ou texte,
+Application web de coaching nutritionnel (FR · EN · PT · ES) : analyse des repas par photo ou texte (6 cases repas, une photo par case et par jour), suivi des boissons (« Ma gourde »), rappels de repas par notification,
 coaching STRICT ou BIENVEILLANT, idées de repas, suivi de la faim, du stress, du poids, et partage
 avec le coach (avec l'accord du client).
 
@@ -14,6 +14,9 @@ avec le coach (avec l'accord du client).
 | `manifest.webmanifest`, `icon-*.png` | Permettent d'ajouter l'application à l'écran d'accueil du téléphone |
 | `supabase/schema.sql` | Base de données et règles de confidentialité (à lancer une fois dans Supabase) |
 | `supabase/functions/ai/index.ts` | Fonction IA sécurisée : la clé de l'API Claude reste sur le serveur |
+| `supabase/functions/remind/index.ts` | Rappels de repas : notifications Web Push (VAPID, chiffrement aes128gcm), clés créées automatiquement |
+| `supabase/cron.sql` | Lance la vérification des rappels toutes les 15 minutes (pg_cron + pg_net) |
+| `sw.js` | Service worker, uniquement pour afficher les notifications (aucune mise en cache) |
 
 ## Fonctionnement
 
