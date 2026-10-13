@@ -1,20 +1,37 @@
 // =====================================================================
 // Coach Assiette : fonction IA sécurisée (Supabase Edge Function "ai")
+// © 2026 Seb (github.com/keyvos) — Tous droits réservés.
 // La clé de l'API Claude reste ici, côté serveur : elle n'arrive jamais
 // sur le téléphone des clients.
 // Secret obligatoire : ANTHROPIC_API_KEY
 // Réglages facultatifs : AI_MODEL (défaut claude-haiku-5-5, le moins cher ; mettre claude-sonnet-5-5 pour plus de précision),
-//   AI_MODEL_QUICK (défaut claude-haiku-5-5), AI_DAILY_LIMIT (défaut 20)
+//   AI_MODEL_QUICK (défaut claude-haiku-5-5), AI_DAILY_LIMIT (défaut 20),
+//   ALLOWED_ORIGINS (défaut https://keyvos.github.io : seul ce site peut utiliser l'IA,
+//   une copie de l'application hébergée ailleurs est refusée)
+// "Verify JWT" : désactivé (la fonction vérifie elle-même la connexion)
 // =====================================================================
 import { createClient } from "jsr:@supabase/supabase-js@2";
 
-const CORS = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
-};
-const reply = (body: unknown, status = 200) =>
-  new Response(JSON.stringify(body), { status, headers: { ...CORS, "Content-Type": "application/json" } });
+// ==== origin (même code dans billing)
+function allowedOrigins(): string[] {
+  return (Deno.env.get("ALLOWED_ORIGINS") || "https://keyvos.github.io").split(",").map((s) => s.trim().replace(/\/+$/, "")).filter(Boolean);
+}
+function originOk(req: Request): boolean {
+  const list = allowedOrigins();
+  if (list.includes("*")) return true;
+  return list.includes(req.headers.get("Origin") || "");
+}
+function corsFor(req: Request): Record<string, string> {
+  const o = req.headers.get("Origin") || "";
+  const list = allowedOrigins();
+  return {
+    "Access-Control-Allow-Origin": list.includes("*") ? "*" : (list.includes(o) ? o : list[0]),
+    "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Vary": "Origin",
+  };
+}
+// ==== end origin
 
 function serverKey(): string {
   // New-style secret key first, then the legacy service_role key
@@ -29,7 +46,11 @@ function serverKey(): string {
 const IMG_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif"];
 
 Deno.serve(async (req) => {
+  const CORS = corsFor(req);
+  const reply = (body: unknown, status = 200) =>
+    new Response(JSON.stringify(body), { status, headers: { ...CORS, "Content-Type": "application/json" } });
   if (req.method === "OPTIONS") return new Response("ok", { headers: CORS });
+  if (!originOk(req)) return reply({ error: "Site non autorisé", code: "origin" }, 403);
   if (req.method !== "POST") return reply({ error: "Méthode non autorisée", code: "bad_request" }, 405);
 
   const apiKey = Deno.env.get("ANTHROPIC_API_KEY");
@@ -42,7 +63,11 @@ Deno.serve(async (req) => {
   if (authErr || !who?.user) return reply({ error: "Session invalide", code: "session_expired" }, 401);
   const uid = who.user.id;
 
-  // 2. Daily limit per person (protects the bill)
+  // 2. Subscription: if paid subscriptions are on and this person has to pay, they must be up to date
+  const { data: acc, error: accErr } = await admin.rpc("access_for", { uid });
+  if (!accErr && acc && acc.allowed === false) return reply({ error: "Abonnement nécessaire", code: "subscription" }, 402);
+
+  // 3. Daily limit per person (protects the bill)
   const limit = Number(Deno.env.get("AI_DAILY_LIMIT") || "20");
   const day = new Date().toISOString().slice(0, 10);
   const { data: row } = await admin.from("ai_usage").select("n").eq("user_id", uid).eq("day", day).maybeSingle();
@@ -50,7 +75,7 @@ Deno.serve(async (req) => {
   if (used >= limit) return reply({ error: "Limite du jour atteinte", code: "quota" }, 429);
   await admin.from("ai_usage").upsert({ user_id: uid, day, n: used + 1 });
 
-  // 3. Build the request to Claude
+  // 4. Build the request to Claude
   let body: { prompt?: string; images?: { type?: string; data?: string }[]; tier?: string };
   try { body = await req.json(); } catch (_) { return reply({ error: "Requête illisible", code: "bad_request" }, 400); }
   const prompt = String(body.prompt || "").slice(0, 60000);

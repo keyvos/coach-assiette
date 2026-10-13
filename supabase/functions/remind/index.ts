@@ -1,5 +1,6 @@
 // =====================================================================
 // Coach Assiette : rappels de repas (Supabase Edge Function "remind")
+// © 2026 Seb (github.com/keyvos) — Tous droits réservés.
 // - GET  ?vapid=1      -> clé publique pour s'abonner aux notifications
 // - POST {"run":true}  -> appelé toutes les 15 min par Supabase Cron :
 //                         envoie les rappels dus (un seul par repas et par jour)

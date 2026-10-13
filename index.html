@@ -1,4 +1,10 @@
 <!doctype html>
+<!--
+  Coach Assiette — © 2026 Seb (github.com/keyvos). Tous droits réservés.
+  Ce code est publié uniquement pour faire fonctionner l'application.
+  Toute copie, reproduction, modification, redistribution ou exploitation
+  commerciale, totale ou partielle, est interdite sans autorisation écrite.
+-->
 <html lang="fr">
 <head>
 <meta charset="utf-8">
@@ -243,6 +249,7 @@ label.tile:has(input:focus-visible),.tile:focus-visible{outline:2px solid var(--
 .tile.flash{animation:flash 1.2s ease 2}
 @keyframes flash{50%{box-shadow:0 0 0 4px var(--accent)}}
 .footer-note{font-size:12px;color:var(--muted);text-align:center;padding-top:8px}
+.linkbtn{background:none;border:0;padding:0;font:inherit;color:var(--accent-ink,var(--accent));text-decoration:underline;cursor:pointer}
 @media (max-width:360px){.macros{grid-template-columns:repeat(2,1fr)}.grid3{grid-template-columns:1fr 1fr}}
 @media (min-width:480px){.cta{grid-template-columns:1fr 1fr}}
 </style>
@@ -260,7 +267,8 @@ label.tile:has(input:focus-visible),.tile:focus-visible{outline:2px solid var(--
 /* ===== Configuration : valeurs du projet Supabase (Project Settings > API). Elles sont publiques par conception. ===== */
 window.CA_CONFIG = window.CA_CONFIG || {
   SUPABASE_URL: 'https://REMPLACER.supabase.co',
-  SUPABASE_KEY: 'REMPLACER_PAR_LA_CLE_PUBLISHABLE'
+  SUPABASE_KEY: 'REMPLACER_PAR_LA_CLE_PUBLISHABLE',
+  OWNER: 'Seb'
 };
 </script>
 <script>
@@ -271,6 +279,7 @@ window.CA_CONFIG = window.CA_CONFIG || {
 const T = {
 fr:{
 need_style:'Choisis un style de coaching.', need_answer:'Choisis une réponse.', age_min:'L’app est réservée aux personnes de 18 ans et plus.',
+rights:'Tous droits réservés', terms_link:'Conditions d’utilisation', au_terms:'J’accepte les conditions d’utilisation', au_terms_read:'Lire', au_need_terms:'Coche la case pour accepter les conditions d’utilisation.', tm_t:'Conditions d’utilisation', tm_date:'Version du 14 octobre 2026', tm_intro:'Coach Assiette est une application d’accompagnement nutritionnel créée par {o}. En créant un compte, tu acceptes les conditions ci-dessous.', tm_h1:'1. Ce que fait l’application', tm_p1:'Elle estime les calories, les macronutriments et les sucres de tes repas à partir de photos ou de descriptions, et te donne des conseils de coaching. Ces estimations sont indicatives : l’application ne remplace pas un médecin, un diététicien ni un allergologue.', tm_h2:'2. Ton compte', tm_p2:'Ton compte est personnel : ne le partage pas et garde ton mot de passe pour toi. L’application est réservée aux personnes de 18 ans et plus.', tm_h3:'3. Propriété intellectuelle', tm_p3:'L’application (son code, son design, ses textes, ses questionnaires, son nom « Coach Assiette » et son logo) appartient à {o}. Tous droits réservés. Il est interdit de la copier, de la reproduire, de la modifier, de la revendre, de la mettre à disposition d’autres personnes ou de l’exploiter commercialement, en tout ou en partie, sans son accord écrit (articles L.122-4 et L.335-2 du Code de la propriété intellectuelle).', tm_h4:'4. Tes données', tm_p4:'Tes données sont enregistrées sur des serveurs en Europe et ne sont jamais revendues. Les photos sont envoyées à un service d’intelligence artificielle uniquement pour être analysées : l’application ne les conserve pas. Ton coach ne voit tes résultats que si tu l’acceptes, et tu peux retirer cet accord à tout moment. Tu peux exporter ou supprimer toutes tes données, et ton compte, depuis les Réglages.', tm_h5:'5. Accès offert ou abonnement', tm_p5:'Selon ce que décide ton coach, ton accès est offert ou soumis à un abonnement mensuel. L’abonnement se paie par carte bancaire ou prélèvement SEPA via Stripe ; ton coach ne voit jamais tes coordonnées bancaires. Tu peux le résilier à tout moment depuis les Réglages : il reste actif jusqu’à la fin de la période payée. Si un paiement n’aboutit pas, l’analyse des photos et les conseils de l’IA sont mis en pause ; tes données restent accessibles.', tm_h6:'6. Évolutions', tm_p6:'L’application peut évoluer, être modifiée ou arrêtée. Si ces conditions changent de façon importante, elles te seront présentées à nouveau.', tm_h7:'7. Droit applicable', tm_p7:'Ces conditions sont soumises au droit français.', tm_accept:'J’accepte', tm_gate:'Avant de continuer, merci de lire et d’accepter les conditions d’utilisation.', s_pay:'Mon abonnement', pay_t:'Abonnement', pay_d:'Pour analyser tes repas en photo et recevoir les conseils de l’IA, un abonnement mensuel est nécessaire. Tu peux le résilier quand tu veux.', pay_price:'{p} par mois', pay_go:'M’abonner', pay_manage:'Gérer mon abonnement (paiement, résiliation)', pay_secure:'Paiement sécurisé par Stripe, par carte bancaire ou prélèvement SEPA. Ton coach ne voit jamais tes coordonnées bancaires.', pay_meanwhile:'En attendant, tu peux continuer à noter tes repas à la main.', pay_ai_off:'L’analyse par IA est en pause : ton abonnement n’est pas actif. Tu peux noter ton repas à la main, ou t’abonner dans Réglages > Mon abonnement.', pay_banner_t:'Analyse des photos en pause', pay_banner_d:'Ton abonnement n’est pas actif. Tu peux continuer à noter tes repas à la main.', pay_see:'Voir l’abonnement', pay_late_banner:'Ton dernier paiement n’est pas passé. Mets à jour ton moyen de paiement pour garder l’analyse des photos.', pay_s_free:'Offert', pay_s_active:'Actif', pay_s_late:'Paiement à régulariser', pay_s_none:'À activer', pay_s_proc:'En cours de validation', pay_free_d:'Ton coach t’offre l’accès à l’application : tu n’as rien à payer.', pay_active_d:'Abonnement actif. Prochain paiement le {d}.', pay_active_end:'Abonnement résilié : il reste actif jusqu’au {d}.', pay_late_d:'Ton dernier paiement n’est pas passé. Mets à jour ton moyen de paiement dans les prochains jours pour garder l’analyse des photos.', pay_late_off:'Ton paiement n’est pas passé : l’analyse des photos est en pause. Mets à jour ton moyen de paiement pour la réactiver.', pay_proc:'Ton paiement est en cours de validation (un prélèvement SEPA peut prendre quelques jours). Tu peux déjà utiliser l’application.', pay_thanks:'Merci ! Ton abonnement est actif.', pay_pending:'Paiement reçu : il est en cours de validation.', pay_cancelled:'Paiement annulé : rien n’a été prélevé.', pay_already:'Tu as déjà un abonnement actif.', pay_not_ready:'Le paiement n’est pas encore disponible. Réessaie plus tard ou parles-en à ton coach.', pay_price_loading:'Chargement du prix…', ct_follow:'Suivi', ct_bill:'Abonnements', bill_t:'Abonnements payants', bill_off_d:'Désactivés : tout le monde utilise l’application gratuitement. Tu peux déjà choisir ci-dessous qui sera offert et qui paiera.', bill_on_d:'Activés : les personnes « Payant » ont besoin d’un abonnement à jour pour l’analyse des photos et les conseils de l’IA.', bill_turn_on:'Activer les abonnements', bill_turn_off:'Désactiver les abonnements', bill_need_stripe:'À activer seulement quand ton compte Stripe est relié à l’application.', bill_confirm_on:'Activer les abonnements ? Les personnes « Payant » sans abonnement ne pourront plus analyser leurs photos (elles pourront toujours noter leurs repas à la main).', bill_confirm_yes:'Oui, activer', bill_default_t:'Nouveaux comptes', bill_default_d:'Règle appliquée à toute personne que tu n’as pas réglée une par une.', bill_free:'Offert', bill_paid:'Payant', bill_add_t:'Régler une personne par e-mail', bill_add_d:'Marche aussi avant qu’elle crée son compte, par exemple pour offrir l’accès à ta famille.', bill_set_free:'Offrir l’accès', bill_set_paid:'Rendre payant', bill_list_t:'Tous les comptes', bill_sum:'{a} abonné(s) à jour · {f} accès offert(s) · {n} compte(s)', bill_me:'Toi (coach)', bill_invited:'Pas encore inscrit', bill_st_active:'Abonné', bill_st_late:'Paiement en retard', bill_st_none:'Pas abonné', bill_st_free:'Offert', bill_by_default:'Suit la règle « Nouveaux comptes »', bill_next:'Prochain paiement le {d}', bill_ends:'Se termine le {d}', bill_saved:'Enregistré.', bill_err:'Impossible de charger les abonnements. Vérifie que la dernière version de la base de données est installée.', bill_bad_email:'Adresse e-mail invalide.', bill_help:'L’argent des abonnements est versé par Stripe directement sur ton compte bancaire. Les personnes avec un accès offert ne voient jamais rien concernant le paiement.',
 s_rem:'Rappels de repas', rem_d:'Une notification si une case repas est encore vide à l’heure choisie. Un seul rappel par repas, jamais si le repas est déjà noté ou sauté.', rem_times_hint:'Efface une heure pour ne pas être rappelé pour ce repas.', rem_water:'Rappel « Pense à boire » à 11 h et 16 h, seulement si ta gourde est peu remplie', rem_enable:'Activer les rappels', rem_disable:'Désactiver les rappels', rem_test:'Envoyer un test', rem_test_sent:'Notification de test envoyée.', rem_saved:'Rappels enregistrés.', rem_on_toast:'Rappels activés.', rem_off_toast:'Rappels désactivés.', rem_need_account:'Les rappels fonctionnent avec un compte, dans l’application en ligne.', rem_err_ios:'Sur iPhone, ajoute d’abord l’application à ton écran d’accueil (bouton Partager, puis « Sur l’écran d’accueil »), ouvre-la depuis cette icône, puis active les rappels.', rem_err_denied:'Les notifications sont bloquées pour ce site. Autorise-les dans les réglages de ton navigateur, puis réessaie.', rem_err_unsupported:'Ce navigateur ne gère pas les notifications. Essaie avec Chrome (Android) ou Safari (iPhone).', rem_err_other:'Les rappels n’ont pas pu être activés. Réessaie dans un moment.', rem_todo_t:'Un rappel si tu oublies une photo ?', rem_todo_d:'Une petite notification à l’heure des repas, seulement si rien n’est noté. Tu choisis les heures.', rem_todo_btn:'Choisir mes rappels',
 demo_btn:'Essayer en mode démo', demo_note:'Mode démo : tes réponses restent sur cet appareil et l’analyse par IA est désactivée (saisie à la main). Idéal pour découvrir l’application.', demo_on:'Mode démo : rien n’est envoyé en ligne.', demo_quit:'Quitter la démo',
 au_signup:'Créer mon compte', au_login:'Me connecter', au_email:'Adresse e-mail', au_pass:'Mot de passe', au_pass_hint:'8 caractères minimum. Garde-le bien : il te permet de retrouver tes données sur n’importe quel téléphone.', au_forgot:'Mot de passe oublié ? Demande à ton coach de le réinitialiser.', au_signup_btn:'Créer mon compte', au_login_btn:'Me connecter', au_privacy:'Tes données sont enregistrées dans ton espace privé, sur des serveurs en Europe. Ton coach ne voit tes résultats que si tu l’acceptes.', au_bad_email:'Adresse e-mail invalide.', au_bad_pass:'Le mot de passe doit faire au moins 8 caractères.', au_exists:'Un compte existe déjà avec cette adresse : choisis « Me connecter ».', au_wrong:'Adresse ou mot de passe incorrect.', au_confirm:'Compte créé : confirme ton adresse avec l’e-mail reçu, puis connecte-toi.', au_account:'Connecté avec {e}', au_logout:'Me déconnecter', au_delete_account:'Ton compte sera aussi supprimé.', err_quota:'Tu as atteint la limite d’analyses par IA pour aujourd’hui. Tu peux encore ajouter tes repas à la main.', cfg_missing:'L’application n’est pas encore configurée : il manque l’adresse de la base de données.',
@@ -394,7 +403,7 @@ delete_all:'Effacer toutes mes données et retirer mon consentement', delete_con
 restr_withdraw:'Retirer et effacer mes allergies et régime', restr_withdrawn:'Allergies et régime effacés.',
 s_sources:'Sources des données', sources_text:'Dans cette version de test, les valeurs nutritionnelles sont estimées par l’IA à partir de valeurs de référence. La version finale utilisera directement ces bases officielles :',
 src_ciqual:'Table Ciqual (Anses, France)', src_insa:'Tabela da Composição de Alimentos (INSA, Portugal)', src_bedca:'BEDCA (AESAN, Espagne), après autorisation', src_usda:'USDA FoodData Central', src_off:'Open Food Facts (produits emballés)',
-s_about:'À propos', about_text:'Version de test gratuite, sans publicité ni abonnement. Estimations indicatives : l’app ne remplace pas un médecin, un diététicien ni un allergologue. Aucune donnée n’est revendue.',
+s_about:'À propos', about_text:'Version de test. Estimations indicatives : l’app ne remplace pas un médecin, un diététicien ni un allergologue. Aucune donnée n’est revendue.',
 s_mode_db:'Tes données sont enregistrées dans ton espace privé : toi seul y as accès.',
 s_feedback_admin:'Avis des testeurs', fb_load:'Afficher les avis', no_feedback:'Aucun avis pour l’instant.', someone:'Testeur',
 profile_saved:'Profil enregistré.', style_saved:'Style enregistré.',
@@ -407,6 +416,7 @@ d_vegetarien:'Végétarien', d_vegetalien:'Végétalien', d_pescetarien:'Pescét
 },
 en:{
 need_style:'Choose a coaching style.', need_answer:'Choose an answer.', age_min:'The app is for people aged 18 and over.',
+rights:'All rights reserved', terms_link:'Terms of use', au_terms:'I accept the terms of use', au_terms_read:'Read', au_need_terms:'Tick the box to accept the terms of use.', tm_t:'Terms of use', tm_date:'Version of 14 October 2026', tm_intro:'Coach Assiette is a nutrition coaching app created by {o}. By creating an account, you accept the terms below.', tm_h1:'1. What the app does', tm_p1:'It estimates the calories, macronutrients and sugars of your meals from photos or descriptions, and gives you coaching advice. These estimates are indicative: the app does not replace a doctor, a dietitian or an allergist.', tm_h2:'2. Your account', tm_p2:'Your account is personal: do not share it and keep your password to yourself. The app is for people aged 18 and over.', tm_h3:'3. Intellectual property', tm_p3:'The app (its code, design, texts, questionnaires, the name “Coach Assiette” and its logo) belongs to {o}. All rights reserved. Copying, reproducing, modifying, reselling, making available to others or using it commercially, in whole or in part, is forbidden without written permission (articles L.122-4 and L.335-2 of the French Intellectual Property Code).', tm_h4:'4. Your data', tm_p4:'Your data is stored on servers in Europe and is never sold. Photos are sent to an artificial intelligence service only to be analysed: the app does not keep them. Your coach only sees your results if you agree, and you can withdraw this at any time. You can export or delete all your data, and your account, from Settings.', tm_h5:'5. Free access or subscription', tm_p5:'Depending on what your coach decides, your access is free or requires a monthly subscription. The subscription is paid by card or SEPA direct debit through Stripe; your coach never sees your bank details. You can cancel at any time from Settings: it stays active until the end of the paid period. If a payment fails, photo analysis and AI advice are paused; your data remains available.', tm_h6:'6. Changes', tm_p6:'The app may change, be modified or stopped. If these terms change significantly, they will be shown to you again.', tm_h7:'7. Applicable law', tm_p7:'These terms are governed by French law.', tm_accept:'I accept', tm_gate:'Before you continue, please read and accept the terms of use.', s_pay:'My subscription', pay_t:'Subscription', pay_d:'To analyse your meals from photos and get AI advice, a monthly subscription is needed. You can cancel whenever you like.', pay_price:'{p} per month', pay_go:'Subscribe', pay_manage:'Manage my subscription (payment, cancellation)', pay_secure:'Secure payment by Stripe, by card or SEPA direct debit. Your coach never sees your bank details.', pay_meanwhile:'Meanwhile, you can keep logging your meals by hand.', pay_ai_off:'AI analysis is paused: your subscription is not active. You can log your meal by hand, or subscribe in Settings > My subscription.', pay_banner_t:'Photo analysis paused', pay_banner_d:'Your subscription is not active. You can keep logging your meals by hand.', pay_see:'See the subscription', pay_late_banner:'Your last payment did not go through. Update your payment method to keep photo analysis.', pay_s_free:'Free', pay_s_active:'Active', pay_s_late:'Payment to fix', pay_s_none:'To activate', pay_s_proc:'Being confirmed', pay_free_d:'Your coach gives you free access to the app: there is nothing to pay.', pay_active_d:'Subscription active. Next payment on {d}.', pay_active_end:'Subscription cancelled: it stays active until {d}.', pay_late_d:'Your last payment did not go through. Update your payment method in the next few days to keep photo analysis.', pay_late_off:'Your payment did not go through: photo analysis is paused. Update your payment method to turn it back on.', pay_proc:'Your payment is being confirmed (a SEPA direct debit can take a few days). You can already use the app.', pay_thanks:'Thank you! Your subscription is active.', pay_pending:'Payment received: it is being confirmed.', pay_cancelled:'Payment cancelled: nothing was charged.', pay_already:'You already have an active subscription.', pay_not_ready:'Payment is not available yet. Try again later or ask your coach.', pay_price_loading:'Loading the price…', ct_follow:'Follow-up', ct_bill:'Subscriptions', bill_t:'Paid subscriptions', bill_off_d:'Off: everyone uses the app for free. You can already choose below who will be free and who will pay.', bill_on_d:'On: “Paid” people need an up-to-date subscription for photo analysis and AI advice.', bill_turn_on:'Turn on subscriptions', bill_turn_off:'Turn off subscriptions', bill_need_stripe:'Turn on only once your Stripe account is connected to the app.', bill_confirm_on:'Turn on subscriptions? “Paid” people without a subscription will no longer be able to analyse their photos (they can still log meals by hand).', bill_confirm_yes:'Yes, turn on', bill_default_t:'New accounts', bill_default_d:'Rule applied to anyone you have not set individually.', bill_free:'Free', bill_paid:'Paid', bill_add_t:'Set a person by email', bill_add_d:'Also works before they create their account, for example to give your family free access.', bill_set_free:'Give free access', bill_set_paid:'Make paid', bill_list_t:'All accounts', bill_sum:'{a} up-to-date subscriber(s) · {f} free access · {n} account(s)', bill_me:'You (coach)', bill_invited:'Not signed up yet', bill_st_active:'Subscribed', bill_st_late:'Payment late', bill_st_none:'Not subscribed', bill_st_free:'Free', bill_by_default:'Follows the “New accounts” rule', bill_next:'Next payment on {d}', bill_ends:'Ends on {d}', bill_saved:'Saved.', bill_err:'Could not load subscriptions. Check that the latest version of the database is installed.', bill_bad_email:'Invalid email address.', bill_help:'Subscription money is paid by Stripe straight into your bank account. People with free access never see anything about payment.',
 s_rem:'Meal reminders', rem_d:'A notification if a meal box is still empty at the time you choose. One reminder per meal, never if the meal is already logged or skipped.', rem_times_hint:'Clear a time to get no reminder for that meal.', rem_water:'“Remember to drink” reminder at 11 am and 4 pm, only if your bottle is low', rem_enable:'Turn on reminders', rem_disable:'Turn off reminders', rem_test:'Send a test', rem_test_sent:'Test notification sent.', rem_saved:'Reminders saved.', rem_on_toast:'Reminders on.', rem_off_toast:'Reminders off.', rem_need_account:'Reminders work with an account, in the online app.', rem_err_ios:'On iPhone, first add the app to your home screen (Share button, then “Add to Home Screen”), open it from that icon, then turn on reminders.', rem_err_denied:'Notifications are blocked for this site. Allow them in your browser settings, then try again.', rem_err_unsupported:'This browser does not support notifications. Try Chrome (Android) or Safari (iPhone).', rem_err_other:'Reminders could not be turned on. Try again in a moment.', rem_todo_t:'A reminder if you forget a photo?', rem_todo_d:'A small notification at mealtimes, only if nothing is logged. You choose the times.', rem_todo_btn:'Choose my reminders',
 demo_btn:'Try the demo', demo_note:'Demo mode: your answers stay on this device and AI analysis is off (manual entry). Ideal to discover the app.', demo_on:'Demo mode: nothing is sent online.', demo_quit:'Leave the demo',
 au_signup:'Create my account', au_login:'Sign in', au_email:'Email address', au_pass:'Password', au_pass_hint:'At least 8 characters. Keep it safe: it lets you find your data on any phone.', au_forgot:'Forgot your password? Ask your coach to reset it.', au_signup_btn:'Create my account', au_login_btn:'Sign in', au_privacy:'Your data is saved in your private space, on servers in Europe. Your coach only sees your results if you agree.', au_bad_email:'Invalid email address.', au_bad_pass:'The password must be at least 8 characters.', au_exists:'An account already exists with this address: choose “Sign in”.', au_wrong:'Wrong email or password.', au_confirm:'Account created: confirm your address with the email you received, then sign in.', au_account:'Signed in as {e}', au_logout:'Sign out', au_delete_account:'Your account will also be deleted.', err_quota:'You have reached today’s limit of AI analyses. You can still add your meals by hand.', cfg_missing:'The app is not configured yet: the database address is missing.',
@@ -530,7 +540,7 @@ delete_all:'Delete all my data and withdraw my consent', delete_confirm:'Everyth
 restr_withdraw:'Withdraw and delete my allergies and diet', restr_withdrawn:'Allergies and diet deleted.',
 s_sources:'Data sources', sources_text:'In this test version, nutrition values are estimated by AI from reference values. The final version will use these official databases directly:',
 src_ciqual:'Ciqual table (Anses, France)', src_insa:'Tabela da Composição de Alimentos (INSA, Portugal)', src_bedca:'BEDCA (AESAN, Spain), once authorised', src_usda:'USDA FoodData Central', src_off:'Open Food Facts (packaged products)',
-s_about:'About', about_text:'Free test version, no ads and no subscription. Estimates are indicative: the app does not replace a doctor, a dietitian or an allergist. No data is ever sold.',
+s_about:'About', about_text:'Test version. Estimates are indicative: the app does not replace a doctor, a dietitian or an allergist. No data is ever sold.',
 s_mode_db:'Your data is stored in your private space: only you can access it.',
 s_feedback_admin:'Tester feedback', fb_load:'Show feedback', no_feedback:'No feedback yet.', someone:'Tester',
 profile_saved:'Profile saved.', style_saved:'Style saved.',
@@ -543,6 +553,7 @@ d_vegetarien:'Vegetarian', d_vegetalien:'Vegan', d_pescetarien:'Pescatarian', d_
 },
 pt:{
 need_style:'Escolhe um estilo de coaching.', need_answer:'Escolhe uma resposta.', age_min:'A aplicação destina-se a pessoas com 18 anos ou mais.',
+rights:'Todos os direitos reservados', terms_link:'Condições de utilização', au_terms:'Aceito as condições de utilização', au_terms_read:'Ler', au_need_terms:'Marca a caixa para aceitar as condições de utilização.', tm_t:'Condições de utilização', tm_date:'Versão de 14 de outubro de 2026', tm_intro:'O Coach Assiette é uma aplicação de acompanhamento nutricional criada por {o}. Ao criar uma conta, aceitas as condições abaixo.', tm_h1:'1. O que a aplicação faz', tm_p1:'Estima as calorias, os macronutrientes e os açúcares das tuas refeições a partir de fotos ou descrições, e dá-te conselhos de coaching. Estas estimativas são indicativas: a aplicação não substitui um médico, um nutricionista nem um alergologista.', tm_h2:'2. A tua conta', tm_p2:'A tua conta é pessoal: não a partilhes e guarda a tua palavra-passe só para ti. A aplicação destina-se a pessoas com 18 anos ou mais.', tm_h3:'3. Propriedade intelectual', tm_p3:'A aplicação (o código, o design, os textos, os questionários, o nome «Coach Assiette» e o logótipo) pertence a {o}. Todos os direitos reservados. É proibido copiá-la, reproduzi-la, modificá-la, revendê-la, disponibilizá-la a outras pessoas ou explorá-la comercialmente, no todo ou em parte, sem autorização escrita (artigos L.122-4 e L.335-2 do Código da Propriedade Intelectual francês).', tm_h4:'4. Os teus dados', tm_p4:'Os teus dados ficam guardados em servidores na Europa e nunca são vendidos. As fotos são enviadas a um serviço de inteligência artificial apenas para serem analisadas: a aplicação não as guarda. O teu coach só vê os teus resultados se aceitares, e podes retirar esse acordo a qualquer momento. Podes exportar ou apagar todos os teus dados, e a tua conta, nas Definições.', tm_h5:'5. Acesso oferecido ou subscrição', tm_p5:'Conforme o que o teu coach decidir, o teu acesso é oferecido ou sujeito a uma subscrição mensal. A subscrição é paga por cartão ou débito direto SEPA através da Stripe; o teu coach nunca vê os teus dados bancários. Podes cancelá-la a qualquer momento nas Definições: fica ativa até ao fim do período pago. Se um pagamento falhar, a análise das fotos e os conselhos da IA ficam em pausa; os teus dados continuam acessíveis.', tm_h6:'6. Alterações', tm_p6:'A aplicação pode evoluir, ser modificada ou terminar. Se estas condições mudarem de forma importante, ser-te-ão apresentadas de novo.', tm_h7:'7. Lei aplicável', tm_p7:'Estas condições regem-se pela lei francesa.', tm_accept:'Aceito', tm_gate:'Antes de continuar, lê e aceita as condições de utilização.', s_pay:'A minha subscrição', pay_t:'Subscrição', pay_d:'Para analisar as tuas refeições por foto e receber os conselhos da IA, é necessária uma subscrição mensal. Podes cancelá-la quando quiseres.', pay_price:'{p} por mês', pay_go:'Subscrever', pay_manage:'Gerir a minha subscrição (pagamento, cancelamento)', pay_secure:'Pagamento seguro pela Stripe, por cartão ou débito direto SEPA. O teu coach nunca vê os teus dados bancários.', pay_meanwhile:'Entretanto, podes continuar a registar as refeições à mão.', pay_ai_off:'A análise por IA está em pausa: a tua subscrição não está ativa. Podes registar a refeição à mão, ou subscrever em Definições > A minha subscrição.', pay_banner_t:'Análise das fotos em pausa', pay_banner_d:'A tua subscrição não está ativa. Podes continuar a registar as refeições à mão.', pay_see:'Ver a subscrição', pay_late_banner:'O teu último pagamento não foi concluído. Atualiza o meio de pagamento para manter a análise das fotos.', pay_s_free:'Oferecido', pay_s_active:'Ativa', pay_s_late:'Pagamento a regularizar', pay_s_none:'Por ativar', pay_s_proc:'Em validação', pay_free_d:'O teu coach oferece-te o acesso à aplicação: não tens nada a pagar.', pay_active_d:'Subscrição ativa. Próximo pagamento a {d}.', pay_active_end:'Subscrição cancelada: fica ativa até {d}.', pay_late_d:'O teu último pagamento não foi concluído. Atualiza o meio de pagamento nos próximos dias para manter a análise das fotos.', pay_late_off:'O teu pagamento não foi concluído: a análise das fotos está em pausa. Atualiza o meio de pagamento para a reativar.', pay_proc:'O teu pagamento está em validação (um débito direto SEPA pode demorar alguns dias). Já podes usar a aplicação.', pay_thanks:'Obrigado! A tua subscrição está ativa.', pay_pending:'Pagamento recebido: está em validação.', pay_cancelled:'Pagamento cancelado: nada foi cobrado.', pay_already:'Já tens uma subscrição ativa.', pay_not_ready:'O pagamento ainda não está disponível. Tenta mais tarde ou fala com o teu coach.', pay_price_loading:'A carregar o preço…', ct_follow:'Acompanhamento', ct_bill:'Subscrições', bill_t:'Subscrições pagas', bill_off_d:'Desativadas: todos usam a aplicação gratuitamente. Já podes escolher abaixo quem terá acesso oferecido e quem pagará.', bill_on_d:'Ativadas: as pessoas «Pago» precisam de uma subscrição em dia para a análise das fotos e os conselhos da IA.', bill_turn_on:'Ativar as subscrições', bill_turn_off:'Desativar as subscrições', bill_need_stripe:'Ativa apenas quando a tua conta Stripe estiver ligada à aplicação.', bill_confirm_on:'Ativar as subscrições? As pessoas «Pago» sem subscrição deixam de poder analisar fotos (podem continuar a registar refeições à mão).', bill_confirm_yes:'Sim, ativar', bill_default_t:'Novas contas', bill_default_d:'Regra aplicada a quem não configuraste individualmente.', bill_free:'Oferecido', bill_paid:'Pago', bill_add_t:'Configurar uma pessoa por e-mail', bill_add_d:'Funciona mesmo antes de a pessoa criar a conta, por exemplo para oferecer o acesso à tua família.', bill_set_free:'Oferecer o acesso', bill_set_paid:'Tornar pago', bill_list_t:'Todas as contas', bill_sum:'{a} subscritor(es) em dia · {f} acesso(s) oferecido(s) · {n} conta(s)', bill_me:'Tu (coach)', bill_invited:'Ainda não inscrito', bill_st_active:'Subscritor', bill_st_late:'Pagamento em atraso', bill_st_none:'Sem subscrição', bill_st_free:'Oferecido', bill_by_default:'Segue a regra «Novas contas»', bill_next:'Próximo pagamento a {d}', bill_ends:'Termina a {d}', bill_saved:'Guardado.', bill_err:'Não foi possível carregar as subscrições. Confirma que a última versão da base de dados está instalada.', bill_bad_email:'Endereço de e-mail inválido.', bill_help:'O dinheiro das subscrições é transferido pela Stripe diretamente para a tua conta bancária. As pessoas com acesso oferecido nunca veem nada sobre pagamentos.',
 s_rem:'Lembretes de refeições', rem_d:'Uma notificação se um quadrado de refeição ainda estiver vazio à hora escolhida. Um só lembrete por refeição, nunca se a refeição já estiver registada ou saltada.', rem_times_hint:'Apaga uma hora para não receber lembrete dessa refeição.', rem_water:'Lembrete «Lembra-te de beber» às 11 h e às 16 h, só se a tua garrafa estiver pouco cheia', rem_enable:'Ativar os lembretes', rem_disable:'Desativar os lembretes', rem_test:'Enviar um teste', rem_test_sent:'Notificação de teste enviada.', rem_saved:'Lembretes guardados.', rem_on_toast:'Lembretes ativados.', rem_off_toast:'Lembretes desativados.', rem_need_account:'Os lembretes funcionam com uma conta, na aplicação online.', rem_err_ios:'No iPhone, adiciona primeiro a aplicação ao ecrã principal (botão Partilhar e depois «Adicionar ao ecrã principal»), abre-a a partir desse ícone e ativa os lembretes.', rem_err_denied:'As notificações estão bloqueadas para este site. Autoriza-as nas definições do navegador e tenta de novo.', rem_err_unsupported:'Este navegador não suporta notificações. Experimenta o Chrome (Android) ou o Safari (iPhone).', rem_err_other:'Não foi possível ativar os lembretes. Tenta de novo daqui a pouco.', rem_todo_t:'Um lembrete se te esqueceres de uma foto?', rem_todo_d:'Uma pequena notificação à hora das refeições, só se nada estiver registado. Tu escolhes as horas.', rem_todo_btn:'Escolher os meus lembretes',
 demo_btn:'Experimentar a demonstração', demo_note:'Modo demonstração: as tuas respostas ficam neste dispositivo e a análise por IA está desativada (registo manual). Ideal para descobrir a aplicação.', demo_on:'Modo demonstração: nada é enviado online.', demo_quit:'Sair da demonstração',
 au_signup:'Criar a minha conta', au_login:'Entrar', au_email:'Endereço de e-mail', au_pass:'Palavra-passe', au_pass_hint:'Pelo menos 8 caracteres. Guarda-a bem: permite-te encontrar os teus dados em qualquer telemóvel.', au_forgot:'Esqueceste a palavra-passe? Pede ao teu coach para a repor.', au_signup_btn:'Criar a minha conta', au_login_btn:'Entrar', au_privacy:'Os teus dados ficam guardados no teu espaço privado, em servidores na Europa. O teu coach só vê os teus resultados se aceitares.', au_bad_email:'Endereço de e-mail inválido.', au_bad_pass:'A palavra-passe deve ter pelo menos 8 caracteres.', au_exists:'Já existe uma conta com este endereço: escolhe «Entrar».', au_wrong:'E-mail ou palavra-passe incorretos.', au_confirm:'Conta criada: confirma o teu endereço com o e-mail recebido e depois entra.', au_account:'Sessão iniciada com {e}', au_logout:'Terminar sessão', au_delete_account:'A tua conta também será apagada.', err_quota:'Atingiste o limite de análises por IA de hoje. Ainda podes adicionar as refeições à mão.', cfg_missing:'A aplicação ainda não está configurada: falta o endereço da base de dados.',
@@ -666,7 +677,7 @@ delete_all:'Apagar todos os meus dados e retirar o consentimento', delete_confir
 restr_withdraw:'Retirar e apagar as minhas alergias e regime', restr_withdrawn:'Alergias e regime apagados.',
 s_sources:'Fontes dos dados', sources_text:'Nesta versão de teste, os valores nutricionais são estimados pela IA a partir de valores de referência. A versão final usará diretamente estas bases oficiais:',
 src_ciqual:'Tabela Ciqual (Anses, França)', src_insa:'Tabela da Composição de Alimentos (INSA, Portugal)', src_bedca:'BEDCA (AESAN, Espanha), após autorização', src_usda:'USDA FoodData Central', src_off:'Open Food Facts (produtos embalados)',
-s_about:'Sobre', about_text:'Versão de teste gratuita, sem publicidade nem assinatura. Estimativas indicativas: a aplicação não substitui um médico, um nutricionista nem um alergologista. Nenhum dado é vendido.',
+s_about:'Sobre', about_text:'Versão de teste. Estimativas indicativas: a aplicação não substitui um médico, um nutricionista nem um alergologista. Nenhum dado é vendido.',
 s_mode_db:'Os teus dados ficam guardados no teu espaço privado: só tu tens acesso.',
 s_feedback_admin:'Opiniões dos testadores', fb_load:'Mostrar as opiniões', no_feedback:'Ainda sem opiniões.', someone:'Testador',
 profile_saved:'Perfil guardado.', style_saved:'Estilo guardado.',
@@ -679,6 +690,7 @@ d_vegetarien:'Vegetariano', d_vegetalien:'Vegano', d_pescetarien:'Pescetariano',
 },
 es:{
 need_style:'Elige un estilo de coaching.', need_answer:'Elige una respuesta.', age_min:'La aplicación es para personas de 18 años o más.',
+rights:'Todos los derechos reservados', terms_link:'Condiciones de uso', au_terms:'Acepto las condiciones de uso', au_terms_read:'Leer', au_need_terms:'Marca la casilla para aceptar las condiciones de uso.', tm_t:'Condiciones de uso', tm_date:'Versión del 14 de octubre de 2026', tm_intro:'Coach Assiette es una aplicación de acompañamiento nutricional creada por {o}. Al crear una cuenta, aceptas las condiciones siguientes.', tm_h1:'1. Qué hace la aplicación', tm_p1:'Estima las calorías, los macronutrientes y los azúcares de tus comidas a partir de fotos o descripciones, y te da consejos de coaching. Estas estimaciones son orientativas: la aplicación no sustituye a un médico, un dietista ni un alergólogo.', tm_h2:'2. Tu cuenta', tm_p2:'Tu cuenta es personal: no la compartas y guarda tu contraseña para ti. La aplicación es para personas de 18 años o más.', tm_h3:'3. Propiedad intelectual', tm_p3:'La aplicación (su código, su diseño, sus textos, sus cuestionarios, su nombre «Coach Assiette» y su logotipo) pertenece a {o}. Todos los derechos reservados. Queda prohibido copiarla, reproducirla, modificarla, revenderla, ponerla a disposición de otras personas o explotarla comercialmente, total o parcialmente, sin autorización escrita (artículos L.122-4 y L.335-2 del Código de la Propiedad Intelectual francés).', tm_h4:'4. Tus datos', tm_p4:'Tus datos se guardan en servidores en Europa y nunca se venden. Las fotos se envían a un servicio de inteligencia artificial solo para analizarlas: la aplicación no las conserva. Tu coach solo ve tus resultados si lo aceptas, y puedes retirar ese acuerdo en cualquier momento. Puedes exportar o eliminar todos tus datos, y tu cuenta, desde Ajustes.', tm_h5:'5. Acceso gratuito o suscripción', tm_p5:'Según lo que decida tu coach, tu acceso es gratuito o requiere una suscripción mensual. La suscripción se paga con tarjeta o domiciliación SEPA a través de Stripe; tu coach nunca ve tus datos bancarios. Puedes cancelarla en cualquier momento desde Ajustes: sigue activa hasta el final del periodo pagado. Si un pago no se completa, el análisis de fotos y los consejos de la IA se pausan; tus datos siguen accesibles.', tm_h6:'6. Cambios', tm_p6:'La aplicación puede evolucionar, modificarse o cerrarse. Si estas condiciones cambian de forma importante, se te volverán a mostrar.', tm_h7:'7. Ley aplicable', tm_p7:'Estas condiciones se rigen por la ley francesa.', tm_accept:'Acepto', tm_gate:'Antes de continuar, lee y acepta las condiciones de uso.', s_pay:'Mi suscripción', pay_t:'Suscripción', pay_d:'Para analizar tus comidas con fotos y recibir los consejos de la IA, hace falta una suscripción mensual. Puedes cancelarla cuando quieras.', pay_price:'{p} al mes', pay_go:'Suscribirme', pay_manage:'Gestionar mi suscripción (pago, cancelación)', pay_secure:'Pago seguro con Stripe, con tarjeta o domiciliación SEPA. Tu coach nunca ve tus datos bancarios.', pay_meanwhile:'Mientras tanto, puedes seguir anotando tus comidas a mano.', pay_ai_off:'El análisis por IA está en pausa: tu suscripción no está activa. Puedes anotar tu comida a mano o suscribirte en Ajustes > Mi suscripción.', pay_banner_t:'Análisis de fotos en pausa', pay_banner_d:'Tu suscripción no está activa. Puedes seguir anotando tus comidas a mano.', pay_see:'Ver la suscripción', pay_late_banner:'Tu último pago no se ha completado. Actualiza tu método de pago para mantener el análisis de fotos.', pay_s_free:'Gratuito', pay_s_active:'Activa', pay_s_late:'Pago pendiente', pay_s_none:'Por activar', pay_s_proc:'En validación', pay_free_d:'Tu coach te ofrece el acceso a la aplicación: no tienes nada que pagar.', pay_active_d:'Suscripción activa. Próximo pago el {d}.', pay_active_end:'Suscripción cancelada: sigue activa hasta el {d}.', pay_late_d:'Tu último pago no se ha completado. Actualiza tu método de pago en los próximos días para mantener el análisis de fotos.', pay_late_off:'Tu pago no se ha completado: el análisis de fotos está en pausa. Actualiza tu método de pago para reactivarlo.', pay_proc:'Tu pago se está validando (una domiciliación SEPA puede tardar unos días). Ya puedes usar la aplicación.', pay_thanks:'¡Gracias! Tu suscripción está activa.', pay_pending:'Pago recibido: se está validando.', pay_cancelled:'Pago cancelado: no se ha cobrado nada.', pay_already:'Ya tienes una suscripción activa.', pay_not_ready:'El pago aún no está disponible. Inténtalo más tarde o habla con tu coach.', pay_price_loading:'Cargando el precio…', ct_follow:'Seguimiento', ct_bill:'Suscripciones', bill_t:'Suscripciones de pago', bill_off_d:'Desactivadas: todos usan la aplicación gratis. Ya puedes elegir abajo quién tendrá acceso gratuito y quién pagará.', bill_on_d:'Activadas: las personas «De pago» necesitan una suscripción al día para el análisis de fotos y los consejos de la IA.', bill_turn_on:'Activar las suscripciones', bill_turn_off:'Desactivar las suscripciones', bill_need_stripe:'Actívalas solo cuando tu cuenta de Stripe esté conectada a la aplicación.', bill_confirm_on:'¿Activar las suscripciones? Las personas «De pago» sin suscripción ya no podrán analizar sus fotos (podrán seguir anotando sus comidas a mano).', bill_confirm_yes:'Sí, activar', bill_default_t:'Cuentas nuevas', bill_default_d:'Regla aplicada a quien no hayas configurado una por una.', bill_free:'Gratuito', bill_paid:'De pago', bill_add_t:'Configurar a una persona por correo', bill_add_d:'Funciona incluso antes de que cree su cuenta, por ejemplo para ofrecer el acceso a tu familia.', bill_set_free:'Ofrecer el acceso', bill_set_paid:'Hacer de pago', bill_list_t:'Todas las cuentas', bill_sum:'{a} suscriptor(es) al día · {f} acceso(s) gratuito(s) · {n} cuenta(s)', bill_me:'Tú (coach)', bill_invited:'Aún no registrado', bill_st_active:'Suscrito', bill_st_late:'Pago atrasado', bill_st_none:'Sin suscripción', bill_st_free:'Gratuito', bill_by_default:'Sigue la regla «Cuentas nuevas»', bill_next:'Próximo pago el {d}', bill_ends:'Termina el {d}', bill_saved:'Guardado.', bill_err:'No se pudieron cargar las suscripciones. Comprueba que está instalada la última versión de la base de datos.', bill_bad_email:'Correo electrónico no válido.', bill_help:'Stripe ingresa el dinero de las suscripciones directamente en tu cuenta bancaria. Las personas con acceso gratuito nunca ven nada sobre pagos.',
 s_rem:'Recordatorios de comidas', rem_d:'Una notificación si una casilla de comida sigue vacía a la hora elegida. Un solo recordatorio por comida, nunca si la comida ya está anotada o saltada.', rem_times_hint:'Borra una hora para no recibir recordatorio de esa comida.', rem_water:'Recordatorio «Acuérdate de beber» a las 11 y a las 16, solo si tu botella está poco llena', rem_enable:'Activar los recordatorios', rem_disable:'Desactivar los recordatorios', rem_test:'Enviar una prueba', rem_test_sent:'Notificación de prueba enviada.', rem_saved:'Recordatorios guardados.', rem_on_toast:'Recordatorios activados.', rem_off_toast:'Recordatorios desactivados.', rem_need_account:'Los recordatorios funcionan con una cuenta, en la aplicación en línea.', rem_err_ios:'En iPhone, añade primero la aplicación a tu pantalla de inicio (botón Compartir y luego «Añadir a pantalla de inicio»), ábrela desde ese icono y activa los recordatorios.', rem_err_denied:'Las notificaciones están bloqueadas para este sitio. Permítelas en los ajustes del navegador y vuelve a intentarlo.', rem_err_unsupported:'Este navegador no admite notificaciones. Prueba con Chrome (Android) o Safari (iPhone).', rem_err_other:'No se pudieron activar los recordatorios. Inténtalo de nuevo en un momento.', rem_todo_t:'¿Un recordatorio si olvidas una foto?', rem_todo_d:'Una pequeña notificación a la hora de comer, solo si no hay nada anotado. Tú eliges las horas.', rem_todo_btn:'Elegir mis recordatorios',
 demo_btn:'Probar la demo', demo_note:'Modo demo: tus respuestas se quedan en este dispositivo y el análisis por IA está desactivado (registro manual). Ideal para descubrir la aplicación.', demo_on:'Modo demo: no se envía nada en línea.', demo_quit:'Salir de la demo',
 au_signup:'Crear mi cuenta', au_login:'Iniciar sesión', au_email:'Correo electrónico', au_pass:'Contraseña', au_pass_hint:'Al menos 8 caracteres. Guárdala bien: te permite recuperar tus datos en cualquier teléfono.', au_forgot:'¿Olvidaste la contraseña? Pide a tu coach que la restablezca.', au_signup_btn:'Crear mi cuenta', au_login_btn:'Iniciar sesión', au_privacy:'Tus datos se guardan en tu espacio privado, en servidores en Europa. Tu coach solo ve tus resultados si lo aceptas.', au_bad_email:'Correo electrónico no válido.', au_bad_pass:'La contraseña debe tener al menos 8 caracteres.', au_exists:'Ya existe una cuenta con este correo: elige «Iniciar sesión».', au_wrong:'Correo o contraseña incorrectos.', au_confirm:'Cuenta creada: confirma tu correo con el mensaje recibido y luego inicia sesión.', au_account:'Sesión iniciada con {e}', au_logout:'Cerrar sesión', au_delete_account:'Tu cuenta también se eliminará.', err_quota:'Has alcanzado el límite de análisis por IA de hoy. Todavía puedes añadir tus comidas a mano.', cfg_missing:'La aplicación aún no está configurada: falta la dirección de la base de datos.',
@@ -802,7 +814,7 @@ delete_all:'Borrar todos mis datos y retirar mi consentimiento', delete_confirm:
 restr_withdraw:'Retirar y borrar mis alergias y mi dieta', restr_withdrawn:'Alergias y dieta borradas.',
 s_sources:'Fuentes de los datos', sources_text:'En esta versión de prueba, los valores nutricionales los estima la IA a partir de valores de referencia. La versión final usará directamente estas bases oficiales:',
 src_ciqual:'Tabla Ciqual (Anses, Francia)', src_insa:'Tabela da Composição de Alimentos (INSA, Portugal)', src_bedca:'BEDCA (AESAN, España), tras su autorización', src_usda:'USDA FoodData Central', src_off:'Open Food Facts (productos envasados)',
-s_about:'Acerca de', about_text:'Versión de prueba gratuita, sin publicidad ni suscripción. Estimaciones orientativas: la aplicación no sustituye a un médico, un dietista-nutricionista ni un alergólogo. Nunca se venden datos.',
+s_about:'Acerca de', about_text:'Versión de prueba. Estimaciones orientativas: la aplicación no sustituye a un médico, un dietista ni un alergólogo. Nunca se venden datos.',
 s_mode_db:'Tus datos se guardan en tu espacio privado: solo tú tienes acceso.',
 s_feedback_admin:'Opiniones de los testers', fb_load:'Mostrar las opiniones', no_feedback:'Todavía no hay opiniones.', someone:'Tester',
 profile_saved:'Perfil guardado.', style_saved:'Estilo guardado.',
@@ -992,6 +1004,136 @@ function makeAI(){
   f.limits = async () => ({images:true});
   return f;
 }
+/* ===== Droits, conditions d'utilisation, abonnements ===== */
+const OWNER = (window.CA_CONFIG && window.CA_CONFIG.OWNER) || 'Seb';
+const TERMS_V = 1;
+function copyLine(){ return '<p class="footer-note">© 2026 ' + esc(OWNER) + ' · Coach Assiette · ' + esc(t('rights')) + ' · <button type="button" class="linkbtn" data-act="terms-open">' + esc(t('terms_link')) + '</button></p>'; }
+function termsBody(){ let h = '<p class="small muted">' + esc(t('tm_date')) + '</p><p>' + esc(t('tm_intro', {o:OWNER})) + '</p>'; for (let i = 1; i <= 7; i++) h += '<h3>' + esc(t('tm_h' + i)) + '</h3><p class="small">' + esc(t('tm_p' + i, {o:OWNER})) + '</p>'; return h; }
+async function termsAccept(){ S.terms = {v:TERMS_V, at:new Date().toISOString()}; S.termsGate = false; await Store.set('terms', S.terms); render(); }
+function fnUrl2(name){ return window.CA_CONFIG.SUPABASE_URL.replace(/\/$/, '') + '/functions/v1/' + name; }
+async function fnPost(name, body){
+  const tok = await Store.token(); let r;
+  try { r = await fetch(fnUrl2(name), {method:'POST', headers:{'Content-Type':'application/json', apikey:window.CA_CONFIG.SUPABASE_KEY, Authorization:'Bearer ' + tok}, body:JSON.stringify(body || {})}); }
+  catch(e){ throw {code:'unavailable'}; }
+  let j = {}; try { j = await r.json(); } catch(e){}
+  if (!r.ok) throw {code:j.code || 'other', status:r.status};
+  return j;
+}
+async function accLoad(){
+  if (Store.mode !== 'db' || Store.demo){ S.acc = null; return; }
+  try { const { data, error } = await SB.rpc('my_access'); S.acc = error ? null : (data || null); } catch(e){ S.acc = null; }
+  applyAccess();
+}
+function payNeeded(){ return !!(S.acc && S.acc.billing && S.acc.allowed === false); }
+function applyAccess(){ if (Store.demo || Store.mode !== 'db') return; if (payNeeded()){ S.sample = null; S.imgOk = false; } else if (!S.sample){ S.sample = makeAI(); S.imgOk = true; } }
+function aiOffText(){ return payNeeded() ? t('pay_ai_off') : t('ai_off'); }
+function priceText(){ const p = S.price; if (!p || p.amount == null || !p.currency) return ''; let v; try { v = new Intl.NumberFormat(LOCALE[LANG], {style:'currency', currency:String(p.currency).toUpperCase()}).format(p.amount / 100); } catch(e){ v = (p.amount / 100) + ' ' + p.currency; } return t('pay_price', {p:v}); }
+async function priceLoad(){ if (S.price || S.priceLoading || Store.mode !== 'db') return; S.priceLoading = true; try { S.price = await fnPost('billing', {action:'price'}); } catch(e){ S.price = {err:e.code || 'other'}; } S.priceLoading = false; render(); if (S.sheet === 'pay') renderSheet(); }
+function retUrl(){ return location.origin + location.pathname; }
+async function payStart(){
+  S.payBusy = true; render();
+  try { const j = await fnPost('billing', {action:'checkout', return_url:retUrl(), lang:LANG}); if (j.url){ location.href = j.url; return; } throw {code:'other'}; }
+  catch(e){ S.payBusy = false; toast(e.code === 'already' ? t('pay_already') : e.code === 'not_configured' ? t('pay_not_ready') : t('err_generic')); if (e.code === 'already') accLoad().then(render); render(); }
+}
+async function payPortal(){
+  S.payBusy = true; render();
+  try { const j = await fnPost('billing', {action:'portal', return_url:retUrl()}); if (j.url){ location.href = j.url; return; } throw {code:'other'}; }
+  catch(e){ S.payBusy = false; toast(e.code === 'not_configured' ? t('pay_not_ready') : t('err_generic')); render(); }
+}
+async function payReturn(q){
+  const st = q.get('billing'); if (!st) return;
+  const sid = q.get('session_id') || '';
+  try { history.replaceState(null, '', location.pathname); } catch(e){}
+  if (st !== 'ok'){ toast(t('pay_cancelled')); return; }
+  try { const j = await fnPost('billing', {action:'sync', session_id:sid}); if (j.access) S.acc = j.access; } catch(e){ await accLoad(); }
+  applyAccess(); toast(payNeeded() ? t('pay_pending') : t('pay_thanks')); render();
+}
+function payLive(){ return !!(S.acc && ['active', 'trialing'].indexOf(S.acc.status) >= 0); }
+function payBanner(){
+  const A = S.acc; if (!A || !A.billing || A.plan !== 'paid' || Store.mode !== 'db') return '';
+  if (payNeeded()) return '<div class="card stack-s"><h3>' + esc(t('pay_banner_t')) + '</h3><p class="small muted">' + esc(t('pay_banner_d')) + '</p><button class="btn primary" data-act="pay-open">' + esc(t('pay_see')) + '</button></div>';
+  if (A.status === 'past_due') return note('warn', esc(t('pay_late_banner')) + ' <button type="button" class="linkbtn" data-act="pay-portal">' + esc(t('pay_manage')) + '</button>');
+  return '';
+}
+function payDate(iso){ return iso ? fmtDay(dayKey(new Date(iso)), {day:'numeric', month:'long', year:'numeric'}) : ''; }
+function payBody(inSheet){
+  const A = S.acc || {}; const dis = S.payBusy ? ' disabled' : ''; let h = '';
+  if (A.plan === 'free') return note('info', esc(t('pay_free_d')));
+  priceLoad();
+  if (payLive()){
+    h += note('info', esc(A.cancel_at_end ? t('pay_active_end', {d:payDate(A.period_end)}) : t('pay_active_d', {d:payDate(A.period_end)})));
+    h += '<button class="btn outline block" data-act="pay-portal"' + dis + '>' + esc(t('pay_manage')) + '</button>';
+  } else if (A.status === 'past_due'){
+    h += note('warn', esc(A.allowed ? t('pay_late_d') : t('pay_late_off')));
+    h += '<button class="btn primary block" data-act="pay-portal"' + dis + '>' + esc(t('pay_manage')) + '</button>';
+  } else if (A.status === 'incomplete' && A.allowed){
+    h += note('info', esc(t('pay_proc')));
+  } else {
+    h += '<p>' + esc(t('pay_d')) + '</p>';
+    h += S.price && S.price.amount != null ? '<p style="font-size:22px;font-weight:800;margin:0">' + esc(priceText()) + '</p>' : S.price && S.price.err ? note('warn', esc(t('pay_not_ready'))) : '<p class="small muted">' + esc(t('pay_price_loading')) + '</p>';
+    h += '<button class="btn primary big block" data-act="pay-go"' + (dis || (S.price && S.price.err ? ' disabled' : '')) + '>' + esc(S.payBusy ? t('loading') : t('pay_go')) + '</button>';
+    if (inSheet) h += '<p class="small muted">' + esc(t('pay_meanwhile')) + '</p>';
+  }
+  return h + '<p class="tiny muted">' + esc(t('pay_secure')) + '</p>';
+}
+function payAcc(acc){
+  const A = S.acc; if (!A || !A.billing || A.plan === 'coach' || Store.mode !== 'db') return '';
+  const sub = A.plan === 'free' ? t('pay_s_free') : payLive() ? t('pay_s_active') : A.status === 'past_due' ? t('pay_s_late') : (A.status === 'incomplete' && A.allowed) ? t('pay_s_proc') : t('pay_s_none');
+  return acc('pay', t('s_pay'), sub, () => payBody(false), 'pay-sec');
+}
+/* coach side: who pays, who doesn't */
+async function billLoad(){
+  if (S.billLoading || Store.mode !== 'db') return; S.billLoading = true;
+  try {
+    const res = await Promise.all([SB.rpc('coach_billing_list'), SB.from('app_config').select('value').eq('name', 'billing').maybeSingle()]);
+    if (res[0].error) throw res[0].error;
+    S.bill = {rows:res[0].data || [], cfg:Object.assign({on:false, default:'free'}, (res[1].data && res[1].data.value) || {})};
+  } catch(e){ S.bill = {err:true}; }
+  S.billLoading = false; if (S.view === 'coach') render();
+}
+async function billSetPlan(email, plan){
+  const { error } = await SB.rpc('coach_set_plan', {target_email:email, new_plan:plan});
+  if (error){ toast(t('err_save')); return false; }
+  if (S.bill && S.bill.rows){ const r = S.bill.rows.find(x => x.email === email); if (r) r.plan = plan === 'default' ? null : plan; else S.bill.rows.unshift({email, user_id:null, plan}); }
+  toast(t('bill_saved')); render(); return true;
+}
+async function billSetCfg(on, def){
+  const { error } = await SB.rpc('coach_set_billing', {turn_on:on, default_plan:def});
+  if (error){ toast(t('err_save')); return; }
+  if (S.bill && S.bill.cfg){ S.bill.cfg.on = on; S.bill.cfg.default = def; }
+  S.billAsk = false; toast(t('bill_saved')); render(); accLoad().then(render);
+}
+function billRow(r, cfg){
+  const me = r.email === Store.email; const eff = r.plan || cfg.default;
+  const c = r.user_id && (S.coachData || []).find(x => x.id === r.user_id); const name = c ? clientName(c) : '';
+  const live = ['active', 'trialing'].indexOf(r.status) >= 0;
+  const badge = me ? t('bill_me') : !r.user_id ? t('bill_invited') : eff === 'free' ? '🎁 ' + t('bill_st_free') : live ? '✅ ' + t('bill_st_active') : r.status === 'past_due' ? '⚠️ ' + t('bill_st_late') : t('bill_st_none');
+  let h = '<div class="item"><div class="between" style="gap:10px;align-items:flex-start"><span style="min-width:0;overflow-wrap:anywhere"><b>' + esc(name || r.email) + '</b>' + (name ? '<br><span class="tiny muted">' + esc(r.email) + '</span>' : '') + '</span><span class="badge">' + esc(badge) + '</span></div>';
+  if (!me){
+    h += seg('bill-plan', r.email, eff, [['free', t('bill_free')], ['paid', t('bill_paid')]]);
+    if (!r.plan) h += '<p class="tiny muted">' + esc(t('bill_by_default')) + '</p>';
+    if (eff === 'paid' && live && r.period_end) h += '<p class="tiny muted">' + esc(r.cancel_at_end ? t('bill_ends', {d:payDate(r.period_end)}) : t('bill_next', {d:payDate(r.period_end)})) + '</p>';
+  }
+  return h + '</div>';
+}
+function billAdmin(){
+  const B = S.bill;
+  if (!B){ billLoad(); return '<div class="loading"><div class="spin"></div></div>'; }
+  if (B.err) return note('danger', esc(t('bill_err')));
+  const cfg = B.cfg; const rows = B.rows || [];
+  let h = '<div class="card stack-s"><div class="between"><h3>' + esc(t('bill_t')) + '</h3><span class="badge">' + esc(cfg.on ? t('acc_on') : t('acc_off')) + '</span></div><p class="small muted">' + esc(cfg.on ? t('bill_on_d') : t('bill_off_d')) + '</p>';
+  if (cfg.on) h += '<button class="btn outline block" data-act="bill-off">' + esc(t('bill_turn_off')) + '</button>';
+  else if (S.billAsk) h += note('warn', esc(t('bill_confirm_on'))) + '<div class="row"><button class="btn primary" data-act="bill-on-yes">' + esc(t('bill_confirm_yes')) + '</button><button class="btn ghost" data-act="bill-on-no">' + esc(t('cancel')) + '</button></div>';
+  else h += '<button class="btn primary block" data-act="bill-on">' + esc(t('bill_turn_on')) + '</button><p class="tiny muted">' + esc(t('bill_need_stripe')) + '</p>';
+  h += '</div>';
+  h += '<div class="card stack-s"><h3>' + esc(t('bill_default_t')) + '</h3><p class="small muted">' + esc(t('bill_default_d')) + '</p>' + seg('bill-default', 'default', cfg.default, [['free', t('bill_free')], ['paid', t('bill_paid')]]) + '</div>';
+  h += '<div class="card stack-s"><h3>' + esc(t('bill_add_t')) + '</h3><p class="small muted">' + esc(t('bill_add_d')) + '</p><label class="field"><span>' + esc(t('au_email')) + '</span><input type="email" inputmode="email" autocapitalize="off" id="bill-email" data-f="billEmail" value="' + esc(S.billEmail || '') + '"></label><div class="grid2"><button class="btn outline" data-act="bill-add" data-v="free">' + esc(t('bill_set_free')) + '</button><button class="btn outline" data-act="bill-add" data-v="paid">' + esc(t('bill_set_paid')) + '</button></div></div>';
+  const others = rows.filter(r => r.email !== Store.email && r.user_id);
+  const nAct = others.filter(r => (r.plan || cfg.default) === 'paid' && ['active', 'trialing'].indexOf(r.status) >= 0).length;
+  const nFree = others.filter(r => (r.plan || cfg.default) === 'free').length;
+  h += '<section class="section"><h2>' + esc(t('bill_list_t')) + '</h2><p class="small muted">' + esc(t('bill_sum', {a:nAct, f:nFree, n:others.length})) + '</p><div class="card list">' + rows.map(r => billRow(r, cfg)).join('') + '</div></section>';
+  return h + note('info', esc(t('bill_help')));
+}
 /* Files offered to the person: a normal browser download */
 const DL = {
   async save(o){
@@ -1007,7 +1149,7 @@ const DL = {
 const S = {
   loaded:false, view:'today', profile:null, days:{}, favorites:[], body:{entries:[]}, bilans:{weeks:{}},
   sample:null, sampleReady:false, imgOk:false, downloads:null, isOwner:false,
-  ob:null, add:null, idea:null, act:null, rd:null, rdDirty:false,
+  ob:null, add:null, idea:null, acc:null, price:null, priceLoading:false, payBusy:false, bill:null, billLoading:false, billAsk:false, billEmail:'', coachTab:'follow', terms:null, termsGate:false, act:null, rd:null, rdDirty:false,
   trackTab:'week', histOpen:null, histLoaded:false, histLoading:false,
   expanded:null, sheet:null, fb:{rating:0, text:''}, fbList:null, q:null, qLater:{},
   showSupport:false, exportText:null, deleteAsk:false, bilanBusy:false, bilanErr:null, bilanCtl:null,
@@ -1323,6 +1465,7 @@ const DEAD = ['not_granted','sampling_disabled','not_declared','capability_disab
 function errText(e){
   const c = e && e.code;
   if (c === 'quota') return t('err_quota');
+  if (c === 'subscription') return t('pay_ai_off');
   if (DEAD.indexOf(c) >= 0) return t('err_not_granted');
   if (c === 'rate_limited') return t('err_rate');
   if (c === 'invalid_json' || c === 'empty_completion') return t('err_json');
@@ -1331,7 +1474,7 @@ function errText(e){
   if (c === 'session_expired') return t('err_session');
   return t('err_generic');
 }
-function handleAiErr(e){ const c = e && e.code; if (DEAD.indexOf(c) >= 0) S.sample = null; if (c === 'images_unavailable') S.imgOk = false; }
+function handleAiErr(e){ const c = e && e.code; if (c === 'subscription'){ S.acc = Object.assign({plan:'paid', status:'none'}, S.acc || {}, {billing:true, allowed:false}); applyAccess(); S.sheet = 'pay'; } if (DEAD.indexOf(c) >= 0) S.sample = null; if (c === 'images_unavailable') S.imgOk = false; }
 
 /* ================= Photos ================= */
 async function prepImage(file){
@@ -1365,7 +1508,7 @@ const ICON = {
 function note(kind, html){ const ic = kind === 'info' ? 'i' : '!'; return '<div class="note ' + kind + '"><span class="ic" aria-hidden="true">' + ic + '</span><div>' + html + '</div></div>'; }
 function seg(act, key, val, opts){ return '<div class="seg" role="group">' + opts.map(o => '<button type="button" data-act="' + act + '" data-k="' + key + '" data-v="' + esc(o[0]) + '" class="' + (val === o[0] ? 'on' : '') + '" aria-pressed="' + (val === o[0]) + '">' + esc(o[1]) + '</button>').join('') + '</div>'; }
 function spinner(title, sub, stop){ return '<div class="card loading"><div class="spin" aria-hidden="true"></div><div class="stack-s"><strong>' + esc(title) + '</strong>' + (sub ? '<span class="muted small">' + esc(sub) + '</span>' : '') + '</div>' + (stop ? '<button class="btn sm outline" data-act="' + stop + '">' + t('stop') + '</button>' : '') + '</div>'; }
-function aiNotice(){ if (!S.sampleReady) return ''; if (!S.sample) return note('info', esc(t('ai_off'))); return ''; }
+function aiNotice(){ if (!S.sampleReady) return ''; if (!S.sample) return note('info', esc(aiOffText())); return ''; }
 
 /* ================= Rendu principal ================= */
 function render(){
@@ -1503,6 +1646,7 @@ function viewToday(){
   let h = '<div class="stack" style="padding-top:4px">';
   h += '<div class="stack-s"><span class="label">' + esc(fmtDay(k)) + '</span><h1>' + esc(t('nav_today')) + '</h1></div>';
   if (Store.mode !== 'db') h += guestWarn() || note('info', esc(Store.mode === 'local' ? t('local_notice') : t('memory_notice')));
+  h += payBanner();
   if (S.showSupport) h += '<div class="card stack-s"><h2>' + esc(t('support_t')) + '</h2><p>' + esc(t('support_text')) + '</p><p class="small muted">' + esc(t('support_res')) + '</p><button class="btn outline" data-act="support-ok">' + esc(t('dismiss')) + '</button></div>';
   h += '<section class="card budget" aria-label="' + esc(t('remaining')) + '"><div class="between"><span class="label">' + esc(over ? t('over') : t('remaining')) + '</span>' + (effStyle() !== S.profile.style ? '<span class="badge">' + esc(t('style_kind')) + '</span>' : '') + '</div>' +
     '<div class="budget-big">' + (over ? '+' : '') + nf(Math.abs(rem)) + '<small>kcal</small></div>' +
@@ -1804,7 +1948,7 @@ function prefillFrom(m, source){
 /* ================= Idée repas ================= */
 function viewIdea(){
   const I = S.idea; let h = '<div class="stack" style="padding-top:4px"><h1>' + esc(t('idea_t')) + '</h1>';
-  if (!S.sample && S.sampleReady) return h + note('info', esc(t('ai_off'))) + '</div>';
+  if (!S.sample && S.sampleReady) return h + note('info', esc(aiOffText())) + '</div>';
   if (I.phase === 'loading_ingr') return h + spinner(t('ingr_wait'), t('analyzing_d'), 'idea-stop') + '</div>';
   if (I.phase === 'loading') return h + spinner(t('idea_wait'), t('analyzing_d'), 'idea-stop') + '</div>';
   if (I.phase === 'ingr'){
@@ -1924,7 +2068,7 @@ function trackWeek(){
       (d.schemas_reperes && d.schemas_reperes.length ? '<h3>' + esc(t('patterns_t')) + '</h3><ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px">' + d.schemas_reperes.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>' : '') +
       (d.point_positif ? '<h3>' + esc(t('positive_t')) + '</h3><p>' + esc(d.point_positif) + '</p>' : '') + (d.objectif_semaine ? '<h3>' + esc(t('goal_week_t')) + '</h3><p>' + esc(d.objectif_semaine) + '</p>' : '') + '</div>'; }
     if (S.bilanErr) h += note('danger', esc(S.bilanErr));
-    if (!S.sample && S.sampleReady) h += note('info', esc(t('ai_off')));
+    if (!S.sample && S.sampleReady) h += note('info', esc(aiOffText()));
     else if (cnt < 3) h += note('info', esc(t('bilan_need')));
     else h += '<button class="btn ' + (b ? 'outline' : 'primary') + ' block" data-act="bilan-gen">' + esc(b ? t('bilan_regen') : t('bilan_gen')) + '</button>';
   }
@@ -2008,11 +2152,12 @@ function viewSettings(){
   h += acc('restr', t('s_restr'), restrHas ? t('acc_filled') : t('acc_none'), () => '<div class="card">' + restrEditor('set') + '</div>' + (p.restr && (p.restr.validated || Object.keys(p.restr.items || {}).length) ? '<button class="btn ghost" data-act="restr-withdraw">' + esc(t('restr_withdraw')) + '</button>' : ''));
   h += acc('habits', t('s_habits'), (p.habits || []).length ? String(p.habits.length) : '', () => (p.habits || []).length ? '<div class="card list">' + p.habits.map((x, i) => '<div class="item"><div class="between"><span>' + esc(x.name) + ' · <b class="num">' + x.grams + ' g</b></span><button class="x" data-act="habit-del" data-v="' + i + '" aria-label="' + esc(t('delete')) + '">×</button></div></div>').join('') + '</div>' : '<p class="small muted">' + esc(t('no_habits')) + '</p>');
   h += remAcc(acc);
+  h += payAcc(acc);
   h += acc('fb', t('s_feedback'), '', () => '<p class="small muted">' + esc(t('s_feedback_d')) + '</p><button class="btn outline block" data-act="fb-open">' + esc(t('feedback_btn')) + '</button>');
   h += acc('data', t('s_data'), '', () => (guestWarn() || note('info', esc(Store.mode === 'db' ? t('s_mode_db') : Store.mode === 'local' ? t('local_notice') : t('memory_notice')))) + '<p class="small">' + esc(Store.demo ? t('demo_on') : t('au_account', {e:Store.email || ''})) + '</p><button class="btn outline block" data-act="logout">' + esc(Store.demo ? t('demo_quit') : t('au_logout')) + '</button><button class="btn outline block" data-act="export">' + esc(t('export')) + '</button>' + (S.exportText ? '<label class="field"><span>' + esc(t('export_copy')) + '</span><textarea id="export-text" readonly style="min-height:160px;font-size:12px">' + esc(S.exportText) + '</textarea></label>' : '') +
     (S.deleteAsk ? note('danger', esc(t('delete_confirm') + ' ' + t('au_delete_account'))) + '<div class="row"><button class="btn primary" data-act="delete-yes">' + esc(t('delete_yes')) + '</button><button class="btn ghost" data-act="delete-no">' + esc(t('cancel')) + '</button></div>' : '<button class="btn ghost" data-act="delete-ask" style="color:var(--danger)">' + esc(t('delete_all')) + '</button>'));
   h += acc('sources', t('s_sources'), 'Ciqual · INSA · BEDCA · USDA · OFF', () => '<div class="card stack-s"><p class="small">' + esc(t('sources_text')) + '</p><ul class="small" style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px">' + ['src_ciqual','src_insa','src_bedca','src_usda','src_off'].map(x => '<li>' + esc(t(x)) + '</li>').join('') + '</ul></div>');
-  h += acc('about', t('s_about'), '', () => '<p class="small muted">' + esc(t('about_text')) + '</p>');
+  h += acc('about', t('s_about'), '', () => '<p class="small muted">' + esc(t('about_text')) + '</p><p class="small">© 2026 ' + esc(OWNER) + ' · Coach Assiette · ' + esc(t('rights')) + '</p><button class="btn outline block" data-act="terms-open">' + esc(t('terms_link')) + '</button>');
   if (S.isOwner && Store.mode === 'db'){
     h += acc('fbadmin', t('s_feedback_admin'), '', () => {
       if (S.fbList === null) return '<button class="btn outline block" data-act="fb-load">' + esc(t('fb_load')) + '</button>';
@@ -2021,7 +2166,7 @@ function viewSettings(){
       return '<div class="card list">' + S.fbList.map(f => '<div class="item"><div class="between"><b>' + esc(f.who) + '</b><span class="small muted">' + esc(f.date) + '</span></div><div class="small">' + esc(f.line) + '</div>' + (f.text ? '<p>' + esc(f.text) + '</p>' : '') + '</div>').join('') + '</div>';
     });
   }
-  return h + '</div><p class="footer-note">' + esc(t('disclaimer')) + '</p></div>';
+  return h + '</div><p class="footer-note">' + esc(t('disclaimer')) + '</p>' + copyLine() + '</div>';
 }
 async function loadFeedback(){
   S.fbList = 'loading'; render();
@@ -2051,6 +2196,7 @@ async function deleteAll(){
   try { await Store.db.doc('feedback/' + Store.uid).delete(); } catch(e){}
   try { await Store.db.doc('coaching/' + Store.uid).delete(); } catch(e){}
   if (Store.demo){ toast(t('deleted')); setTimeout(() => location.reload(), 700); return; }
+  if (S.acc && S.acc.status && ['none', 'canceled', 'incomplete_expired'].indexOf(S.acc.status) < 0){ try { await fnPost('billing', {action:'cancel_now'}); } catch(e){} }
   try { await SB.rpc('delete_me'); } catch(e){}
   toast(t('deleted')); try { await SB.auth.signOut(); } catch(e){} onSignedOut();
 }
@@ -2122,7 +2268,9 @@ function viewCoach(){
   coachSubscribe();
   let h = '<div class="stack" style="padding-top:4px">';
   if (S.coachSel && S.coachData){ const c = S.coachData.find(x => x.id === S.coachSel); if (c) return h + coachDetail(c) + '</div>'; S.coachSel = null; }
-  h += '<h1>' + esc(t('coach_t')) + '</h1><p class="small muted">' + esc(t('coach_live')) + '</p>';
+  h += '<h1>' + esc(t('coach_t')) + '</h1>' + seg('coach-tab', 'coachTab', S.coachTab || 'follow', [['follow', t('ct_follow')], ['bill', t('ct_bill')]]);
+  if (S.coachTab === 'bill') return h + billAdmin() + '</div>';
+  h += '<p class="small muted">' + esc(t('coach_live')) + '</p>';
   if (S.coachErr) return h + note('danger', esc(t('coach_err'))) + '</div>';
   if (!S.coachData) return h + '<div class="loading"><div class="spin"></div></div></div>';
   if (!S.coachData.length) return h + '<div class="card flat"><p class="muted">' + esc(t('coach_none')) + '</p></div>' + note('info', esc(t('coach_none_help'))) + note('warn', esc(t('coach_legal'))) + '</div>';
@@ -2207,6 +2355,9 @@ async function coachExport(){
 /* ================= Avis (feuille) ================= */
 function renderSheet(){
   const el = $('sheet');
+  if (S.termsGate && !S.auth){ el.innerHTML = '<div class="sheet-bg"><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="tm-title"><h2 id="tm-title">' + esc(t('tm_t')) + '</h2>' + note('info', esc(t('tm_gate'))) + termsBody() + '<button class="btn primary big block" data-act="terms-accept">' + esc(t('tm_accept')) + '</button><button class="btn ghost block" data-act="logout">' + esc(t('au_logout')) + '</button></div></div>'; return; }
+  if (S.sheet === 'terms'){ el.innerHTML = '<div class="sheet-bg" data-act="terms-close-bg"><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="tm-title"><div class="between"><h2 id="tm-title">' + esc(t('tm_t')) + '</h2><button class="x" data-act="terms-close" aria-label="' + esc(t('close')) + '">×</button></div>' + termsBody() + '<button class="btn primary block" data-act="terms-close">' + esc(t('close')) + '</button></div></div>'; return; }
+  if (S.sheet === 'pay'){ el.innerHTML = '<div class="sheet-bg" data-act="pay-close-bg"><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="pay-title"><div class="between"><h2 id="pay-title">' + esc(t('pay_t')) + '</h2><button class="x" data-act="pay-close" aria-label="' + esc(t('close')) + '">×</button></div>' + payBody(true) + '</div></div>'; return; }
   if (S.sheet === 'intro'){ el.innerHTML = '<div class="sheet-bg" data-act="intro-bg"><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="intro-title"><span class="label">' + esc(t('app')) + '</span><h2 id="intro-title" style="font-size:26px">' + esc(t('intro_t')) + '</h2><p style="font-size:17px">' + esc(t('intro_text')) + '</p><button class="btn primary big block" data-act="intro-ok">' + esc(t('dismiss')) + '</button></div></div>'; return; }
   if (S.sheet !== 'fb'){ el.innerHTML = ''; return; }
   const F = S.fb;
@@ -2330,6 +2481,21 @@ document.addEventListener('click', e => {
     case 'auth-mode': if (S.auth){ S.auth.mode = v; S.auth.error = null; render(); } break;
     case 'auth-go': authGo(); break;
     case 'demo': startDemo(); break;
+    case 'terms-open': S.sheet = 'terms'; renderSheet(); break;
+    case 'terms-close': case 'terms-close-bg': S.sheet = null; renderSheet(); break;
+    case 'terms-accept': termsAccept(); break;
+    case 'pay-open': S.sheet = 'pay'; renderSheet(); break;
+    case 'pay-close': case 'pay-close-bg': S.sheet = null; renderSheet(); break;
+    case 'pay-go': payStart(); break;
+    case 'pay-portal': payPortal(); break;
+    case 'coach-tab': S.coachTab = v; if (v === 'bill'){ S.bill = null; } render(); break;
+    case 'bill-on': S.billAsk = true; render(); break;
+    case 'bill-on-no': S.billAsk = false; render(); break;
+    case 'bill-on-yes': billSetCfg(true, (S.bill && S.bill.cfg && S.bill.cfg.default) || 'free'); break;
+    case 'bill-off': billSetCfg(false, (S.bill && S.bill.cfg && S.bill.cfg.default) || 'free'); break;
+    case 'bill-default': billSetCfg(!!(S.bill && S.bill.cfg && S.bill.cfg.on), v); break;
+    case 'bill-plan': billSetPlan(k, v); break;
+    case 'bill-add': { const em = String(S.billEmail || '').trim().toLowerCase(); if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){ toast(t('bill_bad_email')); break; } billSetPlan(em, v).then(ok => { if (ok){ S.billEmail = ''; render(); } }); break; }
     case 'rem-on': remEnable(); break;
     case 'rem-off': remDisable(); break;
     case 'rem-test': remTest(); break;
@@ -2440,11 +2606,11 @@ function checkSignals(){
 function resetUserState(){
   if (S.coachUnsub){ try { S.coachUnsub(); } catch(e){} }
   Object.assign(S, {loaded:true, view:'today', profile:null, days:{}, favorites:[], body:{entries:[]}, bilans:{weeks:{}}, sample:null, sampleReady:false, imgOk:false, isOwner:false,
-    ob:null, add:null, idea:null, act:null, rd:null, rdDirty:false, hd:null, hdDirty:false, lifeDraft:null, dayDraft:null, setDraft:null, coachDraft:null, histOpen:null, histLoaded:false, histLoading:false,
+    ob:null, add:null, idea:null, acc:null, price:null, priceLoading:false, payBusy:false, bill:null, billLoading:false, billAsk:false, billEmail:'', coachTab:'follow', terms:null, termsGate:false, act:null, rd:null, rdDirty:false, hd:null, hdDirty:false, lifeDraft:null, dayDraft:null, setDraft:null, coachDraft:null, histOpen:null, histLoaded:false, histLoading:false,
     expanded:null, sheet:null, fbList:null, q:null, qLater:{}, showSupport:false, exportText:null, deleteAsk:false, coachData:null, coachUnsub:null, coachSel:null, coachErr:false, secOpen:{}, coachLater:false, pickFail:false, eve:null, eveLater:false});
 }
 function onSignedOut(){ if (S.auth && !Store.uid) return; Store.setSession(null); resetUserState(); S.auth = newAuth(); render(); window.scrollTo(0, 0); }
-function newAuth(){ return {mode:'signup', email:'', pass:'', error:null, busy:false}; }
+function newAuth(){ return {mode:'signup', email:'', pass:'', error:null, busy:false, terms:false}; }
 function viewCfg(){ return '<div class="stack" style="padding-top:8px"><h1>' + esc(t('app')) + '</h1><p class="muted">' + esc(t('ob_welcome')) + '</p>' + note('warn', esc(S.cfgMissing === 'net' ? t('err_generic') : t('cfg_missing'))) + (S.cfgMissing === 'cfg' ? '<div class="card stack-s"><p class="small">' + esc(t('demo_note')) + '</p><button class="btn primary big block" data-act="demo">' + esc(t('demo_btn')) + '</button></div>' : '') + '</div>'; }
 async function startDemo(){ Store.startDemo(); S.cfgMissing = null; S.auth = null; S.loaded = false; render(); await loadUserData(); S.sample = null; S.imgOk = false; S.sampleReady = true; render(); }
 function viewAuth(){
@@ -2455,21 +2621,24 @@ function viewAuth(){
     '<label class="field"><span>' + esc(t('au_email')) + '</span><input type="email" inputmode="email" autocomplete="email" autocapitalize="off" id="au-email" data-f="auth.email" value="' + esc(A.email) + '"></label>' +
     '<label class="field"><span>' + esc(t('au_pass')) + '</span><input type="password" autocomplete="' + (A.mode === 'signup' ? 'new-password' : 'current-password') + '" id="au-pass" data-f="auth.pass" value="' + esc(A.pass) + '"></label>' +
     '<p class="tiny muted">' + esc(A.mode === 'signup' ? t('au_pass_hint') : t('au_forgot')) + '</p>' +
+    (A.mode === 'signup' ? '<div class="row" style="gap:8px;align-items:flex-start;flex-wrap:nowrap">' + chk('auth.terms', A.terms, t('au_terms')) + '<button type="button" class="linkbtn small" style="flex:none;padding-top:2px" data-act="terms-open">' + esc(t('au_terms_read')) + '</button></div>' : '') +
     (A.error ? note('danger', esc(A.error)) : '') +
     '<button class="btn primary big block" data-act="auth-go"' + (A.busy ? ' disabled' : '') + '>' + esc(A.busy ? t('loading') : (A.mode === 'signup' ? t('au_signup_btn') : t('au_login_btn'))) + '</button></div>' +
-    note('info', esc(t('au_privacy'))) + '<p class="footer-note">' + esc(t('disclaimer')) + '</p></div>';
+    note('info', esc(t('au_privacy'))) + '<p class="footer-note">' + esc(t('disclaimer')) + '</p>' + copyLine() + '</div>';
 }
 async function authGo(){
   const A = S.auth; if (!A || A.busy) return; A.error = null;
   const email = String(A.email || '').trim().toLowerCase();
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ A.error = t('au_bad_email'); render(); return; }
   if (String(A.pass || '').length < 8){ A.error = t('au_bad_pass'); render(); return; }
+  if (A.mode === 'signup' && !A.terms){ A.error = t('au_need_terms'); render(); return; }
   A.busy = true; render();
   try {
     const res = A.mode === 'signup' ? await SB.auth.signUp({email, password:A.pass}) : await SB.auth.signInWithPassword({email, password:A.pass});
     if (res.error) throw res.error;
     if (!res.data || !res.data.session){ A.busy = false; A.error = t('au_confirm'); render(); return; }
-    Store.setSession(res.data.session); resetUserState(); S.auth = null; S.loaded = false; render();
+    Store.setSession(res.data.session); if (A.mode === 'signup') await Store.set('terms', {v:TERMS_V, at:new Date().toISOString()});
+    resetUserState(); S.auth = null; S.loaded = false; render();
     await loadUserData();
   } catch(e){
     A.busy = false; const m = (e && e.message) || '';
@@ -2480,6 +2649,8 @@ async function authGo(){
 async function logout(){ if (Store.demo){ location.reload(); return; } await remUnsubscribe(); if (S.profile && S.profile.reminders){ S.profile.reminders.on = false; await Store.set('profile', S.profile); } try { await SB.auth.signOut(); } catch(e){} onSignedOut(); }
 async function loadUserData(){
   S.profile = await Store.get('profile');
+  S.terms = Store.demo ? {v:TERMS_V} : await Store.get('terms');
+  S.termsGate = !Store.demo && !(S.terms && S.terms.v >= TERMS_V);
   if (S.profile && S.profile.lang && T[S.profile.lang]) LANG = S.profile.lang;
   if (S.profile && S.profile.amb && AMBS[S.profile.amb]) setAmb(S.profile.amb);
   const ks = []; for (let i = 0; i < 14; i++) ks.push(addDays(dayKey(), -i));
@@ -2494,6 +2665,7 @@ async function loadUserData(){
   Store.user.isOwner().then(v => { S.isOwner = !!v; render(); }).catch(() => {});
   scheduleSync();
   const q = new URLSearchParams(location.search); const sl = q.get('slot');
+  if (!Store.demo){ if (q.get('billing')) payReturn(q); else accLoad().then(render); }
   if (sl && S.profile && S.profile.onboarded){ S.sheet = null; S.view = 'today'; S.flashSlot = sl; try { history.replaceState(null, '', location.pathname); } catch(e){} render(); }
   if (!Store.demo){ if (remPrefs().on) swReg(); remCheck(); }
 }
