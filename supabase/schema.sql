@@ -271,3 +271,13 @@ begin
 end $$;
 revoke all on function public.coach_set_billing(boolean, text) from public, anon;
 grant execute on function public.coach_set_billing(boolean, text) to authenticated;
+
+-- ---------------------------------------------------------------------
+-- Droits explicites (fonctionne même si « Afficher automatiquement les
+-- nouvelles tables » a été décoché à la création du projet)
+-- ---------------------------------------------------------------------
+grant usage on schema public to anon, authenticated, service_role;
+grant select, insert, update, delete on public.kv, public.coaching, public.feedback, public.coach_emails, public.ai_usage,
+  public.push_subs, public.push_log, public.app_secrets, public.app_config, public.billing_plans, public.subscriptions to service_role;
+grant execute on function public.is_coach() to authenticated, service_role;
+grant execute on function public.access_for(uuid) to service_role;
