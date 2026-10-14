@@ -4,7 +4,7 @@
 uniquement pour faire fonctionner l'application. Copier, modifier, redistribuer ou exploiter
 commercialement l'application, en tout ou en partie, est interdit sans autorisation écrite.
 
-Application web de coaching nutritionnel (FR · EN · PT · ES) : analyse des repas par photo ou texte (6 cases repas, une photo par case et par jour), suivi des boissons (« Ma gourde »), rappels de repas par notification,
+Application web de coaching nutritionnel (FR · EN · PT · ES) : analyse des repas par photo ou texte (6 cases repas, une photo par case et par jour), suivi des boissons (« Ma gourde »), pesée du matin facultative (tendance sur 7 jours, rappel « chiffre indicatif » à chaque pesée), rappels de repas et de pesée par notification,
 coaching STRICT ou BIENVEILLANT, idées de repas, suivi de la faim, du stress, du poids, partage
 avec le coach (avec l'accord du client) et abonnements mensuels facultatifs (Stripe).
 

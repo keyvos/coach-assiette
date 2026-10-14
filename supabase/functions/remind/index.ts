@@ -139,14 +139,14 @@ function slotOfLocal(iso: string, tz: string): string {
   return "extra";
 }
 
-const MSG: Record<string, { t: string; body: string; water: string; test: string; meal: Record<string, string> }> = {
-  fr: { t: "Coach Assiette", body: "Tu as pris {m} ? Une photo et c’est noté 📸", water: "Petite pause hydratation ? Un verre d’eau 💧", test: "Les rappels fonctionnent sur ce téléphone 👍",
+const MSG: Record<string, { t: string; body: string; water: string; test: string; weigh: string; meal: Record<string, string> }> = {
+  fr: { t: "Coach Assiette", body: "Tu as pris {m} ? Une photo et c’est noté 📸", water: "Petite pause hydratation ? Un verre d’eau 💧", test: "Les rappels fonctionnent sur ce téléphone 👍", weigh: "Pesée du matin ⚖️ Si tu le souhaites : à jeun, même tenue, même balance. Ce n’est qu’un repère.",
     meal: { breakfast: "ton petit-déjeuner", snack10: "ta collation de 10 h", lunch: "ton déjeuner", snack16: "ton goûter", dinner: "ton dîner" } },
-  en: { t: "Coach Assiette", body: "Did you have {m}? Snap a photo and it’s logged 📸", water: "Time for a water break? A glass of water 💧", test: "Reminders work on this phone 👍",
+  en: { t: "Coach Assiette", body: "Did you have {m}? Snap a photo and it’s logged 📸", water: "Time for a water break? A glass of water 💧", test: "Reminders work on this phone 👍", weigh: "Morning weigh-in ⚖️ If you wish: empty stomach, same outfit, same scale. It is only a reference point.",
     meal: { breakfast: "breakfast", snack10: "your 10 am snack", lunch: "lunch", snack16: "your 4 pm snack", dinner: "dinner" } },
-  pt: { t: "Coach Assiette", body: "Já tomaste {m}? Uma foto e fica registado 📸", water: "Pausa para hidratar? Um copo de água 💧", test: "Os lembretes funcionam neste telemóvel 👍",
+  pt: { t: "Coach Assiette", body: "Já tomaste {m}? Uma foto e fica registado 📸", water: "Pausa para hidratar? Um copo de água 💧", test: "Os lembretes funcionam neste telemóvel 👍", weigh: "Pesagem da manhã ⚖️ Se quiseres: em jejum, mesma roupa, mesma balança. É apenas uma referência.",
     meal: { breakfast: "o pequeno-almoço", snack10: "o lanche das 10 h", lunch: "o almoço", snack16: "o lanche", dinner: "o jantar" } },
-  es: { t: "Coach Assiette", body: "¿Ya tomaste {m}? Una foto y queda anotado 📸", water: "¿Pausa para hidratarte? Un vaso de agua 💧", test: "Los recordatorios funcionan en este teléfono 👍",
+  es: { t: "Coach Assiette", body: "¿Ya tomaste {m}? Una foto y queda anotado 📸", water: "¿Pausa para hidratarte? Un vaso de agua 💧", test: "Los recordatorios funcionan en este teléfono 👍", weigh: "Pesaje de la mañana ⚖️ Si quieres: en ayunas, misma ropa, misma báscula. Solo es una referencia.",
     meal: { breakfast: "el desayuno", snack10: "el tentempié de las 10", lunch: "la comida", snack16: "la merienda", dinner: "la cena" } },
 };
 const SKIP: Record<string, string> = { breakfast: "morning", lunch: "noon", dinner: "evening" };
@@ -174,18 +174,28 @@ async function run() {
         if (now.min >= at && now.min < at + 120) due.push({ kind: slot, slot });
       }
       if (prefs.water) for (const [kind, at, share] of WATER) if (now.min >= at && now.min < at + 120) due.push({ kind, share });
+      if (prefs.weigh) {
+        const [h, m] = String(prefs.weigh).split(":").map(Number);
+        const at = h * 60 + (m || 0);
+        if (Number.isFinite(at) && now.min >= at && now.min < at + 120) due.push({ kind: "weigh" });
+      }
       if (!due.length) continue;
       const { data: logs } = await admin.from("push_log").select("kind").eq("user_id", row.user_id).eq("day", now.day);
       const done = new Set((logs || []).map((x: { kind: string }) => x.kind));
       const todo = due.filter((d) => !done.has(d.kind));
       if (!todo.length) continue;
-      const { data: kv } = await admin.from("kv").select("key,value").eq("user_id", row.user_id).in("key", ["day-" + now.day, "profile"]);
+      const { data: kv } = await admin.from("kv").select("key,value").eq("user_id", row.user_id).in("key", ["day-" + now.day, "profile", "body"]);
       const day = (kv || []).find((x: { key: string }) => x.key === "day-" + now.day)?.value || {};
       const nm = (kv || []).find((x: { key: string }) => x.key === "profile")?.value?.noMeal || {};
+      const body = (kv || []).find((x: { key: string }) => x.key === "body")?.value || {};
       for (const d of todo) {
         checked++;
         let msg: Record<string, string> | null = null;
-        if (d.slot) {
+        if (d.kind === "weigh") {
+          // deno-lint-ignore no-explicit-any
+          const weighed = (body.entries || []).some((e: any) => e.wi && e.date === now.day);
+          if (!weighed) msg = { title: L.t, body: L.weigh, tag: "weigh", url: "./?slot=weigh" };
+        } else if (d.slot) {
           // deno-lint-ignore no-explicit-any
           const eaten = (day.meals || []).some((m: any) => (m.slot || slotOfLocal(m.at, tz)) === d.slot);
           const skipped = SKIP[d.slot] && (day.skipped || []).includes(SKIP[d.slot]);
