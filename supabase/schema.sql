@@ -1,6 +1,6 @@
 -- =====================================================================
 -- Coach Assiette : base de données
--- © 2026 Seb (github.com/keyvos) — Tous droits réservés.
+-- © 2026 Sébastien Bassous (github.com/keyvos) — Tous droits réservés.
 -- À coller dans Supabase > SQL Editor > New query, puis cliquer "Run".
 -- AVANT de lancer : remplace TON-ADRESSE@exemple.com (tout en bas)
 -- par l'adresse e-mail avec laquelle TU te connecteras à l'application

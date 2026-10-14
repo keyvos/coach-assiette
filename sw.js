@@ -1,4 +1,4 @@
-/* Coach Assiette — © 2026 Seb (github.com/keyvos). Tous droits réservés. */
+/* Coach Assiette — © 2026 Sébastien Bassous (github.com/keyvos). Tous droits réservés. */
 /* Coach Assiette : service worker, uniquement pour les rappels (aucune mise en cache). */
 self.addEventListener('install', () => self.skipWaiting());
 self.addEventListener('activate', (e) => e.waitUntil(self.clients.claim()));

@@ -1,6 +1,6 @@
 // =====================================================================
 // Coach Assiette : abonnements (Supabase Edge Function "billing")
-// © 2026 Seb (github.com/keyvos) — Tous droits réservés.
+// © 2026 Sébastien Bassous (github.com/keyvos) — Tous droits réservés.
 // Ouvre la page de paiement Stripe, l'espace « Gérer mon abonnement »,
 // et met à jour l'abonnement au retour du paiement.
 // Secrets obligatoires (Supabase > Edge Functions > Secrets) :

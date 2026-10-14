@@ -1,6 +1,6 @@
 // =====================================================================
 // Coach Assiette : messages de Stripe (Supabase Edge Function "stripe-webhook")
-// © 2026 Seb (github.com/keyvos) — Tous droits réservés.
+// © 2026 Sébastien Bassous (github.com/keyvos) — Tous droits réservés.
 // Stripe prévient ici à chaque paiement, échec de paiement ou résiliation :
 // l'état de l'abonnement est mis à jour tout seul.
 // Secrets obligatoires : STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET (whsec_…)

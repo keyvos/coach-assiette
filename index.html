@@ -1,6 +1,6 @@
 <!doctype html>
 <!--
-  Coach Assiette — © 2026 Seb (github.com/keyvos). Tous droits réservés.
+  Coach Assiette — © 2026 Sébastien Bassous (github.com/keyvos). Tous droits réservés.
   Ce code est publié uniquement pour faire fonctionner l'application.
   Toute copie, reproduction, modification, redistribution ou exploitation
   commerciale, totale ou partielle, est interdite sans autorisation écrite.
@@ -268,7 +268,7 @@ label.tile:has(input:focus-visible),.tile:focus-visible{outline:2px solid var(--
 window.CA_CONFIG = window.CA_CONFIG || {
   SUPABASE_URL: 'https://REMPLACER.supabase.co',
   SUPABASE_KEY: 'REMPLACER_PAR_LA_CLE_PUBLISHABLE',
-  OWNER: 'Seb'
+  OWNER: 'Sébastien Bassous'
 };
 </script>
 <script>
@@ -1005,7 +1005,7 @@ function makeAI(){
   return f;
 }
 /* ===== Droits, conditions d'utilisation, abonnements ===== */
-const OWNER = (window.CA_CONFIG && window.CA_CONFIG.OWNER) || 'Seb';
+const OWNER = (window.CA_CONFIG && window.CA_CONFIG.OWNER) || 'Sébastien Bassous';
 const TERMS_V = 1;
 function copyLine(){ return '<p class="footer-note">© 2026 ' + esc(OWNER) + ' · Coach Assiette · ' + esc(t('rights')) + ' · <button type="button" class="linkbtn" data-act="terms-open">' + esc(t('terms_link')) + '</button></p>'; }
 function termsBody(){ let h = '<p class="small muted">' + esc(t('tm_date')) + '</p><p>' + esc(t('tm_intro', {o:OWNER})) + '</p>'; for (let i = 1; i <= 7; i++) h += '<h3>' + esc(t('tm_h' + i)) + '</h3><p class="small">' + esc(t('tm_p' + i, {o:OWNER})) + '</p>'; return h; }

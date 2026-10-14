@@ -1,6 +1,6 @@
 # Coach Assiette
 
-© 2026 Seb (github.com/keyvos). **Tous droits réservés.** Voir [LICENSE](LICENSE) : ce code est visible
+© 2026 Sébastien Bassous (github.com/keyvos). **Tous droits réservés.** Voir [LICENSE](LICENSE) : ce code est visible
 uniquement pour faire fonctionner l'application. Copier, modifier, redistribuer ou exploiter
 commercialement l'application, en tout ou en partie, est interdit sans autorisation écrite.
 

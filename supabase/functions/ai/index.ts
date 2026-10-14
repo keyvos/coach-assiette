@@ -1,6 +1,6 @@
 // =====================================================================
 // Coach Assiette : fonction IA sécurisée (Supabase Edge Function "ai")
-// © 2026 Seb (github.com/keyvos) — Tous droits réservés.
+// © 2026 Sébastien Bassous (github.com/keyvos) — Tous droits réservés.
 // La clé de l'API Claude reste ici, côté serveur : elle n'arrive jamais
 // sur le téléphone des clients.
 // Secret obligatoire : ANTHROPIC_API_KEY
