@@ -12,7 +12,7 @@ select cron.schedule(
   'coach-assiette-rappels',
   '*/15 * * * *',
   $$ select net.http_post(
-       url     := 'https://REMPLACER.supabase.co/functions/v1/remind',
+       url     := 'https://rzvgqsyzxmsupvjwpdyu.supabase.co/functions/v1/remind',
        headers := '{"Content-Type": "application/json"}'::jsonb,
        body    := '{"run": true}'::jsonb
      ); $$
