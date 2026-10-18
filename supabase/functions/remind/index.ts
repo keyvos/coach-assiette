@@ -148,6 +148,8 @@ const MSG: Record<string, { t: string; body: string; water: string; test: string
     meal: { breakfast: "o pequeno-almoço", snack10: "o lanche das 10 h", lunch: "o almoço", snack16: "o lanche", dinner: "o jantar" } },
   es: { t: "Coach Assiette", body: "¿Ya tomaste {m}? Una foto y queda anotado 📸", water: "¿Pausa para hidratarte? Un vaso de agua 💧", test: "Los recordatorios funcionan en este teléfono 👍", weigh: "Pesaje de la mañana ⚖️ Si quieres: en ayunas, misma ropa, misma báscula. Solo es una referencia.",
     meal: { breakfast: "el desayuno", snack10: "el tentempié de las 10", lunch: "la comida", snack16: "la merienda", dinner: "la cena" } },
+  ar: { t: "Coach Assiette", body: "هل تناولت {m}؟ صورة واحدة وتُسجَّل 📸", water: "استراحة ترطيب قصيرة؟ كوب ماء 💧", test: "التذكيرات تعمل على هذا الهاتف 👍", weigh: "وزن الصباح ⚖️ إذا رغبت: على الريق، باللباس نفسه، وعلى الميزان نفسه. إنه مجرد مرجع.",
+    meal: { breakfast: "فطورك", snack10: "وجبتك الخفيفة الساعة 10", lunch: "غداءك", snack16: "وجبتك الخفيفة الساعة 16", dinner: "عشاءك" } },
 };
 const SKIP: Record<string, string> = { breakfast: "morning", lunch: "noon", dinner: "evening" };
 const NOKEY: Record<string, string> = { breakfast: "morning", snack10: "snack10", lunch: "noon", snack16: "snack16", dinner: "evening" };
