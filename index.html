@@ -848,6 +848,9 @@ ar:{"need_style":"اختر أسلوب التدريب.","need_answer":"اختر �
 };
 const LOCALE = {fr:'fr-FR', en:'en-GB', pt:'pt-PT', es:'es-ES', ar:'ar-u-nu-latn'};
 const LANG_NATIVE = {fr:'Français', en:'English', pt:'Português', es:'Español', ar:'العربية'};
+const LANG_FR = {fr:'Français', en:'Anglais', pt:'Portugais', es:'Espagnol', ar:'Arabe'};
+function langLabel(l){ return '<strong>' + LANG_FR[l] + '</strong>' + (LANG_NATIVE[l] !== LANG_FR[l] ? '<span class="small muted"><bdi lang="' + l + '">' + LANG_NATIVE[l] + '</bdi></span>' : ''); }
+function langName(l){ return LANG_FR[l] + (LANG_NATIVE[l] !== LANG_FR[l] ? ' · ' + LANG_NATIVE[l] : ''); }
 const AMBS = {menthe:['#2C7868','#E0A43A','#D5ECE5'], sauge:['#48775A','#E8955E','#DCEBDD'], ciel:['#3F6F99','#D9A85A','#DCE8F3'], lavande:['#6A5FA8','#EE9F75','#E6E2F4']};
 let AMB = 'menthe';
 function applyAmb(){ try { document.documentElement.setAttribute('data-amb', AMB); } catch(e){} }
@@ -1566,7 +1569,7 @@ function viewOb(){
   let body = '';
   if (st === 'lang'){
     body = '<div class="stack"><h1>' + esc(t('app')) + '</h1><p class="muted">' + esc(t('ob_welcome')) + '</p><span class="badge" style="align-self:flex-start">' + esc(t('ob_time')) + '</span><div class="card stack-s"><h2>' + esc(t('intro_t')) + '</h2><p>' + esc(t('intro_text')) + '</p></div>' +
-      '<div class="field"><span>' + esc(t('ob_choose_lang')) + '</span><div class="grid2">' + Object.keys(LANG_NATIVE).map(l => '<button class="opt-pick ' + (LANG === l ? 'on' : '') + '" data-act="lang" data-v="' + l + '" aria-pressed="' + (LANG === l) + '"><strong>' + LANG_NATIVE[l] + '</strong></button>').join('') + '</div></div>' +
+      '<div class="field"><span>' + esc(t('ob_choose_lang')) + '</span><div class="grid2">' + Object.keys(LANG_NATIVE).map(l => '<button class="opt-pick ' + (LANG === l ? 'on' : '') + '" data-act="lang" data-v="' + l + '" aria-pressed="' + (LANG === l) + '">' + langLabel(l) + '</button>').join('') + '</div></div>' +
       '<div class="field"><span>' + esc(t('ob_choose_amb')) + '</span>' + ambPicker() + '<p class="tiny muted">' + esc(t('amb_hint')) + '</p></div>' +
       note('info', esc(t('ob_ai_info'))) + guestWarn() + '</div>';
   } else if (st === 'profile'){
@@ -2243,7 +2246,7 @@ function viewSettings(){
   const restrHas = !!(p.restr && p.restr.validated && (Object.keys(p.restr.items || {}).length || p.restr.other));
   const w = num(p.weight);
   let h = '<div class="stack" style="padding-top:4px"><h1>' + esc(t('settings_t')) + '</h1><button class="card opt-pick" data-act="guide-open" style="border-radius:var(--r)"><strong>📖 ' + esc(t('gd_t')) + '</strong><span class="small muted">' + esc(t('gd_sub')) + '</span></button><div class="stack-s">';
-  h += acc('lang', t('s_lang'), LANG_NATIVE[LANG], () => '<div class="grid2">' + Object.keys(LANG_NATIVE).map(l => '<button class="opt-pick ' + (LANG === l ? 'on' : '') + '" data-act="lang" data-v="' + l + '" aria-pressed="' + (LANG === l) + '"><strong>' + LANG_NATIVE[l] + '</strong></button>').join('') + '</div>');
+  h += acc('lang', t('s_lang'), langName(LANG), () => '<div class="grid2">' + Object.keys(LANG_NATIVE).map(l => '<button class="opt-pick ' + (LANG === l ? 'on' : '') + '" data-act="lang" data-v="' + l + '" aria-pressed="' + (LANG === l) + '">' + langLabel(l) + '</button>').join('') + '</div>');
   h += acc('amb', t('s_amb'), t('amb_' + AMB), () => ambPicker());
   h += acc('style', t('s_style'), t(p.style === 'STRICT' ? 'style_strict' : 'style_kind'), () => styleCards('profile.style', p.style));
   h += acc('profile', t('s_profile'), profileValid(p) ? t('prof_sum', {a:p.age, h:p.height, w:nf(w, w % 1 ? 1 : 0)}) : t('acc_todo'), () => '<div class="card stack">' + profileFields('setDraft', D) +
@@ -2741,7 +2744,7 @@ async function startDemo(){ Store.startDemo(); S.cfgMissing = null; S.auth = nul
 function viewAuth(){
   const A = S.auth;
   return '<div class="stack" style="padding-top:8px"><h1>' + esc(t('app')) + '</h1><p class="muted">' + esc(t('ob_welcome')) + '</p>' +
-    '<div class="grid2">' + Object.keys(LANG_NATIVE).map(l => '<button class="opt-pick ' + (LANG === l ? 'on' : '') + '" data-act="lang" data-v="' + l + '" aria-pressed="' + (LANG === l) + '"><strong>' + LANG_NATIVE[l] + '</strong></button>').join('') + '</div>' +
+    '<div class="grid2">' + Object.keys(LANG_NATIVE).map(l => '<button class="opt-pick ' + (LANG === l ? 'on' : '') + '" data-act="lang" data-v="' + l + '" aria-pressed="' + (LANG === l) + '">' + langLabel(l) + '</button>').join('') + '</div>' +
     '<div class="card stack">' + seg('auth-mode', 'auth.mode', A.mode, [['signup', t('au_signup')], ['login', t('au_login')]]) +
     '<label class="field"><span>' + esc(t('au_email')) + '</span><input type="email" inputmode="email" autocomplete="email" autocapitalize="off" id="au-email" data-f="auth.email" value="' + esc(A.email) + '"></label>' +
     '<label class="field"><span>' + esc(t('au_pass')) + '</span><input type="password" autocomplete="' + (A.mode === 'signup' ? 'new-password' : 'current-password') + '" id="au-pass" data-f="auth.pass" value="' + esc(A.pass) + '"></label>' +
