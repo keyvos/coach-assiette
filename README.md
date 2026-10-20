@@ -29,7 +29,7 @@ avec le coach (avec l'accord du client) et abonnements mensuels facultatifs (Str
 - **Site** : hébergé gratuitement par GitHub Pages (chaque modification du dépôt est mise en ligne automatiquement).
 - **Comptes et données** : Supabase (serveurs en Europe). Chaque client ne voit que ses propres données ;
   le coach ne voit que les résumés des clients qui ont accepté le partage.
-- **IA** : la fonction `ai` appelle l'API Claude. Limite par client et par jour réglable avec le secret
+- **IA** : la fonction `ai` (mise en ligne dans Supabase sous le nom `bright-api`, réglé par `AI_FUNCTION` en haut de `index.html`) appelle l'API Claude. Limite par client et par jour réglable avec le secret
   `AI_DAILY_LIMIT` (20 par défaut). Modèles réglables avec `AI_MODEL` (analyse des photos, `claude-haiku-5-5` par défaut, le moins cher ; `claude-sonnet-5-5` pour plus de précision) et `AI_MODEL_QUICK` (messages courts).
 - **Protection contre les copies** : les fonctions `ai` et `billing` n'acceptent que les demandes venant du site
   officiel (`ALLOWED_ORIGINS`, défaut `https://keyvos.github.io`). Une copie de l'application hébergée ailleurs

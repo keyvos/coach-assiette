@@ -275,6 +275,7 @@ label.tile:has(input:focus-visible),.tile:focus-visible{outline:2px solid var(--
 window.CA_CONFIG = window.CA_CONFIG || {
   SUPABASE_URL: 'https://rzvgqsyzxmsupvjwpdyu.supabase.co',
   SUPABASE_KEY: 'sb_publishable_z5u0OjQB4gGhY88UVc7y4w_giNZZ3Yw',
+  AI_FUNCTION: 'bright-api',  // nom de la fonction IA dans Supabase (Edge Functions)
   OWNER: 'Sébastien Bassous'
 };
 </script>
@@ -1019,7 +1020,7 @@ function makeAI(){
     const prompt = typeof input === 'string' ? input : (Array.isArray(input) ? input.map(m => m.content).join('\n\n') : String(input));
     const tok = await Store.token();
     let r;
-    try { r = await fetch(window.CA_CONFIG.SUPABASE_URL.replace(/\/$/, '') + '/functions/v1/ai', {method:'POST', headers:{'Content-Type':'application/json', 'Authorization':'Bearer ' + tok, 'apikey':window.CA_CONFIG.SUPABASE_KEY}, body:JSON.stringify({prompt, images, tier:opts.modelTier || 'default'}), signal:opts.signal}); }
+    try { r = await fetch(window.CA_CONFIG.SUPABASE_URL.replace(/\/$/, '') + '/functions/v1/' + (window.CA_CONFIG.AI_FUNCTION || 'ai'), {method:'POST', headers:{'Content-Type':'application/json', 'Authorization':'Bearer ' + tok, 'apikey':window.CA_CONFIG.SUPABASE_KEY}, body:JSON.stringify({prompt, images, tier:opts.modelTier || 'default'}), signal:opts.signal}); }
     catch(e){ if (e && e.name === 'AbortError') throw {code:'cancelled'}; throw {code:'unavailable'}; }
     let out = {}; try { out = await r.json(); } catch(e){}
     if (!r.ok) throw {code:out.code || (r.status === 401 ? 'session_expired' : r.status === 429 ? 'rate_limited' : 'unavailable'), message:out.error || ''};
