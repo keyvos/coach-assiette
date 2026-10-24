@@ -7,6 +7,8 @@
 //   STRIPE_SECRET_KEY (sk_test_… pour les essais, sk_live_… ensuite)
 //   STRIPE_PRICE_ID   (price_… : le prix mensuel créé dans Stripe)
 // Réglage facultatif : ALLOWED_ORIGINS (défaut https://keyvos.github.io)
+// Dans Stripe : Paramètres > Billing > Portail client : autoriser la résiliation
+//   « à la fin de la période de facturation » (bouton « Résilier mon abonnement »)
 // "Verify JWT" : désactivé (la fonction vérifie elle-même la connexion)
 // =====================================================================
 import { createClient } from "jsr:@supabase/supabase-js@2";
@@ -147,6 +149,21 @@ Deno.serve(async (req) => {
       if (!returnUrlOk(ret)) return reply({ error: "Adresse de retour refusée", code: "bad_request" }, 400);
       if (!row?.stripe_customer) return reply({ error: "Aucun abonnement", code: "no_customer" }, 404);
       const s = await stripe("billing_portal/sessions", "POST", { customer: row.stripe_customer, return_url: ret });
+      return reply({ url: s.url });
+    }
+
+    if (action === "cancel") {
+      // "Résilier mon abonnement": opens Stripe straight on the cancellation page (French "résiliation en trois clics")
+      if (!returnUrlOk(ret)) return reply({ error: "Adresse de retour refusée", code: "bad_request" }, 400);
+      if (!row?.stripe_customer) return reply({ error: "Aucun abonnement", code: "no_customer" }, 404);
+      const params: Record<string, string> = { customer: row.stripe_customer, return_url: ret };
+      if (row.stripe_sub && ["active", "trialing", "past_due"].includes(row.status) && !row.cancel_at_end) {
+        params["flow_data[type]"] = "subscription_cancel";
+        params["flow_data[subscription_cancel][subscription]"] = row.stripe_sub;
+        params["flow_data[after_completion][type]"] = "redirect";
+        params["flow_data[after_completion][redirect][return_url]"] = ret + "?billing=cancelled";
+      }
+      const s = await stripe("billing_portal/sessions", "POST", params);
       return reply({ url: s.url });
     }
 
