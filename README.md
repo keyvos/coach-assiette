@@ -4,7 +4,7 @@
 uniquement pour faire fonctionner l'application. Copier, modifier, redistribuer ou exploiter
 commercialement l'application, en tout ou en partie, est interdit sans autorisation écrite.
 
-Application web de coaching nutritionnel (FR · EN · PT · ES · AR, l’arabe s’affichant de droite à gauche) : analyse des repas par photo ou texte (6 cases repas, une photo par case et par jour), suivi des boissons (« Ma gourde »), pesée du matin facultative (tendance sur 7 jours, rappel « chiffre indicatif » à chaque pesée), rappels de repas et de pesée par notification, guide d'utilisation intégré (bouton « ? », imprimable),
+Application web de coaching nutritionnel (FR · EN · PT · ES · AR, l’arabe s’affichant de droite à gauche) : analyse des repas par photo ou texte (6 cases repas, une photo par case et par jour), suivi des boissons (« Ma gourde »), pesée du matin facultative (tendance sur 7 jours, rappel « chiffre indicatif » à chaque pesée), rappels de repas et de pesée par notification, guide d'utilisation intégré (bouton « ? », imprimable), réglage de lisibilité (bouton « Aa » : texte agrandi, contraste renforcé), mot de passe oublié (lien par e-mail), prise en compte des troubles digestifs déclarés (ulcère, reflux, digestion lente, côlon irritable),
 coaching STRICT ou BIENVEILLANT, idées de repas, suivi de la faim, du stress, du poids, partage
 avec le coach (avec l'accord du client) et abonnements mensuels facultatifs (Stripe).
 
@@ -36,6 +36,17 @@ avec le coach (avec l'accord du client) et abonnements mensuels facultatifs (Str
   ne peut donc ni utiliser l'IA ni encaisser d'abonnements. Si le site change d'adresse (nom de domaine),
   mettre la nouvelle adresse dans le secret `ALLOWED_ORIGINS`.
 - **Conditions d'utilisation** : acceptées à la création du compte (version enregistrée dans les données du compte).
+
+## Mot de passe oublié
+
+Le client demande un lien depuis l'écran de connexion ; le lien le ramène dans l'application (`?reset=1`), où il choisit
+un nouveau mot de passe. À régler une fois dans Supabase :
+
+1. *Authentication > URL Configuration* : *Site URL* `https://keyvos.github.io/coach-assiette/` et, dans *Redirect URLs*,
+   `https://keyvos.github.io/coach-assiette/**`.
+2. *Authentication > Emails > SMTP Settings* : un service d'envoi d'e-mails (par exemple Brevo ou Resend). Sans lui,
+   Supabase n'envoie les e-mails qu'aux membres de l'équipe du projet, et seulement quelques-uns par heure.
+3. *Authentication > Emails > Templates > Reset Password* : texte de l'e-mail en français.
 
 ## Abonnements (facultatif)
 
